@@ -39,8 +39,9 @@ void setup() {
 
   kinect.init();
   
+  
   square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
-   square.setStroke(255);
+  square.setStroke(255);
   square.setFill(0);
 
 }
@@ -65,7 +66,7 @@ void draw() {
   SkullyBoi();
 
 
-  //circles.add(new Circle(mx, my));
+  circles.add(new Circle(mx, my));
 
   for (int i=0; i<circles.size(); i++) 
   {
@@ -135,8 +136,6 @@ void SkullyBoi()
             if ( varianceRightHand>400) 
             {
               square.setStroke(color(random(0,127),random(127,255),random(127,255)));
-              //square.strokeWeight(stroke+.1);
-             //ellipse(random(0,width), random(0,height),200,200); 
             }
             
            if ( varianceLeftHand>400) 
@@ -157,19 +156,8 @@ void SkullyBoi()
              square.rotateX(0.1);  
            }
             if ( varianceHead>200) 
-           {
-             
-             //a=a+.004;       
-             //s=cos(a)*2;
-             //println(s);
-             //square.scale(s);
-             square.setFill(color(random(0,127),random(127,255),random(127,255)));
-             
-             //pushMatrix(); 
-             ////square.translate(centerHeadX,centerHeadY);
-             //square.scale(1.01);
-             //popMatrix();
-             //square.rotateZ(0.1);  
+           {                        
+             square.setFill(color(random(0,127),random(127,255),random(127,255)));           
            }
            
            if ( varianceHead2>400) 
