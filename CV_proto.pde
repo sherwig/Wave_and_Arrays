@@ -124,7 +124,7 @@ void SkullyBoi()
            float varianceRightHand=bufferRightHandCenter.variance();
            float varianceLeftHand=bufferLeftHandCenter.variance();
            float varianceLeftHand2=bufferLeftHandCenter2.variance();
-          // float varianceLeftHand3=bufferLeftHandCenter3.variance();
+           float varianceLeftHand3=bufferLeftHandCenter3.variance();
            float varianceHead=bufferCenterHead.variance();
            float varianceHead2=bufferCenterHead2.variance();
 
