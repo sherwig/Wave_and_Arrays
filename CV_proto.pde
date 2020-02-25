@@ -39,7 +39,6 @@ void setup() {
 
   kinect.init();
   
-  
   square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
   square.setStroke(255);
   square.setFill(0);
@@ -115,13 +114,19 @@ void SkullyBoi()
            leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
            centerHeadX+=(joints[KinectPV2.JointType_Head].getX()-centerHeadX)*speed;
            centerHeadY+=(joints[KinectPV2.JointType_Head].getY()-centerHeadY)*speed;
+           
            bufferLeftHandCenter.update(leftHandX);
            bufferLeftHandCenter2.update(leftHandY);
            bufferLeftHandCenter3.update(leftHandZ);
            bufferCenterHead.update(centerHeadX);
            bufferCenterHead2.update(centerHeadY);
+           
            //float sum=bufferRightHandCenter.average();
            
+           //keep last frame position of each frame and then can use distance
+           //make a limb tracker class 
+             //last positions current position
+             //Push back to PVector
            float varianceRightHand=bufferRightHandCenter.variance();
            float varianceLeftHand=bufferLeftHandCenter.variance();
            float varianceLeftHand2=bufferLeftHandCenter2.variance();
@@ -131,8 +136,9 @@ void SkullyBoi()
 
            fill(255); 
            textSize(32);
-           text( varianceHead,50,50);
+           text(varianceHead,50,50);
            //float stroke=1;
+           //make a flag 
             if ( varianceRightHand>400) 
             {
               square.setStroke(color(random(0,127),random(127,255),random(127,255)));
@@ -144,6 +150,7 @@ void SkullyBoi()
             // square.scale(.95);
              square.rotateY(0.1);  
            }
+           
            if ( varianceLeftHand2>400) 
            {
              
@@ -165,9 +172,8 @@ void SkullyBoi()
              //a=a+.004;       
              //s=cos(a)*2;
              //println(s);
-             //square.scale(s);
-             
-            // square.scale(.95);
+             //square.scale(s);             
+             //square.scale(.95);
              //square.rotateZ(0.1);  
            }
            
@@ -176,10 +182,7 @@ void SkullyBoi()
            //  println("Here");
            // // square.scale(.95);
            //  square.rotateZ(0.1);  
-           //}
- 
-
-           
+           //}    
            // println(sum);
             
         }
