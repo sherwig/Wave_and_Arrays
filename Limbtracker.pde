@@ -1,6 +1,6 @@
 public class Limbtracker {
   
-  protected int size=55;
+  protected int size;
   protected PVector[] limbtracker1, limbtracker2;
   
   
@@ -45,15 +45,9 @@ public class Limbtracker {
       comparison[i]=limbtracker1[i].dist(limbtracker2[i]);
       
     }
-    return comparison;
-    
+    return comparison; 
   };
   
-  public float totalDistance()
-  {
-     float totalDistance=limbtracker1.dist(limbtracker2); 
-    
-  }
   
 }
   

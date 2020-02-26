@@ -11,6 +11,7 @@ FloatBuffer bufferLeftHandCenter2= new FloatBuffer(30);
 FloatBuffer bufferLeftHandCenter3= new FloatBuffer(30);
 FloatBuffer bufferCenterHead= new FloatBuffer(30);
 FloatBuffer bufferCenterHead2= new FloatBuffer(30);
+Limbtracker limbtracker,limbtracker2= new Limbtracker(55);
 KinectPV2 kinect;
 ArrayList<Circle> circles = new ArrayList<Circle>();
 float mx;
@@ -36,6 +37,7 @@ void setup() {
 
   kinect.enableSkeletonColorMap(true);
   kinect.enableColorImg(true);
+  kinect.enableSkeleton3DMap(true);
 
   kinect.init();
   
@@ -94,6 +96,12 @@ void SkullyBoi()
       temp[i]=getJointX(joints,i);
        // println(temp);
        
+       
+       //float[] xPos=getSkeletonX(joints);
+       //float[] yPos=getSkeletonY(joints);
+       //float[] zPos=getSkeletonZ(joints);
+       
+     // limbtracker.update(xPos,yPos,zPos);
       for (int j=0; j<temp.length; j++)
       {
         if(temp[j]>vert2)
@@ -261,6 +269,39 @@ float getJointX(KJoint[] joints, int jointType)
 {
      return (joints[jointType].getX());
 }
+
+float[] getSkeletonX(KJoint[] joints3D) {
+    int joints_number = 25;
+    float[] x_values = new float[joints_number];
+// For every joints, get the z value, store it in an array 
+     for(int i = 0; i < joints_number; i++) {
+        x_values[i] = joints3D[i].getX();
+      }
+      return x_values;
+  }
+  
+  float[] getSkeletonY(KJoint[] joints3D) {
+    int joints_number = 25;
+    float[] y_values = new float[joints_number];
+// For every joints, get the z value, store it in an array 
+     for(int i = 0; i < joints_number; i++) {
+        y_values[i] = joints3D[i].getZ();
+      }
+      return y_values;
+  }
+
+ float[] getSkeletonZ(KJoint[] joints3D) {
+    int joints_number = 25;
+    float[] z_values = new float[joints_number];
+// For every joints, get the z value, store it in an array 
+     for(int i = 0; i < joints_number; i++) {
+        z_values[i] = joints3D[i].getZ();
+      }
+      return z_values;
+  }
+
+
+
 
 
 //draw bone
