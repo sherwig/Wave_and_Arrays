@@ -11,7 +11,8 @@ FloatBuffer bufferLeftHandCenter2= new FloatBuffer(30);
 FloatBuffer bufferLeftHandCenter3= new FloatBuffer(30);
 FloatBuffer bufferCenterHead= new FloatBuffer(30);
 FloatBuffer bufferCenterHead2= new FloatBuffer(30);
-Limbtracker limbtracker,limbtracker2= new Limbtracker(55);
+
+Limbtracker limbtracker= new Limbtracker(55);
 KinectPV2 kinect;
 ArrayList<Circle> circles = new ArrayList<Circle>();
 float mx;
