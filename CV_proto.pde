@@ -11,8 +11,9 @@ FloatBuffer bufferLeftHandCenter2= new FloatBuffer(30);
 FloatBuffer bufferLeftHandCenter3= new FloatBuffer(30);
 FloatBuffer bufferCenterHead= new FloatBuffer(30);
 FloatBuffer bufferCenterHead2= new FloatBuffer(30);
+FloatBuffer bufferCenter= new FloatBuffer(30);
 
-Limbtracker limbtracker= new Limbtracker(55);
+Limbtracker limbtracker;
 KinectPV2 kinect;
 ArrayList<Circle> circles = new ArrayList<Circle>();
 float mx;
@@ -45,6 +46,8 @@ void setup() {
   square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
   square.setStroke(255);
   square.setFill(0);
+    
+  limbtracker= new Limbtracker(25);
 
 }
 
@@ -98,11 +101,16 @@ void SkullyBoi()
        // println(temp);
        
        
-       //float[] xPos=getSkeletonX(joints);
-       //float[] yPos=getSkeletonY(joints);
-       //float[] zPos=getSkeletonZ(joints);
+       float[] xPos=getSkeletonX(joints);
+       float[] yPos=getSkeletonY(joints);
+       float[] zPos=getSkeletonZ(joints);
        
-     // limbtracker.update(xPos,yPos,zPos);
+    //   println(yPos.length);
+     limbtracker.update(xPos,yPos,zPos);
+     limbtracker.fillFollowing(25);
+     float[] comparison=limbtracker.distance(25);
+   
+     //println(comparison);
       for (int j=0; j<temp.length; j++)
       {
         if(temp[j]>vert2)
@@ -124,6 +132,8 @@ void SkullyBoi()
            centerHeadX+=(joints[KinectPV2.JointType_Head].getX()-centerHeadX)*speed;
            centerHeadY+=(joints[KinectPV2.JointType_Head].getY()-centerHeadY)*speed;
            
+           bufferCenter.update(comparison[1]);
+           
            bufferLeftHandCenter.update(leftHandX);
            bufferLeftHandCenter2.update(leftHandY);
            bufferLeftHandCenter3.update(leftHandZ);
@@ -142,6 +152,8 @@ void SkullyBoi()
            float varianceLeftHand3=bufferLeftHandCenter3.variance();
            float varianceHead=bufferCenterHead.variance();
            float varianceHead2=bufferCenterHead2.variance();
+           float center1=bufferCenter.variance();
+            println(center1);
 
            fill(255); 
            textSize(32);
@@ -166,7 +178,7 @@ void SkullyBoi()
             // square.scale(.95);
              a=a+.3;       
              s=cos(a)*2;
-             println(s);
+            // println(s);
              square.scale(s);
              
              square.rotateX(0.1);  
