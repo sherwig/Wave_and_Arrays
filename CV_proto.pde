@@ -96,19 +96,16 @@ void SkullyBoi()
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       KJoint[] joints = skeleton.getJoints();
        
        println(joints);
       temp[i]=getJointX(joints,i);
        // println(temp);
-=======
+
        KJoint[] joints = skeleton.getJoints();
->>>>>>> 45f8398cb5478a2d39195890a977d932ede27b39
-=======
+
        KJoint[] joints = skeleton.getJoints();
->>>>>>> 45f8398cb5478a2d39195890a977d932ede27b39
        
        //gets an x value of the whole skeloten
        temp[i]=getJointX(joints,i);
@@ -148,16 +145,14 @@ void SkullyBoi()
            leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
            centerHeadX+=(joints[KinectPV2.JointType_Head].getX()-centerHeadX)*speed;
            centerHeadY+=(joints[KinectPV2.JointType_Head].getY()-centerHeadY)*speed;
-<<<<<<< HEAD
+           
            println(joints[KinectPV2.JointType_HandLeft]);
            bufferCenter.update(comparison[7]);
-=======
            
            //filling buffer with what we found from the comparison from earlier. One problem I am having is
            //I know longer can just call the joint type, but rather have to figure out which joint is where 
            //in the comparison array. 
            bufferCenter.update(comparison[1]);
->>>>>>> 45f8398cb5478a2d39195890a977d932ede27b39
            
            bufferLeftHandCenter.update(leftHandX);
            bufferLeftHandCenter2.update(leftHandY);
