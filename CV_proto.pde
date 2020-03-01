@@ -96,7 +96,6 @@ void SkullyBoi()
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
-     
        
        println(joints);
       temp[i]=getJointX(joints,i);
@@ -114,10 +113,6 @@ void SkullyBoi()
        float[] yPos=getSkeletonY(joints);
        float[] zPos=getSkeletonZ(joints);
        
-    //   println(yPos.length);
-     limbtracker.update(xPos,yPos,zPos);
-     limbtracker.fillFollowing(25);
-     float[] comparison=limbtracker.distance(25);
        //Filling the limbtracker PVector with all the points
        limbtracker.update(xPos,yPos,zPos);
        //filling second PVector with the first PVectors values
@@ -156,6 +151,7 @@ void SkullyBoi()
            //I know longer can just call the joint type, but rather have to figure out which joint is where 
            //in the comparison array. 
            bufferCenter.update(comparison[1]);
+>>>>>>> 45f8398cb5478a2d39195890a977d932ede27b39
            
            bufferLeftHandCenter.update(leftHandX);
            bufferLeftHandCenter2.update(leftHandY);
@@ -164,6 +160,7 @@ void SkullyBoi()
            bufferCenterHead2.update(centerHeadY);
            
            //float sum=bufferRightHandCenter.average();
+           
            
            float varianceRightHand=bufferRightHandCenter.variance();
            float varianceLeftHand=bufferLeftHandCenter.variance();
@@ -179,7 +176,6 @@ void SkullyBoi()
 
            fill(255); 
            textSize(32);
-           text(varianceHead,50,50);
            text(center1,50,50);
            //float stroke=1;
            //make a flag 
@@ -310,7 +306,6 @@ float getJointX(KJoint[] joints, int jointType)
 float[] getSkeletonX(KJoint[] joints3D) {
     int joints_number = 25;
     float[] x_values = new float[joints_number];
-// For every joints, get the z value, store it in an array 
 // For every joints, get the x value, store it in an array 
      for(int i = 0; i < joints_number; i++) {
         x_values[i] = joints3D[i].getX();
@@ -321,7 +316,6 @@ float[] getSkeletonX(KJoint[] joints3D) {
   float[] getSkeletonY(KJoint[] joints3D) {
     int joints_number = 25;
     float[] y_values = new float[joints_number];
-// For every joints, get the z value, store it in an array 
 // For every joints, get the y value, store it in an array 
      for(int i = 0; i < joints_number; i++) {
         y_values[i] = joints3D[i].getZ();
