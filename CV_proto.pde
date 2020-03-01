@@ -91,28 +91,33 @@ void SkullyBoi()
 {
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonColorMap();
   //println(skeletonArray.size());
+  
   //individual JOINTS
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
-      KJoint[] joints = skeleton.getJoints();
-     
-      temp[i]=getJointX(joints,i);
+       KJoint[] joints = skeleton.getJoints();
+       
+       //gets an x value of the whole skeloten
+       temp[i]=getJointX(joints,i);
        // println(temp);
        
-       
+       //Getting three float arrays of all positions of the skelotens
        float[] xPos=getSkeletonX(joints);
        float[] yPos=getSkeletonY(joints);
        float[] zPos=getSkeletonZ(joints);
        
-    //   println(yPos.length);
-     limbtracker.update(xPos,yPos,zPos);
-     limbtracker.fillFollowing(25);
-     float[] comparison=limbtracker.distance(25);
+       //Filling the limbtracker PVector with all the points
+       limbtracker.update(xPos,yPos,zPos);
+       //filling second PVector with the first PVectors values
+       limbtracker.fillFollowing(25);
+       //Doing a comparison of the two
+       float[] comparison=limbtracker.distance(25);
    
      //println(comparison);
       for (int j=0; j<temp.length; j++)
       {
+        //Checking what third the skeloten is in
         if(temp[j]>vert2)
         {
           spot[j]="right";
@@ -132,6 +137,9 @@ void SkullyBoi()
            centerHeadX+=(joints[KinectPV2.JointType_Head].getX()-centerHeadX)*speed;
            centerHeadY+=(joints[KinectPV2.JointType_Head].getY()-centerHeadY)*speed;
            
+           //filling buffer with what we found from the comparison from earlier. One problem I am having is
+           //I know longer can just call the joint type, but rather have to figure out which joint is where 
+           //in the comparison array. 
            bufferCenter.update(comparison[1]);
            
            bufferLeftHandCenter.update(leftHandX);
@@ -152,6 +160,9 @@ void SkullyBoi()
            float varianceLeftHand3=bufferLeftHandCenter3.variance();
            float varianceHead=bufferCenterHead.variance();
            float varianceHead2=bufferCenterHead2.variance();
+           
+           //finding the variance of the comparison. I am not sure if I still need to do this as 
+           //the limbtracker comparison function I think does this for me. 
            float center1=bufferCenter.variance();
             println(center1);
 
@@ -278,6 +289,7 @@ void drawJoint(KJoint[] joints, int jointType) {
   popMatrix();
 }
 
+//Gets an X value of a joint.
 float getJointX(KJoint[] joints, int jointType)
 {
      return (joints[jointType].getX());
@@ -286,7 +298,7 @@ float getJointX(KJoint[] joints, int jointType)
 float[] getSkeletonX(KJoint[] joints3D) {
     int joints_number = 25;
     float[] x_values = new float[joints_number];
-// For every joints, get the z value, store it in an array 
+// For every joints, get the x value, store it in an array 
      for(int i = 0; i < joints_number; i++) {
         x_values[i] = joints3D[i].getX();
       }
@@ -296,7 +308,7 @@ float[] getSkeletonX(KJoint[] joints3D) {
   float[] getSkeletonY(KJoint[] joints3D) {
     int joints_number = 25;
     float[] y_values = new float[joints_number];
-// For every joints, get the z value, store it in an array 
+// For every joints, get the y value, store it in an array 
      for(int i = 0; i < joints_number; i++) {
         y_values[i] = joints3D[i].getZ();
       }
