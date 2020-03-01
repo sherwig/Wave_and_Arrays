@@ -97,11 +97,15 @@ void SkullyBoi()
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       KJoint[] joints = skeleton.getJoints();
        
        println(joints);
       temp[i]=getJointX(joints,i);
        // println(temp);
+=======
+       KJoint[] joints = skeleton.getJoints();
+>>>>>>> 45f8398cb5478a2d39195890a977d932ede27b39
 =======
        KJoint[] joints = skeleton.getJoints();
 >>>>>>> 45f8398cb5478a2d39195890a977d932ede27b39
