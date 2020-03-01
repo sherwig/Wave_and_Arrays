@@ -97,10 +97,19 @@ void SkullyBoi()
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
      
+       
+       println(joints);
       temp[i]=getJointX(joints,i);
        // println(temp);
+=======
+       KJoint[] joints = skeleton.getJoints();
+>>>>>>> 45f8398cb5478a2d39195890a977d932ede27b39
        
+       //gets an x value of the whole skeloten
+       temp[i]=getJointX(joints,i);
+       // println(temp);
        
+       //Getting three float arrays of all positions of the skelotens
        float[] xPos=getSkeletonX(joints);
        float[] yPos=getSkeletonY(joints);
        float[] zPos=getSkeletonZ(joints);
@@ -109,10 +118,17 @@ void SkullyBoi()
      limbtracker.update(xPos,yPos,zPos);
      limbtracker.fillFollowing(25);
      float[] comparison=limbtracker.distance(25);
+       //Filling the limbtracker PVector with all the points
+       limbtracker.update(xPos,yPos,zPos);
+       //filling second PVector with the first PVectors values
+       limbtracker.fillFollowing(25);
+       //Doing a comparison of the two
+       float[] comparison=limbtracker.distance(25);
    
      //println(comparison);
       for (int j=0; j<temp.length; j++)
       {
+        //Checking what third the skeloten is in
         if(temp[j]>vert2)
         {
           spot[j]="right";
@@ -131,7 +147,14 @@ void SkullyBoi()
            leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
            centerHeadX+=(joints[KinectPV2.JointType_Head].getX()-centerHeadX)*speed;
            centerHeadY+=(joints[KinectPV2.JointType_Head].getY()-centerHeadY)*speed;
+<<<<<<< HEAD
+           println(joints[KinectPV2.JointType_HandLeft]);
+           bufferCenter.update(comparison[7]);
+=======
            
+           //filling buffer with what we found from the comparison from earlier. One problem I am having is
+           //I know longer can just call the joint type, but rather have to figure out which joint is where 
+           //in the comparison array. 
            bufferCenter.update(comparison[1]);
            
            bufferLeftHandCenter.update(leftHandX);
@@ -142,22 +165,22 @@ void SkullyBoi()
            
            //float sum=bufferRightHandCenter.average();
            
-           //keep last frame position of each frame and then can use distance
-           //make a limb tracker class 
-             //last positions current position
-             //Push back to PVector
            float varianceRightHand=bufferRightHandCenter.variance();
            float varianceLeftHand=bufferLeftHandCenter.variance();
            float varianceLeftHand2=bufferLeftHandCenter2.variance();
            float varianceLeftHand3=bufferLeftHandCenter3.variance();
            float varianceHead=bufferCenterHead.variance();
            float varianceHead2=bufferCenterHead2.variance();
+           
+           //finding the variance of the comparison. I am not sure if I still need to do this as 
+           //the limbtracker comparison function I think does this for me. 
            float center1=bufferCenter.variance();
             println(center1);
 
            fill(255); 
            textSize(32);
            text(varianceHead,50,50);
+           text(center1,50,50);
            //float stroke=1;
            //make a flag 
             if ( varianceRightHand>400) 
@@ -278,6 +301,7 @@ void drawJoint(KJoint[] joints, int jointType) {
   popMatrix();
 }
 
+//Gets an X value of a joint.
 float getJointX(KJoint[] joints, int jointType)
 {
      return (joints[jointType].getX());
@@ -287,6 +311,7 @@ float[] getSkeletonX(KJoint[] joints3D) {
     int joints_number = 25;
     float[] x_values = new float[joints_number];
 // For every joints, get the z value, store it in an array 
+// For every joints, get the x value, store it in an array 
      for(int i = 0; i < joints_number; i++) {
         x_values[i] = joints3D[i].getX();
       }
@@ -297,6 +322,7 @@ float[] getSkeletonX(KJoint[] joints3D) {
     int joints_number = 25;
     float[] y_values = new float[joints_number];
 // For every joints, get the z value, store it in an array 
+// For every joints, get the y value, store it in an array 
      for(int i = 0; i < joints_number; i++) {
         y_values[i] = joints3D[i].getZ();
       }
