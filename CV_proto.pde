@@ -91,10 +91,12 @@ void SkullyBoi()
 {
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonColorMap();
   //println(skeletonArray.size());
+  
   //individual JOINTS
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
+<<<<<<< HEAD
       KJoint[] joints = skeleton.getJoints();
        
        println(joints);
