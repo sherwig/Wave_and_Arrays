@@ -2,7 +2,6 @@ import KinectPV2.KJoint;
 import KinectPV2.*;
 float rightHandX=0;
 float[] temp=new float[8];
-float[][] positions=new float[3][25];
 String[] spot= new String [8];
 float vert1, vert2;
 Limbtracker limbtracker;
@@ -100,6 +99,7 @@ void SkullyBoi()
        //gets an x value of the whole skeloten
        temp[i]=getJointX(joints,KinectPV2.JointType_SpineMid);
        // println(temp);
+        println(1);
        
        //Getting three float arrays of all positions of the skelotens
        //float[i][0] xPos=getSkeletonX(joints);
@@ -125,13 +125,14 @@ void SkullyBoi()
         if(temp[j]>vert2)
         {
           spot[j]="right";
-           
+           println(2);
            float[] xPos=getSkeletonX(joints);
            float[] yPos=getSkeletonY(joints);
            float[] zPos=getSkeletonZ(joints);
+           float[][] positions=new float[3][25];
            positions=limbtracker2.getPositions(xPos,yPos,zPos);
            
-           limbtracker2.update(positions[0][0],positions[0][0],positions[0][0]);
+           limbtracker2.update(positions);
        
            //filling second PVector with the first PVectors values
            limbtracker2.fillFollowing(KinectPV2.JointType_Count);
@@ -155,12 +156,17 @@ void SkullyBoi()
         }
          else if(temp[j]<vert2 && temp[j]>vert1)
         {
-           spot[j]="middle";     
+           spot[j]="middle";    
+           println(3);
            //Filling the limbtracker PVector with all the points
-           limbtracker.update(positions.x[j],positions.y[j],positions.y[j]);
-       
-           //filling second PVector with the first PVectors values
-           limbtracker.fillFollowing(KinectPV2.JointType_Count);
+           float[] xPos=getSkeletonX(joints);
+           float[] yPos=getSkeletonY(joints);
+           float[] zPos=getSkeletonZ(joints);
+           float[][] positions=new float[3][25];
+           
+           positions=limbtracker2.getPositions(xPos,yPos,zPos);
+           println(positions);
+           limbtracker2.update(positions);
        
            //Doing a comparison of the two
            float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
@@ -175,7 +181,7 @@ void SkullyBoi()
            //leftHandY+=(joints[KinectPV2.JointType_HandLeft].getY()-leftHandY)*speed;
            //leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
            
-         //  println(joints[KinectPV2.JointType_HandLeft]);
+           //println(joints[KinectPV2.JointType_HandLeft]);
            
            //filling buffer with what we found from the comparison from earlier. One problem I am having is
            //I know longer can just call the joint type, but rather have to figure out which joint is where 
@@ -221,10 +227,13 @@ void SkullyBoi()
         {       
             spot[j]="Left"; 
      
-            limbtracker3.update(xPos3,yPos3,zPos3);
-       
-           //filling second PVector with the first PVectors values
-           limbtracker3.fillFollowing(KinectPV2.JointType_Count);
+           float[] xPos=getSkeletonX(joints);
+           float[] yPos=getSkeletonY(joints);
+           float[] zPos=getSkeletonZ(joints);
+           float[][] positions=new float[3][25];
+           positions=limbtracker2.getPositions(xPos,yPos,zPos);
+           
+           limbtracker2.update(positions);
        
            //Doing a comparison of the two
            float[] comparison3=limbtracker.distance(KinectPV2.JointType_Count);

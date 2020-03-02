@@ -29,7 +29,7 @@ public class Limbtracker {
    {
     sampleIndex++;
     if(sampleIndex == size) sampleIndex = 0;  
-      limbtracker1[sampleIndex].set(xPos[0][sampleIndex],yPos[1][sampleIndex],zPos[2][sampleIndex]);         
+      limbtracker1[sampleIndex].set(positions[0][sampleIndex],positions[1][sampleIndex],positions[2][sampleIndex]);         
      return this;
    };
   
@@ -74,7 +74,7 @@ public class Limbtracker {
   {
     for(int i=0; i<3; i++) 
     {
-     for (int j=0; j<25; j++)
+     for (int j=0; j<26; j++)
      {
         positions[0][j]=xPos[j];
         positions[1][j]=yPos[j]; 
