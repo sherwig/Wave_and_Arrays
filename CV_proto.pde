@@ -1,28 +1,19 @@
-
 import KinectPV2.KJoint;
 import KinectPV2.*;
 float rightHandX=0;
 float[] temp=new float[8];
+float[][] positions3=new float[8][3];
 String[] spot= new String [8];
 float vert1, vert2;
-FloatBuffer bufferRightHandCenter= new FloatBuffer(30);
-FloatBuffer bufferLeftHandCenter= new FloatBuffer(30);
-FloatBuffer bufferLeftHandCenter2= new FloatBuffer(30);
-FloatBuffer bufferLeftHandCenter3= new FloatBuffer(30);
-FloatBuffer bufferCenterHead= new FloatBuffer(30);
-FloatBuffer bufferCenterHead2= new FloatBuffer(30);
-FloatBuffer bufferCenter= new FloatBuffer(30);
-
 Limbtracker limbtracker;
+Limbtracker limbtracker2; 
+Limbtracker limbtracker3;
+  
+FloatList[][] inventory= new FloatList[8][3];
 KinectPV2 kinect;
 ArrayList<Circle> circles = new ArrayList<Circle>();
 float mx;
 float my;
-float leftHandX;
-float leftHandY;
-float leftHandZ;
-float centerHeadX;
-float centerHeadY;
 float speed = 0.05;
 PShape square;
 float topLeft=0;
@@ -33,6 +24,8 @@ float a=0.0;
 float s=0.0;
 boolean flag1=true;
 boolean flag2=true;
+boolean flag3=true;
+
 
 void setup() {
   size(1920, 1080, P3D);
@@ -50,7 +43,11 @@ void setup() {
   square.setFill(0);
     
   limbtracker= new Limbtracker(25);
-
+  // positions = new PVector[7];
+   //for( int i=0; i != 7; i++) 
+   // {
+   //   positions[i]=new PVector(0,0,0);  
+   // }
 }
 
 void draw() {
@@ -106,35 +103,69 @@ void SkullyBoi()
        // println(temp);
        
        //Getting three float arrays of all positions of the skelotens
-       float[] xPos=getSkeletonX(joints);
-       float[] yPos=getSkeletonY(joints);
-       float[] zPos=getSkeletonZ(joints);
+       //float[i][0] xPos=getSkeletonX(joints);
+       //float[i][1] yPos=getSkeletonY(joints);
+       //float[i][2] zPos=getSkeletonZ(joints);
        
-       //Filling the limbtracker PVector with all the points
-       limbtracker.update(xPos,yPos,zPos);
-      
-       //filling second PVector with the first PVectors values
-       limbtracker.fillFollowing(KinectPV2.JointType_Count);
+ 
        
-       //Doing a comparison of the two
-       float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
+       //for(int k=0; k<KinectPV2.JointType_Count; k++)
+       //{
+       //  positions[i].set(xPos[k],yPos[k],zPos[k]); 
+       //}
+       //float [] xPos2=positions.x.array();
    
     // println(comparison);
      
       for (int j=0; j<temp.length; j++)
-      {
+      {       
+       // positions3[i][j]=getSkeletonX(joints);
+        //,getSkeletonX(joints),getSkeletonX(joints);
+        inventory[i][0]=  getSkeletonX(joints);
         //Checking what third the skeloten is in
         if(temp[j]>vert2)
         {
           spot[j]="right";
+  
+           limbtracker2.update(xPos,yPos,zPos);
+       
+           //filling second PVector with the first PVectors values
+           limbtracker2.fillFollowing(KinectPV2.JointType_Count);
+       
+           //Doing a comparison of the two
+           float[] comparison2=limbtracker.distance(KinectPV2.JointType_Count);
+           limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
+           float right1=limbtracker2.bufferVariance();
+           
+           if (right1>400 && flag2==true) 
+           {
+             flag2=false;
+            // square.scale(.95);
+             square.rotateY(0.1);  
+             square.rotateX(0.1);  
+           }          
+            else if(right1<=400)
+            {
+              flag2=true;
+            }          
         }
          else if(temp[j]<vert2 && temp[j]>vert1)
         {
-            spot[j]="middle";
+           spot[j]="middle";     
+           //Filling the limbtracker PVector with all the points
+           limbtracker.update(positions.x[j],positions.y[j],positions.y[j]);
+       
+           //filling second PVector with the first PVectors values
+           limbtracker.fillFollowing(KinectPV2.JointType_Count);
+       
+           //Doing a comparison of the two
+           float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
+           limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
+           float center1=limbtracker.bufferVariance();
+            
            // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
            // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
            // circles.add(new Circle(mx, my));     
-           // bufferRightHandCenter.update(mx);
             
            //leftHandX+=(joints[KinectPV2.JointType_HandLeft].getX()-leftHandX)*speed;
            //leftHandY+=(joints[KinectPV2.JointType_HandLeft].getY()-leftHandY)*speed;
@@ -145,9 +176,8 @@ void SkullyBoi()
            //filling buffer with what we found from the comparison from earlier. One problem I am having is
            //I know longer can just call the joint type, but rather have to figure out which joint is where 
            //in the comparison array. 
-          // bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
-           limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
-           float center1=limbtracker.bufferVariance();
+           // bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
+          
            
            //float center1=bufferCenter.variance();
            
@@ -164,13 +194,11 @@ void SkullyBoi()
 
             if (center1>400 && flag1==true) 
             {
-              square.setFill(color(random(0,127),random(127,255),random(127,255)));
               a=a+.3;       
               s=cos(a)*2;
              //println(s);
               square.scale(s);
              
-              square.rotateX(0.1);  
               flag1=false;
             }
             
@@ -182,61 +210,36 @@ void SkullyBoi()
             }
         
             
-           if (center1>400 && flag2==true) 
-           {
-             flag2=false;
-            // square.scale(.95);
-             square.rotateY(0.1);  
-           }
-            
-            else if(center1<=400)
-            {
-              flag2=true;
-            }
-           
-           
-           //if ( varianceLeftHand2>400) 
-           //{
-             
-           // // square.scale(.95);
-           //  a=a+.3;       
-           //  s=cos(a)*2;
-           // // println(s);
-           //  square.scale(s);
-             
-           //  square.rotateX(0.1);  
-           //}
-           // if ( varianceHead>200) 
-           //{                        
-           //  square.setFill(color(random(0,127),random(127,255),random(127,255)));           
-           //}
-           
-           //if ( varianceHead2>400) 
-           //{   
-             //a=a+.004;       
-             //s=cos(a)*2;
-             //println(s);
-             //square.scale(s);             
-             //square.scale(.95);
-             //square.rotateZ(0.1);  
-           //}
-           
-           //if ( varianceLeftHand3>400) 
-           //{
-           //  println("Here");
-           // // square.scale(.95);
-           //  square.rotateZ(0.1);  
-           //}    
-           // println(sum);
-            
+                                                 
         }
         
         else if(temp[j]<vert1)
         {       
-            spot[j]="Left";      
+            spot[j]="Left"; 
+     
+            limbtracker3.update(xPos3,yPos3,zPos3);
+       
+           //filling second PVector with the first PVectors values
+           limbtracker3.fillFollowing(KinectPV2.JointType_Count);
+       
+           //Doing a comparison of the two
+           float[] comparison3=limbtracker.distance(KinectPV2.JointType_Count);
+           limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandLeft]);
+           float left1=limbtracker2.bufferVariance();
+           
+           if (left1>400 && flag3==true) 
+           {
+             flag3=false;
+             square.setFill(color(random(0,127),random(127,255),random(127,255)));
+           }          
+            else if(left1<=400)
+            {
+              flag3=true;
+            }      
         }
         
     }
+      
       drawBody(joints);     
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
