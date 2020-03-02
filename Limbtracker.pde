@@ -72,15 +72,15 @@ public class Limbtracker {
   
   public float[][] getPositions(float[] xPos,float[] yPos,float[] zPos) 
   {
-    for(int i=0; i<3; i++) 
-    {
-     for (int j=0; j<26; j++)
+    //for(int i=0; i<3; i++) 
+    //{
+     for (int j=0; j<25; j++)
      {
         positions[0][j]=xPos[j];
         positions[1][j]=yPos[j]; 
         positions[2][j]=zPos[j];
      }
-    }    
+    //}    
     return positions;   
   }
   

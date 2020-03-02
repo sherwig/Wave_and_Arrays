@@ -7,6 +7,10 @@ float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2; 
 Limbtracker limbtracker3;
+float[][] positions=new float[3][25];
+float[][] positions2=new float[3][25];
+float[][] positions3=new float[3][25];
+
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 ArrayList<Circle> circles = new ArrayList<Circle>();
@@ -118,9 +122,6 @@ void SkullyBoi()
      
       for (int j=0; j<temp.length; j++)
       {       
-       // positions3[i][j]=getSkeletonX(joints);
-        //,getSkeletonX(joints),getSkeletonX(joints);
-        //inventory[i][0]=  getSkeletonX(joints);
         //Checking what third the skeloten is in
         if(temp[j]>vert2)
         {
@@ -129,18 +130,17 @@ void SkullyBoi()
            float[] xPos=getSkeletonX(joints);
            float[] yPos=getSkeletonY(joints);
            float[] zPos=getSkeletonZ(joints);
-           float[][] positions=new float[3][25];
-           positions=limbtracker2.getPositions(xPos,yPos,zPos);
+           positions=limbtracker.getPositions(xPos,yPos,zPos);
            
-           limbtracker2.update(positions);
+           limbtracker.update(positions);
        
            //filling second PVector with the first PVectors values
-           limbtracker2.fillFollowing(KinectPV2.JointType_Count);
+           limbtracker.fillFollowing(KinectPV2.JointType_Count);
        
            //Doing a comparison of the two
-           float[] comparison2=limbtracker.distance(KinectPV2.JointType_Count);
-           limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
-           float right1=limbtracker2.bufferVariance();
+           float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
+           limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
+           float right1=limbtracker.bufferVariance();
            
            if (right1>400 && flag2==true) 
            {
@@ -162,16 +162,17 @@ void SkullyBoi()
            float[] xPos=getSkeletonX(joints);
            float[] yPos=getSkeletonY(joints);
            float[] zPos=getSkeletonZ(joints);
-           float[][] positions=new float[3][25];
-           
-           positions=limbtracker2.getPositions(xPos,yPos,zPos);
-           println(positions);
-           limbtracker2.update(positions);
+           println(xPos.length);
+           println("here");
+      
+           positions2=limbtracker2.getPositions(xPos,yPos,zPos);
+           println(positions2);
+           limbtracker2.update(positions2);
        
            //Doing a comparison of the two
-           float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
-           limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
-           float center1=limbtracker.bufferVariance();
+           float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
+           limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
+           float center1=limbtracker2.bufferVariance();
             
            // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
            // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
@@ -230,15 +231,14 @@ void SkullyBoi()
            float[] xPos=getSkeletonX(joints);
            float[] yPos=getSkeletonY(joints);
            float[] zPos=getSkeletonZ(joints);
-           float[][] positions=new float[3][25];
-           positions=limbtracker2.getPositions(xPos,yPos,zPos);
+           positions3=limbtracker3.getPositions(xPos,yPos,zPos);
            
-           limbtracker2.update(positions);
+           limbtracker3.update(positions3);
        
            //Doing a comparison of the two
-           float[] comparison3=limbtracker.distance(KinectPV2.JointType_Count);
+           float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
            limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandLeft]);
-           float left1=limbtracker2.bufferVariance();
+           float left1=limbtracker3.bufferVariance();
            
            if (left1>400 && flag3==true) 
            {
