@@ -10,7 +10,6 @@ Limbtracker limbtracker3;
 float[][] positions=new float[3][25];
 float[][] positions2=new float[3][25];
 float[][] positions3=new float[3][25];
-
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 ArrayList<Circle> circles = new ArrayList<Circle>();
@@ -354,10 +353,6 @@ float[] getSkeletonX(KJoint[] joints3D) {
       return z_values;
   }
 
-
-
-
-
 //draw bone
 void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   pushMatrix();
@@ -444,9 +439,7 @@ class Circle {
         }
           else if(temp[j]<vert1)
         {
-  
-          
-     
+
          // println(diam);
           
         }
