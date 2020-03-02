@@ -68,6 +68,7 @@ void draw() {
   //image(img,0,0);
   //popMatrix();
   
+  //Lessgo
   SkullyBoi();
 
 
@@ -122,7 +123,7 @@ void SkullyBoi()
         //Checking what third the skeloten is in
         if(temp[j]>vert2)
         {
-          spot[j]="right";
+           spot[j]="right";
            println(2);
            float[] xPos=getSkeletonX(joints);
            float[] yPos=getSkeletonY(joints);
