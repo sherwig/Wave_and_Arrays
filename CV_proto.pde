@@ -37,8 +37,8 @@ void setup() {
   colorMode(HSB);
   kinect = new KinectPV2(this);
 
-  kinect.enableSkeletonColorMap(true);
-  kinect.enableColorImg(true);
+//  kinect.enableSkeletonColorMap(true);
+//  kinect.enableColorImg(true);
   kinect.enableSkeleton3DMap(true);
 
   kinect.init();
@@ -99,16 +99,12 @@ void SkullyBoi()
 
       KJoint[] joints = skeleton.getJoints();
        
-       println(joints);
+       //println(joints);
       temp[i]=getJointX(joints,i);
        // println(temp);
-
-       KJoint[] joints = skeleton.getJoints();
-
-       KJoint[] joints = skeleton.getJoints();
        
        //gets an x value of the whole skeloten
-       temp[i]=getJointX(joints,i);
+       temp[i]=getJointX(joints,12);
        // println(temp);
        
        //Getting three float arrays of all positions of the skelotens
@@ -120,10 +116,11 @@ void SkullyBoi()
        limbtracker.update(xPos,yPos,zPos);
        //filling second PVector with the first PVectors values
        limbtracker.fillFollowing(25);
+       
        //Doing a comparison of the two
        float[] comparison=limbtracker.distance(25);
    
-     //println(comparison);
+     println(comparison);
       for (int j=0; j<temp.length; j++)
       {
         //Checking what third the skeloten is in
@@ -173,12 +170,13 @@ void SkullyBoi()
            //finding the variance of the comparison. I am not sure if I still need to do this as 
            //the limbtracker comparison function I think does this for me. 
            float center1=bufferCenter.variance();
-            println(center1);
+            //println(center1);
 
            fill(255); 
            textSize(32);
            text(center1,50,50);
            //float stroke=1;
+           
            //make a flag 
             if ( varianceRightHand>400) 
             {

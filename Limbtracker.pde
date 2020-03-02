@@ -34,9 +34,12 @@ public class Limbtracker {
    {
     if(sampleIndex == size) 
     {
+      
+    
      for(int i=0; i<size; i++) 
      {
-      limbtracker2[i]=limbtracker1[i].copy();
+      //limbtracker2[i]=limbtracker1[i].copy();
+      limbtracker2[i].set(limbtracker1[i]);
      }
     }
      return this;
