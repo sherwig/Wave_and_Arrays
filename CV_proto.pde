@@ -2,14 +2,13 @@ import KinectPV2.KJoint;
 import KinectPV2.*;
 float rightHandX=0;
 float[] temp=new float[8];
-float[][] positions3=new float[8][3];
+float[][] positions=new float[3][25];
 String[] spot= new String [8];
 float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2; 
 Limbtracker limbtracker3;
-  
-FloatList[][] inventory= new FloatList[8][3];
+//FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 ArrayList<Circle> circles = new ArrayList<Circle>();
 float mx;
@@ -121,13 +120,18 @@ void SkullyBoi()
       {       
        // positions3[i][j]=getSkeletonX(joints);
         //,getSkeletonX(joints),getSkeletonX(joints);
-        inventory[i][0]=  getSkeletonX(joints);
+        //inventory[i][0]=  getSkeletonX(joints);
         //Checking what third the skeloten is in
         if(temp[j]>vert2)
         {
           spot[j]="right";
-  
-           limbtracker2.update(xPos,yPos,zPos);
+           
+           float[] xPos=getSkeletonX(joints);
+           float[] yPos=getSkeletonY(joints);
+           float[] zPos=getSkeletonZ(joints);
+           positions=limbtracker2.getPositions(xPos,yPos,zPos);
+           
+           limbtracker2.update(positions[0][0],positions[0][0],positions[0][0]);
        
            //filling second PVector with the first PVectors values
            limbtracker2.fillFollowing(KinectPV2.JointType_Count);

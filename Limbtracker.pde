@@ -4,7 +4,7 @@ public class Limbtracker {
   protected PVector[] limbtracker1, limbtracker2;
   protected int sampleIndex;
   FloatBuffer buffer;
-
+  protected float[][] positions;
   
   public Limbtracker( int size ) {
     initBuffer( size );
@@ -16,6 +16,7 @@ public class Limbtracker {
     limbtracker2 = new PVector[size];
     buffer= new FloatBuffer(30);
     sampleIndex = 0;
+    positions=new float[3][25];
     for( int i=0; i != limbtracker1.length; i++) 
     {
       limbtracker1[i]=new PVector(0,0,0);
@@ -24,11 +25,11 @@ public class Limbtracker {
   };
   
   //Fill first PVector with x, y, and z postitions of skelotens
-   public Limbtracker update(float[] xPos,float[] yPos,float[] zPos)
+   public Limbtracker update(float[][] positions)
    {
     sampleIndex++;
     if(sampleIndex == size) sampleIndex = 0;  
-      limbtracker1[sampleIndex].set(xPos[sampleIndex],yPos[sampleIndex],zPos[sampleIndex]);         
+      limbtracker1[sampleIndex].set(xPos[0][sampleIndex],yPos[1][sampleIndex],zPos[2][sampleIndex]);         
      return this;
    };
   
@@ -69,12 +70,18 @@ public class Limbtracker {
   };
   
   
-  public[] float positions() 
+  public float[][] getPositions(float[] xPos,float[] yPos,float[] zPos) 
   {
-    float 
-    
-    
-   return shit;
+    for(int i=0; i<3; i++) 
+    {
+     for (int j=0; j<25; j++)
+     {
+        positions[0][j]=xPos[j];
+        positions[1][j]=yPos[j]; 
+        positions[2][j]=zPos[j];
+     }
+    }    
+    return positions;   
   }
   
 }
