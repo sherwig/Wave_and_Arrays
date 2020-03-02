@@ -3,7 +3,7 @@ public class Limbtracker {
   protected int size;
   protected PVector[] limbtracker1, limbtracker2;
   protected int sampleIndex;
-  FloatBuffer bufferCenter= new FloatBuffer(30);
+  FloatBuffer buffer;
 
   
   public Limbtracker( int size ) {
@@ -14,6 +14,7 @@ public class Limbtracker {
     this.size = size;
     limbtracker1 = new PVector[size];
     limbtracker2 = new PVector[size];
+    buffer= new FloatBuffer(30);
     sampleIndex = 0;
     for( int i=0; i != limbtracker1.length; i++) 
     {
@@ -35,9 +36,7 @@ public class Limbtracker {
    public Limbtracker fillFollowing(int size)
    {
     if(sampleIndex == size) 
-    {
-      
-    
+    {  
      for(int i=0; i<size; i++) 
      {
       //limbtracker2[i]=limbtracker1[i].copy();
@@ -58,6 +57,16 @@ public class Limbtracker {
     return comparison; 
   };
   
+  public void fillBuffer(float value)
+  {
+    buffer.update(value);   
+  };
+ 
+  public float bufferVariance()
+  {
+    float variance=buffer.variance();
+    return variance;  
+  };
   
 }
   

@@ -139,34 +139,21 @@ void SkullyBoi()
            //leftHandX+=(joints[KinectPV2.JointType_HandLeft].getX()-leftHandX)*speed;
            //leftHandY+=(joints[KinectPV2.JointType_HandLeft].getY()-leftHandY)*speed;
            //leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
-           //centerHeadX+=(joints[KinectPV2.JointType_Head].getX()-centerHeadX)*speed;
-           //centerHeadY+=(joints[KinectPV2.JointType_Head].getY()-centerHeadY)*speed;
            
          //  println(joints[KinectPV2.JointType_HandLeft]);
-           bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
            
            //filling buffer with what we found from the comparison from earlier. One problem I am having is
            //I know longer can just call the joint type, but rather have to figure out which joint is where 
            //in the comparison array. 
-           bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
+          // bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
+           limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
+           float center1=limbtracker.bufferVariance();
+           
+           //float center1=bufferCenter.variance();
            
            //bufferLeftHandCenter.update(leftHandX);
-           //bufferLeftHandCenter2.update(leftHandY);
-           //bufferLeftHandCenter3.update(leftHandZ);
-           //bufferCenterHead.update(centerHeadX);
-           //bufferCenterHead2.update(centerHeadY);
                                
            //float varianceRightHand=bufferRightHandCenter.variance();
-           //float varianceLeftHand=bufferLeftHandCenter.variance();
-           //float varianceLeftHand2=bufferLeftHandCenter2.variance();
-           //float varianceLeftHand3=bufferLeftHandCenter3.variance();
-           //float varianceHead=bufferCenterHead.variance();
-           //float varianceHead2=bufferCenterHead2.variance();
-           
-           //finding the variance of the comparison. I am not sure if I still need to do this as 
-           //the limbtracker comparison function I think does this for me. 
-          
-           float center1=bufferCenter.variance();
            
            //println(center1);            
            fill(255); 
@@ -177,7 +164,7 @@ void SkullyBoi()
 
             if (center1>400 && flag1==true) 
             {
-              square.setStroke(color(random(0,127),random(127,255),random(127,255)));
+              square.setFill(color(random(0,127),random(127,255),random(127,255)));
               a=a+.3;       
               s=cos(a)*2;
              //println(s);
