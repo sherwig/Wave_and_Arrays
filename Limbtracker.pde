@@ -24,7 +24,7 @@ public class Limbtracker {
   };
   
   //Fill first PVector with x, y, and z postitions of skelotens
-   public Limbtracker update(float[] xPos,float[] yPos,float[] zPos )
+   public Limbtracker update(float[] xPos,float[] yPos,float[] zPos)
    {
     sampleIndex++;
     if(sampleIndex == size) sampleIndex = 0;  
@@ -67,6 +67,15 @@ public class Limbtracker {
     float variance=buffer.variance();
     return variance;  
   };
+  
+  
+  public[] float positions() 
+  {
+    float 
+    
+    
+   return shit;
+  }
   
 }
   
