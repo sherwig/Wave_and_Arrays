@@ -108,9 +108,7 @@ void SkullyBoi()
        //float[i][0] xPos=getSkeletonX(joints);
        //float[i][1] yPos=getSkeletonY(joints);
        //float[i][2] zPos=getSkeletonZ(joints);
-       
- 
-       
+  
        //for(int k=0; k<KinectPV2.JointType_Count; k++)
        //{
        //  positions[i].set(xPos[k],yPos[k],zPos[k]); 
@@ -218,9 +216,7 @@ void SkullyBoi()
           
               flag1=true;
             }
-        
-            
-                                                 
+                                        
         }
         
         else if(temp[j]<vert1)
