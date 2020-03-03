@@ -32,6 +32,15 @@ public class Limbtracker {
       limbtracker1[sampleIndex].set(positions[0][sampleIndex],positions[1][sampleIndex],positions[2][sampleIndex]);         
      return this;
    };
+   
+     //Fill first PVector with x, y, and z postitions of skelotens
+   public Limbtracker update2(float[] xPos,float[] yPos,float[] zPos)
+   {
+    sampleIndex++;
+    if(sampleIndex == size) sampleIndex = 0;  
+      limbtracker1[sampleIndex].set(xPos[sampleIndex],yPos[sampleIndex],zPos[sampleIndex]);         
+     return this;
+   };
   
    //Copy the first PVector into a second one once it is full. 
    public Limbtracker fillFollowing(int size)
