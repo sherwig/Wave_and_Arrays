@@ -44,6 +44,8 @@ void setup() {
   square.setFill(0);
     
   limbtracker= new Limbtracker(25);
+  limbtracker2= new Limbtracker(25);
+  limbtracker3= new Limbtracker(25);
   // positions = new PVector[7];
    //for( int i=0; i != 7; i++) 
    // {
@@ -343,7 +345,7 @@ float[] getSkeletonX(KJoint[] joints3D) {
     float[] y_values = new float[joints_number];
 // For every joints, get the y value, store it in an array 
      for(int i = 0; i < joints_number; i++) {
-        y_values[i] = joints3D[i].getZ();
+        y_values[i] = joints3D[i].getY();
       }
       return y_values;
   }
