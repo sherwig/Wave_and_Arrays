@@ -2,7 +2,7 @@ import KinectPV2.KJoint;
 import KinectPV2.*;
 float rightHandX=0;
 String[] spot= new String [8];
-float[] temp=new float[8];      
+float[] temp=new float[7];      
 float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2; 
