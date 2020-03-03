@@ -100,7 +100,7 @@ void SkullyBoi()
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
     
-      println("Skully", skeletonArray.size());
+     // println("Skully", skeletonArray.size());
       KJoint[] joints = skeleton.getJoints();
        //float[] temp=new float[skeletonArray.size()];      
        //gets an x value of the whole skeloten
@@ -111,7 +111,7 @@ void SkullyBoi()
         float[] yPos=getSkeletonY(joints);
         float[] zPos=getSkeletonZ(joints);
         
-        println(xPos);
+       // println(xPos);
        //Getting three float arrays of all positions of the skelotens
        //float[i][0] xPos=getSkeletonX(joints);
        //float[i][1] yPos=getSkeletonY(joints);
@@ -133,12 +133,12 @@ void SkullyBoi()
         {
            spot[j]="right";
            println(2);
-           float[] xPosright=getSkeletonX(joints);
-           float[] yPosright=getSkeletonY(joints);
-           float[] zPosright=getSkeletonZ(joints);
-           positions=limbtracker.getPositions(xPosright,yPosright,zPosright);
+           //float[] xPosright=getSkeletonX(joints);
+           //float[] yPosright=getSkeletonY(joints);
+           //float[] zPosright=getSkeletonZ(joints);
+          // positions=limbtracker.getPositions(xPosright,yPosright,zPosright);
            
-           limbtracker.update(positions);
+           limbtracker.update2(xPos,yPos,zPos);
        
            //filling second PVector with the first PVectors values
            limbtracker.fillFollowing(KinectPV2.JointType_Count);
@@ -168,8 +168,8 @@ void SkullyBoi()
            //float[] xPos=getSkeletonX(joints);
            //float[] yPos=getSkeletonY(joints);
            //float[] zPos=getSkeletonZ(joints);
-           println(xPos.length);
-           println("here");
+         //  println(xPos.length);
+           //println("here");
       
           // positions2=limbtracker2.getPositions(xPos,yPos,zPos);
            println(positions2);
@@ -239,7 +239,7 @@ void SkullyBoi()
            
            positions3=limbtracker3.getPositions(xPosleft,yPosleft,zPosleft);
            
-           limbtracker3.update(positions3);
+           limbtracker.update2(xPosleft,yPosleft,zPosleft);
        
            //Doing a comparison of the two
            float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
