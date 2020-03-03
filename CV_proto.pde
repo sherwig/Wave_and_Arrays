@@ -23,18 +23,21 @@ float topRight=0;
 float bottomRight=300;
 float a=0.0;
 float s=0.0;
+<<<<<<< HEAD
 boolean flag1=true;
 boolean flag2=true;
 boolean flag3=true;
 
+=======
+>>>>>>> parent of bb7ded6... more updates
 
 void setup() {
   size(1920, 1080, P3D);
   colorMode(HSB);
   kinect = new KinectPV2(this);
 
-  kinect.enableSkeletonColorMap(true);
-  kinect.enableColorImg(true);
+//  kinect.enableSkeletonColorMap(true);
+//  kinect.enableColorImg(true);
   kinect.enableSkeleton3DMap(true);
 
   kinect.init();
@@ -99,13 +102,18 @@ void SkullyBoi()
     if (skeleton.isTracked()) {
 
       KJoint[] joints = skeleton.getJoints();
-             
+       
+       //println(joints);
+      temp[i]=getJointX(joints,i);
+       // println(temp);
+       
        //gets an x value of the whole skeloten
-       temp[i]=getJointX(joints,KinectPV2.JointType_SpineMid);
+       temp[i]=getJointX(joints,12);
        // println(temp);
         println(1);
        
        //Getting three float arrays of all positions of the skelotens
+<<<<<<< HEAD
        //float[i][0] xPos=getSkeletonX(joints);
        //float[i][1] yPos=getSkeletonY(joints);
        //float[i][2] zPos=getSkeletonZ(joints);
@@ -115,9 +123,21 @@ void SkullyBoi()
        //  positions[i].set(xPos[k],yPos[k],zPos[k]); 
        //}
        //float [] xPos2=positions.x.array();
+=======
+       float[] xPos=getSkeletonX(joints);
+       float[] yPos=getSkeletonY(joints);
+       float[] zPos=getSkeletonZ(joints);
+       
+       //Filling the limbtracker PVector with all the points
+       limbtracker.update(xPos,yPos,zPos);
+       //filling second PVector with the first PVectors values
+       limbtracker.fillFollowing(25);
+       
+       //Doing a comparison of the two
+       float[] comparison=limbtracker.distance(25);
+>>>>>>> parent of bb7ded6... more updates
    
-    // println(comparison);
-     
+     println(comparison);
       for (int j=0; j<temp.length; j++)
       {       
         //Checking what third the skeloten is in
@@ -154,6 +174,7 @@ void SkullyBoi()
         }
          else if(temp[j]<vert2 && temp[j]>vert1)
         {
+<<<<<<< HEAD
            spot[j]="middle";    
            println(3);
            //Filling the limbtracker PVector with all the points
@@ -181,10 +202,28 @@ void SkullyBoi()
            //leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
            
            //println(joints[KinectPV2.JointType_HandLeft]);
+=======
+            spot[j]="middle";
+            mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
+            my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
+            circles.add(new Circle(mx, my));     
+            bufferRightHandCenter.update(mx);
+            
+           leftHandX+=(joints[KinectPV2.JointType_HandLeft].getX()-leftHandX)*speed;
+           leftHandY+=(joints[KinectPV2.JointType_HandLeft].getY()-leftHandY)*speed;
+           leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
+           leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
+           centerHeadX+=(joints[KinectPV2.JointType_Head].getX()-centerHeadX)*speed;
+           centerHeadY+=(joints[KinectPV2.JointType_Head].getY()-centerHeadY)*speed;
+           
+           println(joints[KinectPV2.JointType_HandLeft]);
+           bufferCenter.update(comparison[7]);
+>>>>>>> parent of bb7ded6... more updates
            
            //filling buffer with what we found from the comparison from earlier. One problem I am having is
            //I know longer can just call the joint type, but rather have to figure out which joint is where 
            //in the comparison array. 
+<<<<<<< HEAD
            // bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
           
            
@@ -195,14 +234,40 @@ void SkullyBoi()
            //float varianceRightHand=bufferRightHandCenter.variance();
            
            //println(center1);            
+=======
+           bufferCenter.update(comparison[1]);
+           
+           bufferLeftHandCenter.update(leftHandX);
+           bufferLeftHandCenter2.update(leftHandY);
+           bufferLeftHandCenter3.update(leftHandZ);
+           bufferCenterHead.update(centerHeadX);
+           bufferCenterHead2.update(centerHeadY);
+           
+           //float sum=bufferRightHandCenter.average();
+           
+           
+           float varianceRightHand=bufferRightHandCenter.variance();
+           float varianceLeftHand=bufferLeftHandCenter.variance();
+           float varianceLeftHand2=bufferLeftHandCenter2.variance();
+           float varianceLeftHand3=bufferLeftHandCenter3.variance();
+           float varianceHead=bufferCenterHead.variance();
+           float varianceHead2=bufferCenterHead2.variance();
+           
+           //finding the variance of the comparison. I am not sure if I still need to do this as 
+           //the limbtracker comparison function I think does this for me. 
+           float center1=bufferCenter.variance();
+            //println(center1);
+
+>>>>>>> parent of bb7ded6... more updates
            fill(255); 
            textSize(32);
            text(center1,50,50);
-           text(str(flag1),50,100);
            //float stroke=1;
-
-            if (center1>400 && flag1==true) 
+           
+           //make a flag 
+            if ( varianceRightHand>400) 
             {
+<<<<<<< HEAD
               a=a+.3;       
               s=cos(a)*2;
              //println(s);
@@ -218,9 +283,54 @@ void SkullyBoi()
               flag1=true;
             }
                                         
+=======
+              square.setStroke(color(random(0,127),random(127,255),random(127,255)));
+            }
+            
+           if ( varianceLeftHand>400) 
+           {
+             
+            // square.scale(.95);
+             square.rotateY(0.1);  
+           }
+           
+           if ( varianceLeftHand2>400) 
+           {
+             
+            // square.scale(.95);
+             a=a+.3;       
+             s=cos(a)*2;
+            // println(s);
+             square.scale(s);
+             
+             square.rotateX(0.1);  
+           }
+            if ( varianceHead>200) 
+           {                        
+             square.setFill(color(random(0,127),random(127,255),random(127,255)));           
+           }
+           
+           if ( varianceHead2>400) 
+           {   
+             //a=a+.004;       
+             //s=cos(a)*2;
+             //println(s);
+             //square.scale(s);             
+             //square.scale(.95);
+             //square.rotateZ(0.1);  
+           }
+           
+           //if ( varianceLeftHand3>400) 
+           //{
+           //  println("Here");
+           // // square.scale(.95);
+           //  square.rotateZ(0.1);  
+           //}    
+           // println(sum);
+            
+>>>>>>> parent of bb7ded6... more updates
         }
-        
-        else if(temp[j]<vert1)
+         else if(temp[j]<vert1)
         {       
             spot[j]="Left"; 
      

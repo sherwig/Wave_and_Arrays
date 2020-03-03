@@ -3,8 +3,11 @@ public class Limbtracker {
   protected int size;
   protected PVector[] limbtracker1, limbtracker2;
   protected int sampleIndex;
+<<<<<<< HEAD
   FloatBuffer buffer;
   protected float[][] positions;
+=======
+>>>>>>> parent of bb7ded6... more updates
   
   public Limbtracker( int size ) {
     initBuffer( size );
