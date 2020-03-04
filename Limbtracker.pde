@@ -5,6 +5,7 @@ public class Limbtracker {
   protected int sampleIndex;
   FloatBuffer buffer;
   protected float[][] positions;
+  boolean flag=true;
   
   public Limbtracker( int size ) {
     initBuffer( size );

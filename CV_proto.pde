@@ -128,18 +128,19 @@ void SkullyBoi()
            limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
            float right1=limbtracker.bufferVariance();
           
-           if (right1>400 && flag2==true) 
+           if (right1>400 && limbtracker.flag==true) 
            {
-             flag2=false;
+             limbtracker.flag=false;
              square.rotateY(0.1);  
              square.rotateX(0.1);  
            }          
             else if(right1<=400)
             {
-              flag2=true;
+              limbtracker.flag=true;
             }          
         }
-         else if(xSetter<vert2 && xSetter>vert1)
+        
+        else if(xSetter<vert2 && xSetter>vert1)
         {
            //spot[j]="middle";    
            println(3);           
@@ -147,7 +148,8 @@ void SkullyBoi()
            float[] yPos=limbtracker2.getY(joints);
            float[] zPos=limbtracker2.getZ(joints);
            limbtracker2.update2(xPos, yPos, zPos);
-       
+           
+           println(zPos);
            //Doing a comparison of the two
            float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
            limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
@@ -164,34 +166,25 @@ void SkullyBoi()
            text(str(flag1),50,100);
            //float stroke=1;
 
-            if (center1>400 && flag1==true) 
+            if (center1>400 && limbtracker2.flag==true) 
             {
               a=a+.3;       
               s=cos(a)*2;
              //println(s);
-              square.scale(s);
-             
-              flag1=false;
+              square.scale(s);            
+              limbtracker2.flag=false;
             }
                 
             else if(center1<=400)
-            {
-          
-              flag1=true;
+            {          
+              limbtracker2.flag=true;
             }
                                         
         }
         
         else if(xSetter<vert1)
         {       
-            //spot[j]="Left"; 
-     
-           //float[] xPosleft=getSkeletonX(joints);
-           //float[] yPosleft=getSkeletonY(joints);
-           //float[] zPosleft=getSkeletonZ(joints);
-           
-           //positions3=limbtracker3.getPositions(xPosleft,yPosleft,zPosleft);
-           
+           //spot[j]="Left";            
            float[] xPos=limbtracker3.getX(joints);
            float[] yPos=limbtracker3.getY(joints);
            float[] zPos=limbtracker3.getZ(joints);
@@ -202,19 +195,18 @@ void SkullyBoi()
            limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandRight]);
            float left1=limbtracker3.bufferVariance();
            
-           if (left1>400 && flag3==true) 
+           if (left1>400 && limbtracker3.flag==true) 
            {
-             flag3=false;
+             limbtracker3.flag=false;
              square.setFill(color(random(0,127),random(127,255),random(127,255)));
            }          
             
             else if(left1<=400)
             {
-              flag3=true;
+              limbtracker3.flag=true;
             }      
         }
-        
-    //}
+
       
           drawBody(joints);  
        //text(skeletonArray.size(), 100,100);
