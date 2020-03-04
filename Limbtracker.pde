@@ -34,7 +34,7 @@ public class Limbtracker {
    };
    
      //Fill first PVector with x, y, and z postitions of skelotens
-   public Limbtracker update2(float[] xPos,float[] yPos,float[] zPos)
+   public Limbtracker update2(float[] xPos, float[] yPos, float[] zPos)
    {
     sampleIndex++;
     if(sampleIndex == size) sampleIndex = 0;  
@@ -78,6 +78,40 @@ public class Limbtracker {
     return variance;  
   };
   
+  public float[] getX(KJoint[] joints3D) 
+  {
+    int joints_number = 25;
+    float[] x_values = new float[joints_number];
+// For every joints, get the x value, store it in an array 
+     for(int i = 0; i < joints_number; i++) {
+        x_values[i] = joints3D[i].getX();
+      }
+      return x_values;   
+    
+  }
+  
+    public float[] getY(KJoint[] joints3D) 
+  {
+    int joints_number = 25;
+    float[] y_values = new float[joints_number];
+// For every joints, get the y value, store it in an array 
+     for(int i = 0; i < joints_number; i++) {
+        y_values[i] = joints3D[i].getY();
+      }
+      return y_values;
+    
+  }
+  
+  public float[] getZ(KJoint[] joints3D) 
+  {
+    int joints_number = 25;
+    float[] z_values = new float[joints_number];
+// For every joints, get the z value, store it in an array 
+     for(int i = 0; i < joints_number; i++) {
+        z_values[i] = joints3D[i].getZ();
+      }
+      return z_values;    
+  }
   
   public float[][] getPositions(float[] xPos,float[] yPos,float[] zPos) 
   {

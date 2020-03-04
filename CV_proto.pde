@@ -30,7 +30,7 @@ boolean flag3=true;
 
 void setup() {
   size(1920, 1080, P3D);
-  colorMode(HSB);
+  colorMode(RGB);
   kinect = new KinectPV2(this);
 
   kinect.enableSkeletonColorMap(true);
@@ -41,7 +41,7 @@ void setup() {
   
   square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
   square.setStroke(255);
-  square.setFill(0);
+
     
   vert1=width/3; 
   vert2=vert1*2;
@@ -49,23 +49,20 @@ void setup() {
   limbtracker= new Limbtracker(25);
   limbtracker2= new Limbtracker(25);
   limbtracker3= new Limbtracker(25);
-  // positions = new PVector[7];
-   //for( int i=0; i != 7; i++) 
-   // {
-   //   positions[i]=new PVector(0,0,0);  
-   // }
+  
 }
 
 void draw() {
   background(0);
    
-  fill(0,0,255);
+  stroke(0,0,255);
   line(vert1,height,vert1,0);
   line(vert2,height,vert2,0);
   //println(vert1,vert2);
-  noFill();
+ // noFill();
+  
   shape(square, 800, 400);
-
+  //square.setFill(color(0,0,255));  
   //image(kinect.getColorImage(), 0, 0, width, height);
   //pushMatrix();
   //scale(7);
@@ -110,44 +107,19 @@ void SkullyBoi()
        
        float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
         println(xSetter);
-        println(1);
-     
-
-       // println(xPos);
-       //Getting three float arrays of all positions of the skelotens
-       //float[i][0] xPos=getSkeletonX(joints);
-       //float[i][1] yPos=getSkeletonY(joints);
-       //float[i][2] zPos=getSkeletonZ(joints);
-  
-       //for(int k=0; k<KinectPV2.JointType_Count; k++)
-       //{
-       //  positions[i].set(xPos[k],yPos[k],zPos[k]); 
-       //}
-       //float [] xPos2=positions.x.array();
-   
-    // println(comparison);
-     
-      //for (int j=0; j<temp.length; j++)
-      //{  
-        //float[] xPos=getSkeletonX(joints);
-        //float[] yPos=getSkeletonY(joints);
-        //float[] zPos=getSkeletonZ(joints);
-       // println("temp", temp[j]);
+        //println(1);
+       
         //Checking what third the skeloten is in
         if(xSetter>vert2)
         {
            //spot[j]="right";
            println(2);
-           //float[] xPosright=getSkeletonX(joints);
-           //float[] yPosright=getSkeletonY(joints);
-           //float[] zPosright=getSkeletonZ(joints);
-          // positions=limbtracker.getPositions(xPosright,yPosright,zPosright);
            
-           float[] xPos=getSkeletonX(joints);
-           float[] yPos=getSkeletonY(joints);
-           float[] zPos=getSkeletonZ(joints);
-           limbtracker.update2(xPos,yPos,zPos);
-       
+           float[] xPos=limbtracker.getX(joints);
+           float[] yPos=limbtracker.getY(joints);
+           float[] zPos=limbtracker.getZ(joints);
+           limbtracker.update2(xPos, yPos, zPos);
+           println(xPos);
            //filling second PVector with the first PVectors values
            limbtracker.fillFollowing(KinectPV2.JointType_Count);
        
@@ -155,37 +127,26 @@ void SkullyBoi()
            float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
            limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
            float right1=limbtracker.bufferVariance();
-           
-           //if (right1>400 && flag2==true) 
-           //{
-           //  flag2=false;
-           // // square.scale(.95);
-           //  square.rotateY(0.1);  
-           //  square.rotateX(0.1);  
-           //}          
-           // else if(right1<=400)
-           // {
-           //   flag2=true;
-           // }          
+          
+           if (right1>400 && flag2==true) 
+           {
+             flag2=false;
+             square.rotateY(0.1);  
+             square.rotateX(0.1);  
+           }          
+            else if(right1<=400)
+            {
+              flag2=true;
+            }          
         }
          else if(xSetter<vert2 && xSetter>vert1)
         {
            //spot[j]="middle";    
-           println(3);
-           //Filling the limbtracker PVector with all the points
-           //float[] xPos=getSkeletonX(joints);
-           //float[] yPos=getSkeletonY(joints);
-           //float[] zPos=getSkeletonZ(joints);
-         //  println(xPos.length);
-           //println("here");
-      
-          // positions2=limbtracker2.getPositions(xPos,yPos,zPos);
-           println(positions2);
-          // limbtracker2.update(positions2);
-          float[] xPos=getSkeletonX(joints);
-          float[] yPos=getSkeletonY(joints);
-          float[] zPos=getSkeletonZ(joints);
-          limbtracker2.update2(xPos,yPos,zPos);
+           println(3);           
+           float[] xPos=limbtracker2.getX(joints);
+           float[] yPos=limbtracker2.getY(joints);
+           float[] zPos=limbtracker2.getZ(joints);
+           limbtracker2.update2(xPos, yPos, zPos);
        
            //Doing a comparison of the two
            float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
@@ -195,25 +156,7 @@ void SkullyBoi()
            // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
            // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
            // circles.add(new Circle(mx, my));     
-            
-           //leftHandX+=(joints[KinectPV2.JointType_HandLeft].getX()-leftHandX)*speed;
-           //leftHandY+=(joints[KinectPV2.JointType_HandLeft].getY()-leftHandY)*speed;
-           //leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
-           
-           //println(joints[KinectPV2.JointType_HandLeft]);
-           
-           //filling buffer with what we found from the comparison from earlier. One problem I am having is
-           //I know longer can just call the joint type, but rather have to figure out which joint is where 
-           //in the comparison array. 
-           // bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
-          
-           
-           //float center1=bufferCenter.variance();
-           
-           //bufferLeftHandCenter.update(leftHandX);
-                               
-           //float varianceRightHand=bufferRightHandCenter.variance();
-           
+    
            //println(center1);            
            fill(255); 
            textSize(32);
@@ -230,8 +173,7 @@ void SkullyBoi()
              
               flag1=false;
             }
-            
-     
+                
             else if(center1<=400)
             {
           
@@ -244,17 +186,20 @@ void SkullyBoi()
         {       
             //spot[j]="Left"; 
      
-           float[] xPosleft=getSkeletonX(joints);
-           float[] yPosleft=getSkeletonY(joints);
-           float[] zPosleft=getSkeletonZ(joints);
+           //float[] xPosleft=getSkeletonX(joints);
+           //float[] yPosleft=getSkeletonY(joints);
+           //float[] zPosleft=getSkeletonZ(joints);
            
-           positions3=limbtracker3.getPositions(xPosleft,yPosleft,zPosleft);
+           //positions3=limbtracker3.getPositions(xPosleft,yPosleft,zPosleft);
            
-           limbtracker.update2(xPosleft,yPosleft,zPosleft);
+           float[] xPos=limbtracker3.getX(joints);
+           float[] yPos=limbtracker3.getY(joints);
+           float[] zPos=limbtracker3.getZ(joints);
+           limbtracker3.update2(xPos, yPos, zPos);
        
-           //Doing a comparison of the two
+           ////Doing a comparison of the two
            float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
-           limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandLeft]);
+           limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandRight]);
            float left1=limbtracker3.bufferVariance();
            
            if (left1>400 && flag3==true) 
@@ -262,6 +207,7 @@ void SkullyBoi()
              flag3=false;
              square.setFill(color(random(0,127),random(127,255),random(127,255)));
            }          
+            
             else if(left1<=400)
             {
               flag3=true;
@@ -340,36 +286,6 @@ float getJointX(KJoint[] joints, int jointType)
 {
      return (joints[jointType].getX());
 }
-
-float[] getSkeletonX(KJoint[] joints3D) {
-    int joints_number = 25;
-    float[] x_values = new float[joints_number];
-// For every joints, get the x value, store it in an array 
-     for(int i = 0; i < joints_number; i++) {
-        x_values[i] = joints3D[i].getX();
-      }
-      return x_values;
-  }
-  
-  float[] getSkeletonY(KJoint[] joints3D) {
-    int joints_number = 25;
-    float[] y_values = new float[joints_number];
-// For every joints, get the y value, store it in an array 
-     for(int i = 0; i < joints_number; i++) {
-        y_values[i] = joints3D[i].getY();
-      }
-      return y_values;
-  }
-
- float[] getSkeletonZ(KJoint[] joints3D) {
-    int joints_number = 25;
-    float[] z_values = new float[joints_number];
-// For every joints, get the z value, store it in an array 
-     for(int i = 0; i < joints_number; i++) {
-        z_values[i] = joints3D[i].getZ();
-      }
-      return z_values;
-  }
 
 //draw bone
 void drawBone(KJoint[] joints, int jointType1, int jointType2) {
