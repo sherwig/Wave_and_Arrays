@@ -26,6 +26,7 @@ float s=0.0;
 boolean flag1=true;
 boolean flag2=true;
 boolean flag3=true;
+float threshold=400;
 
 
 void setup() {
@@ -128,13 +129,13 @@ void SkullyBoi()
            limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
            float right1=limbtracker.bufferVariance();
           
-           if (right1>400 && limbtracker.flag==true) 
+           if (right1>threshold && limbtracker.flag==true) 
            {
              limbtracker.flag=false;
              square.rotateY(0.1);  
              square.rotateX(0.1);  
            }          
-            else if(right1<=400)
+            else if(right1<=threshold)
             {
               limbtracker.flag=true;
             }          
@@ -166,7 +167,7 @@ void SkullyBoi()
            text(str(flag1),50,100);
            //float stroke=1;
 
-            if (center1>400 && limbtracker2.flag==true) 
+            if (center1>threshold && limbtracker2.flag==true) 
             {
               a=a+.3;       
               s=cos(a)*2;
@@ -175,7 +176,7 @@ void SkullyBoi()
               limbtracker2.flag=false;
             }
                 
-            else if(center1<=400)
+            else if(center1<=threshold)
             {          
               limbtracker2.flag=true;
             }
@@ -195,13 +196,13 @@ void SkullyBoi()
            limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandRight]);
            float left1=limbtracker3.bufferVariance();
            
-           if (left1>400 && limbtracker3.flag==true) 
+           if (left1>threshold && limbtracker3.flag==true) 
            {
              limbtracker3.flag=false;
              square.setFill(color(random(0,127),random(127,255),random(127,255)));
            }          
             
-            else if(left1<=400)
+            else if(left1<=threshold)
             {
               limbtracker3.flag=true;
             }      
@@ -211,13 +212,10 @@ void SkullyBoi()
           drawBody(joints);  
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
-    }
-           
-
+    }       
   }
   
 }
-
 
 //DRAW BODY
 void drawBody(KJoint[] joints) {
@@ -276,7 +274,7 @@ void drawJoint(KJoint[] joints, int jointType) {
 //Gets an X value of a joint.
 float getJointX(KJoint[] joints, int jointType)
 {
-     return (joints[jointType].getX());
+    return (joints[jointType].getX());
 }
 
 //draw bone
