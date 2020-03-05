@@ -111,16 +111,15 @@ void SkullyBoi()
         //println(1);
        
         //Checking what third the skeloten is in
+        
         if(xSetter>vert2)
         {
+          
            //spot[j]="right";
            println(2);
-           
-           float[] xPos=limbtracker.getX(joints);
-           float[] yPos=limbtracker.getY(joints);
-           float[] zPos=limbtracker.getZ(joints);
-           limbtracker.update2(xPos, yPos, zPos);
-           println(xPos);
+  
+           limbtracker.update2(joints);
+          // println(xPos);
            //filling second PVector with the first PVectors values
            limbtracker.fillFollowing(KinectPV2.JointType_Count);
        
@@ -145,12 +144,11 @@ void SkullyBoi()
         {
            //spot[j]="middle";    
            println(3);           
-           float[] xPos=limbtracker2.getX(joints);
-           float[] yPos=limbtracker2.getY(joints);
-           float[] zPos=limbtracker2.getZ(joints);
-           limbtracker2.update2(xPos, yPos, zPos);
-           
-           println(zPos);
+  
+           limbtracker2.update2(joints);
+           limbtracker2.fillFollowing(KinectPV2.JointType_Count);
+
+           //println(zPos);
            //Doing a comparison of the two
            float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
            limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
@@ -186,10 +184,8 @@ void SkullyBoi()
         else if(xSetter<vert1)
         {       
            //spot[j]="Left";            
-           float[] xPos=limbtracker3.getX(joints);
-           float[] yPos=limbtracker3.getY(joints);
-           float[] zPos=limbtracker3.getZ(joints);
-           limbtracker3.update2(xPos, yPos, zPos);
+
+           limbtracker3.update2(joints);
        
            ////Doing a comparison of the two
            float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);

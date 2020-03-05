@@ -2,6 +2,10 @@ public class Limbtracker {
   
   protected int size;
   protected PVector[] limbtracker1, limbtracker2;
+  float[] comparison= new float[KinectPV2.JointType_Count]; 
+  float[] z_values = new float[KinectPV2.JointType_Count];
+  float[] y_values = new float[KinectPV2.JointType_Count];
+  float[] x_values = new float[KinectPV2.JointType_Count];
   protected int sampleIndex;
   FloatBuffer buffer;
   protected float[][] positions;
@@ -35,11 +39,14 @@ public class Limbtracker {
    };
    
      //Fill first PVector with x, y, and z postitions of skelotens
-   public Limbtracker update2(float[] xPos, float[] yPos, float[] zPos)
+   public Limbtracker update2(KJoint[] joints3D)
    {
+     x_values=getX(joints3D);
+     y_values=getY(joints3D);
+     z_values=getZ(joints3D);
     sampleIndex++;
     if(sampleIndex == size) sampleIndex = 0;  
-      limbtracker1[sampleIndex].set(xPos[sampleIndex],yPos[sampleIndex],zPos[sampleIndex]);         
+      limbtracker1[sampleIndex].set( x_values[sampleIndex], y_values[sampleIndex], z_values[sampleIndex]);         
      return this;
    };
   
@@ -60,7 +67,6 @@ public class Limbtracker {
   //Compute the distance of each point to one another.
   public float[] distance(int size)
   {
-    float[] comparison= new float[size];  
     for(int i=0; i<size;i++)
     {
       comparison[i]=limbtracker1[i].dist(limbtracker2[i]);     
@@ -79,24 +85,20 @@ public class Limbtracker {
     return variance;  
   };
   
-  public float[] getX(KJoint[] joints3D) 
-  {
-    int joints_number = 25;
-    float[] x_values = new float[joints_number];
+public float[] getX(KJoint[] joints3D) 
+  {  
 // For every joints, get the x value, store it in an array 
-     for(int i = 0; i < joints_number; i++) {
+     for(int i = 0; i < KinectPV2.JointType_Count; i++) {
         x_values[i] = joints3D[i].getX();
       }
       return x_values;   
     
   }
   
-    public float[] getY(KJoint[] joints3D) 
+public float[] getY(KJoint[] joints3D) 
   {
-    int joints_number = 25;
-    float[] y_values = new float[joints_number];
 // For every joints, get the y value, store it in an array 
-     for(int i = 0; i < joints_number; i++) {
+     for(int i = 0; i < KinectPV2.JointType_Count; i++) {
         y_values[i] = joints3D[i].getY();
       }
       return y_values;
@@ -105,10 +107,8 @@ public class Limbtracker {
   
   public float[] getZ(KJoint[] joints3D) 
   {
-    int joints_number = 25;
-    float[] z_values = new float[joints_number];
 // For every joints, get the z value, store it in an array 
-     for(int i = 0; i < joints_number; i++) {
+     for(int i = 0; i < KinectPV2.JointType_Count; i++) {
         z_values[i] = joints3D[i].getZ();
       }
       return z_values;    
