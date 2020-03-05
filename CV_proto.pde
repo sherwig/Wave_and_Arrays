@@ -7,9 +7,7 @@ float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2; 
 Limbtracker limbtracker3;
-float[][] positions=new float[3][25];
-float[][] positions2=new float[3][25];
-float[][] positions3=new float[3][25];
+
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 //ArrayList<Circle> circles = new ArrayList<Circle>();
@@ -92,7 +90,7 @@ void draw() {
 
 void SkullyBoi()
 {
-   ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonColorMap();
+   ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();
   //println(skeletonArray.size());
   
   //individual JOINTS

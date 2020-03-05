@@ -28,25 +28,17 @@ public class Limbtracker {
       limbtracker2[i]=new PVector(0,0,0);
     }
   };
-  
-  //Fill first PVector with x, y, and z postitions of skelotens
-   public Limbtracker update(float[][] positions)
-   {
-    sampleIndex++;
-    if(sampleIndex == size) sampleIndex = 0;  
-      limbtracker1[sampleIndex].set(positions[0][sampleIndex],positions[1][sampleIndex],positions[2][sampleIndex]);         
-     return this;
-   };
    
      //Fill first PVector with x, y, and z postitions of skelotens
    public Limbtracker update2(KJoint[] joints3D)
    {
      x_values=getX(joints3D);
-     y_values=getY(joints3D);
+     y_values=getY(joints3D); 
      z_values=getZ(joints3D);
+    
     sampleIndex++;
     if(sampleIndex == size) sampleIndex = 0;  
-      limbtracker1[sampleIndex].set( x_values[sampleIndex], y_values[sampleIndex], z_values[sampleIndex]);         
+      limbtracker1[sampleIndex].set(x_values[sampleIndex], y_values[sampleIndex], z_values[sampleIndex]);         
      return this;
    };
   
