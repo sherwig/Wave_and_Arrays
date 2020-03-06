@@ -7,6 +7,7 @@ float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2; 
 Limbtracker limbtracker3;
+Boolean[] bool=new Boolean[3];
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 //ArrayList<Circle> circles = new ArrayList<Circle>();
@@ -100,84 +101,89 @@ void SkullyBoi()
     if (skeleton.isTracked()) {
     
      // println("Skully", skeletonArray.size());
-      KJoint[] joints = skeleton.getJoints();
-       //float[] temp=new float[skeletonArray.size()];      
-       //gets an x value of the whole skeloten
-       //temp[i]=getJointX(joints,KinectPV2.JointType_SpineMid);
-       
+      KJoint[] joints = skeleton.getJoints();       
        float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
        // println(xSetter);
         //println(1);
        
-        //Checking what third the skeloten is in
+       for (int j=0; j<bool.length; j++)
+       {
+         bool[j]=false;
+       }
         
+        //Checking what third the skeloten is in
         if(xSetter>vert2)
         {
           
            //spot[j]="right";
            println(2);
-  
-           limbtracker.update2(joints);
-          // println(xPos);
-           //filling second PVector with the first PVectors values
-           limbtracker.fillFollowing(KinectPV2.JointType_Count);
-       
-           //Doing a comparison of the two
-           float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
-           limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
-           float right1=limbtracker.bufferVariance();
-          
-           if (right1>threshold && limbtracker.flag==true) 
+           
+           bool[2]=true;
+           if(bool[2]=true)
            {
-             limbtracker.flag=false;
-             square.rotateY(0.1);  
-             square.rotateX(0.1);  
-           }          
-            else if(right1<=threshold)
-            {
-              limbtracker.flag=true;
-            }          
+             limbtracker.update2(joints);
+            // println(xPos);
+             //filling second PVector with the first PVectors values
+             limbtracker.fillFollowing(KinectPV2.JointType_Count);
+         
+             //Doing a comparison of the two
+             float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
+             limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
+             float right1=limbtracker.bufferVariance();
+            
+             if (right1>threshold && limbtracker.flag==true) 
+             {
+               limbtracker.flag=false;
+               square.rotateY(0.1);  
+               square.rotateX(0.1);  
+             }          
+              else if(right1<=threshold)
+              {
+                limbtracker.flag=true;
+              }          
         }
-        
+       }
         else if(xSetter<vert2 && xSetter>vert1)
         {
            //spot[j]="middle";    
            println(3);           
+          
+           bool[1]=true;
+           if(bool[1]=true)
+           {
+             limbtracker2.update2(joints);
+             limbtracker2.fillFollowing(KinectPV2.JointType_Count);
   
-           limbtracker2.update2(joints);
-           limbtracker2.fillFollowing(KinectPV2.JointType_Count);
-
-           //println(zPos);
-           //Doing a comparison of the two
-           float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
-           limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
-           float center1=limbtracker2.bufferVariance();
-            
-           // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
-           // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
-           // circles.add(new Circle(mx, my));     
-    
-           //println(center1);            
-           fill(255); 
-           textSize(32);
-           text(center1,50,50);
-           text(str(flag1),50,100);
-           //float stroke=1;
-
-            if (center1>threshold && limbtracker2.flag==true) 
-            {
-              a=a+.3;       
-              s=cos(a)*2;
-             //println(s);
-              square.scale(s);            
-              limbtracker2.flag=false;
-            }
-                
-            else if(center1<=threshold)
-            {          
-              limbtracker2.flag=true;
-            }
-                                        
+             //Doing a comparison of the two
+             float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
+             limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
+             float center1=limbtracker2.bufferVariance();
+              
+             // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
+             // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
+             // circles.add(new Circle(mx, my));     
+      
+             //println(center1);            
+             fill(255); 
+             textSize(32);
+             text(center1,50,50);
+             text(str(flag1),50,100);
+             //float stroke=1;
+  
+              if (center1>threshold && limbtracker2.flag==true) 
+              {
+                a=a+.3;       
+                s=cos(a)*2;
+               //println(s);
+                square.scale(s);            
+                limbtracker2.flag=false;
+              }
+                  
+              else if(center1<=threshold)
+              {          
+                limbtracker2.flag=true;
+              }
+           }                             
         }
         
         else if(xSetter<vert1)
@@ -197,10 +203,26 @@ void SkullyBoi()
              square.setFill(color(random(0,127),random(127,255),random(127,255)));
            }          
             
-            else if(left1<=threshold)
-            {
-              limbtracker3.flag=true;
-            }      
+           bool[0]=true;
+           if(bool[0]=true)
+           {
+             limbtracker3.update2(joints);       
+             ////Doing a comparison of the two
+             float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
+             limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandRight]);
+             float left1=limbtracker3.bufferVariance();
+             
+             if (left1>threshold && limbtracker3.flag==true) 
+             {
+               limbtracker3.flag=false;
+               square.setFill(color(random(0,127),random(127,255),random(127,255)));
+             }          
+              
+              else if(left1<=threshold)
+              {
+                limbtracker3.flag=true;
+              }   
+          }
         }
 
       
