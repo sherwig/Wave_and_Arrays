@@ -8,7 +8,6 @@ public class Limbtracker {
   float[] x_values = new float[KinectPV2.JointType_Count];
   protected int sampleIndex;
   FloatBuffer buffer;
-  protected float[][] positions;
   boolean flag=true;
   
   public Limbtracker( int size ) {
@@ -21,7 +20,6 @@ public class Limbtracker {
     limbtracker2 = new PVector[size];
     buffer= new FloatBuffer(30);
     sampleIndex = 0;
-    positions=new float[3][25];
     for( int i=0; i != limbtracker1.length; i++) 
     {
       limbtracker1[i]=new PVector(0,0,0);
@@ -106,19 +104,6 @@ public float[] getY(KJoint[] joints3D)
       return z_values;    
   }
   
-  public float[][] getPositions(float[] xPos,float[] yPos,float[] zPos) 
-  {
-    //for(int i=0; i<3; i++) 
-    //{
-     for (int j=0; j<25; j++)
-     {
-        positions[0][j]=xPos[j];
-        positions[1][j]=yPos[j]; 
-        positions[2][j]=zPos[j];
-     }
-    //}    
-    return positions;   
-  }
   
 }
   

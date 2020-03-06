@@ -7,7 +7,6 @@ float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2; 
 Limbtracker limbtracker3;
-
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 //ArrayList<Circle> circles = new ArrayList<Circle>();
@@ -21,11 +20,9 @@ float topRight=0;
 float bottomRight=300;
 float a=0.0;
 float s=0.0;
-boolean flag1=true;
-boolean flag2=true;
-boolean flag3=true;
 float threshold=400;
-
+float zVal = 3;
+float rotX = PI;
 
 void setup() {
   size(1920, 1080, P3D);
@@ -40,7 +37,6 @@ void setup() {
   
   square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
   square.setStroke(255);
-
     
   vert1=width/3; 
   vert2=vert1*2;
@@ -68,9 +64,14 @@ void draw() {
   //image(img,0,0);
   //popMatrix();
   
+  //translate the scene to the center 
+  pushMatrix();
+  //translate(width/2, height/2, 0);
+  scale(zVal);
+  rotateX(rotX);
   //Lessgo
   SkullyBoi();
-
+  popMatrix();
 
   //circles.add(new Circle(mx, my));
 
@@ -105,7 +106,7 @@ void SkullyBoi()
        //temp[i]=getJointX(joints,KinectPV2.JointType_SpineMid);
        
        float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
-        println(xSetter);
+       // println(xSetter);
         //println(1);
        
         //Checking what third the skeloten is in
@@ -182,7 +183,7 @@ void SkullyBoi()
         else if(xSetter<vert1)
         {       
            //spot[j]="Left";            
-
+            println(4);
            limbtracker3.update2(joints);
        
            ////Doing a comparison of the two
@@ -257,13 +258,24 @@ void drawBody(KJoint[] joints) {
   drawJoint(joints, KinectPV2.JointType_Head);
 }
 
-//draw joint
+////draw joint
 void drawJoint(KJoint[] joints, int jointType) {
   pushMatrix();
   translate(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
   ellipse(0, 0, 25, 25);
   popMatrix();
 }
+
+//void drawJoint(KJoint[] joints, int jointType) 
+//{
+//  strokeWeight(2.0f + joints[jointType].getZ()*8);
+//  point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
+//}
+
+//void drawBone(KJoint[] joints, int jointType1, int jointType2) {
+//  strokeWeight(2.0f + joints[jointType1].getZ()*8);
+//  point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
+//}
 
 //Gets an X value of a joint.
 float getJointX(KJoint[] joints, int jointType)
