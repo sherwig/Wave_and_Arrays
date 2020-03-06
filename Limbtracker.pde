@@ -83,7 +83,7 @@ public float[] getX(KJoint[] joints3D)
       }
       return x_values;   
     
-  }
+  };
   
 public float[] getY(KJoint[] joints3D) 
   {
@@ -93,7 +93,7 @@ public float[] getY(KJoint[] joints3D)
       }
       return y_values;
     
-  }
+  };
   
   public float[] getZ(KJoint[] joints3D) 
   {
@@ -102,9 +102,8 @@ public float[] getY(KJoint[] joints3D)
         z_values[i] = joints3D[i].getZ();
       }
       return z_values;    
-  }
-  
-  
+  };
+    
 }
   
   
