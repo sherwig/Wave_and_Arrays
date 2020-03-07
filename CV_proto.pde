@@ -23,7 +23,7 @@ float bottomRight=300;
 float a=0.0;
 float s=0.0;
 float threshold=400;
-float zVal = 3;
+float zVal = 300;
 float rotX = PI;
 
 void setup() {
@@ -53,28 +53,27 @@ void setup() {
 
 void draw() {
   background(0);
-   
-  stroke(0,0,255);
-  line(vert1,height,vert1,0);
-  line(vert2,height,vert2,0);
-  //println(vert1,vert2);
- // noFill();
-  
-  shape(square, 800, 400);
+
+ // shape(square, 800, 400);
+ 
   //square.setFill(color(0,0,255));  
   //image(kinect.getColorImage(), 0, 0, width, height);
-  pushMatrix();
-  scale(3.8);
-  image(kinect.getDepthMaskImage(), 0, 0);
-  popMatrix();
+  //pushMatrix();
+  //scale(3.8);
+  //image(kinect.getDepthMaskImage(), 0, 0);
+  //popMatrix();
 
   //translate the scene to the center 
   pushMatrix();
-  //translate(width/2, height/2, 0);
-  scale(3.8);
-
+  stroke(0,0,255);
+  line(vert1,height,vert1,0);
+  line(vert2,height,vert2,0);
+  translate(width/2, height/2, 0);
+  scale(zVal);
+  rotateX(rotX);
   SkullyBoi();
   popMatrix();
+  
 
   //circles.add(new Circle(mx, my));
 
@@ -94,8 +93,8 @@ void draw() {
 
 void SkullyBoi()
 {
-   //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
-   ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();
+   ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
+   //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();
   //println(skeletonArray.size());
   
   //individual JOINTS
@@ -269,38 +268,54 @@ void drawBody(KJoint[] joints) {
   drawJoint(joints, KinectPV2.JointType_Head);
 }
 
-////draw joint
+//draw joint
+//void drawJoint(KJoint[] joints, int jointType) {
+//  pushMatrix();
+//  translate(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
+//  ellipse(0, 0, 25, 25);
+//  popMatrix();
+//}
+
+////draw bone
+//void drawBone(KJoint[] joints, int jointType1, int jointType2) {
+//  pushMatrix();
+//  translate(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ());
+//  ellipse(0, 0, 25, 25);
+//  popMatrix();
+//  line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(), joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
+//}
+
+
+//void drawBone(KJoint[] joints, int jointType1) {
+
+//  float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);  
+//  float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
+//  float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
+
+//  //println(xMapped);
+//  //println(yMapped);
+//  //println(zMapped);
+//}
+
 void drawJoint(KJoint[] joints, int jointType) {
-  pushMatrix();
-  translate(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
-  ellipse(0, 0, 25, 25);
-  popMatrix();
+  //strokeWeight(2.0f + joints[jointType].getZ()*8);
+  strokeWeight(.05);
+  point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
 }
 
-//void drawJoint(KJoint[] joints, int jointType) 
-//{
-//  strokeWeight(2.0f + joints[jointType].getZ()*8);
-//  point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
-//}
+void drawBone(KJoint[] joints, int jointType1, int jointType2) {
+  //strokeWeight(2.0f + joints[jointType1].getZ()*8);
+  strokeWeight(.02);
+  //point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
+  
+  line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(), joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
 
-//void drawBone(KJoint[] joints, int jointType1, int jointType2) {
-//  strokeWeight(2.0f + joints[jointType1].getZ()*8);
-//  point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
-//}
+}
 
 //Gets an X value of a joint.
 float getJointX(KJoint[] joints, int jointType)
 {
     return (joints[jointType].getX());
-}
-
-//draw bone
-void drawBone(KJoint[] joints, int jointType1, int jointType2) {
-  pushMatrix();
-  translate(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ());
-  ellipse(0, 0, 25, 25);
-  popMatrix();
-  line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(), joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
 }
 
 //draw hand state
