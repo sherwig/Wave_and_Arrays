@@ -73,7 +73,6 @@ void draw() {
   rotateX(rotX);
   SkullyBoi();
   popMatrix();
-  
 
   //circles.add(new Circle(mx, my));
 
@@ -299,16 +298,26 @@ void drawBody(KJoint[] joints) {
 
 void drawJoint(KJoint[] joints, int jointType) {
   //strokeWeight(2.0f + joints[jointType].getZ()*8);
-  strokeWeight(.05);
-  point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
+  strokeWeight(.05);   
+  float xMapped = map(joints[jointType].getX(), -1.28, 1, 0, width);
+  float yMapped = map(joints[jointType].getY(), -0.3, 0.07, 0, height);
+  float zMapped = map(joints[jointType].getZ(), 1, 8, 0, height*2);
+  point(xMapped, yMapped, zMapped);
 }
 
 void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   //strokeWeight(2.0f + joints[jointType1].getZ()*8);
+  
+  float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);
+  float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
+  float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
+  float xMapped2 = map(joints[jointType2].getX(), -1.28, 1, 0, width);
+  float yMapped2 = map(joints[jointType2].getY(), -0.3, 0.07, 0, height);
+  float zMapped2 = map(joints[jointType2].getZ(), 1, 8, 0, height*2);
   strokeWeight(.02);
   //point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
   
-  line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(), joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
+  line(xMapped,yMapped,zMapped,xMapped2,yMapped2, zMapped2);
 
 }
 
