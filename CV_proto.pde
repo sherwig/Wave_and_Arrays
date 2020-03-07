@@ -1,5 +1,6 @@
 import KinectPV2.KJoint;
 import KinectPV2.*;
+import java.util.ArrayList;
 float rightHandX=0;
 String[] spot= new String [8];
 float[] temp=new float[7];      
@@ -33,6 +34,8 @@ void setup() {
   kinect.enableSkeletonColorMap(true);
   kinect.enableColorImg(true);
   kinect.enableSkeleton3DMap(true);
+  kinect.enableDepthMaskImg(true);
+  kinect.enableSkeletonDepthMap(true);
 
   kinect.init();
   
@@ -60,17 +63,16 @@ void draw() {
   shape(square, 800, 400);
   //square.setFill(color(0,0,255));  
   //image(kinect.getColorImage(), 0, 0, width, height);
-  //pushMatrix();
-  //scale(7);
-  //image(img,0,0);
-  //popMatrix();
-  
+  pushMatrix();
+  scale(3.8);
+  image(kinect.getDepthMaskImage(), 0, 0);
+  popMatrix();
+
   //translate the scene to the center 
   pushMatrix();
   //translate(width/2, height/2, 0);
-  scale(zVal);
-  rotateX(rotX);
-  //Lessgo
+  scale(3.8);
+
   SkullyBoi();
   popMatrix();
 
@@ -92,7 +94,8 @@ void draw() {
 
 void SkullyBoi()
 {
-   ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();
+   //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
+   ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();
   //println(skeletonArray.size());
   
   //individual JOINTS
@@ -167,7 +170,6 @@ void SkullyBoi()
              fill(255); 
              textSize(32);
              text(center1,50,50);
-             text(str(flag1),50,100);
              //float stroke=1;
   
               if (center1>threshold && limbtracker2.flag==true) 
@@ -189,20 +191,7 @@ void SkullyBoi()
         else if(xSetter<vert1)
         {       
            //spot[j]="Left";            
-            println(4);
-           limbtracker3.update2(joints);
-       
-           ////Doing a comparison of the two
-           float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
-           limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandRight]);
-           float left1=limbtracker3.bufferVariance();
-           
-           if (left1>threshold && limbtracker3.flag==true) 
-           {
-             limbtracker3.flag=false;
-             square.setFill(color(random(0,127),random(127,255),random(127,255)));
-           }          
-            
+           println(4);                  
            bool[0]=true;
            if(bool[0]=true)
            {

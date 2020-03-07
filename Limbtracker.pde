@@ -33,7 +33,7 @@ public class Limbtracker {
      x_values=getX(joints3D);
      y_values=getY(joints3D); 
      z_values=getZ(joints3D);
-    
+    println(z_values);
     sampleIndex++;
     if(sampleIndex == size) sampleIndex = 0;  
       limbtracker1[sampleIndex].set(x_values[sampleIndex], y_values[sampleIndex], z_values[sampleIndex]);         
