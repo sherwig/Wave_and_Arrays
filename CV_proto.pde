@@ -133,8 +133,8 @@ void SkullyBoi()
              if (right1>threshold && limbtracker.flag==true) 
              {
                limbtracker.flag=false;
-               shapes.triangle.rotateY(0.1);  
-              shapes.triangle.rotateX(0.1);  
+              // shapes.triangle.rotateY(0.1);  
+               shapes.triangle.rotateX(0.3);  
              }          
               else if(right1<=threshold)
               {
