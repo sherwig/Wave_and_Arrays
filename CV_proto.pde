@@ -8,6 +8,7 @@ float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2; 
 Limbtracker limbtracker3;
+Shapes shapes;
 Boolean[] bool=new Boolean[3];
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
@@ -23,7 +24,7 @@ float bottomRight=300;
 float a=0.0;
 float s=0.0;
 float threshold=400;
-float zVal = 300;
+float zVal = 350;
 float rotX = PI;
 
 void setup() {
@@ -48,6 +49,7 @@ void setup() {
   limbtracker= new Limbtracker(25);
   limbtracker2= new Limbtracker(25);
   limbtracker3= new Limbtracker(25);
+   shapes= new Shapes();
   
 }
 
@@ -73,6 +75,8 @@ void draw() {
   rotateX(rotX);
   SkullyBoi();
   popMatrix();
+
+  SkullyBoi();
 
   //circles.add(new Circle(mx, my));
 
@@ -212,12 +216,40 @@ void SkullyBoi()
         }
 
       
-          drawBody(joints);  
+          //drawBody(joints);  
+          //drawSquiglyBoi(joints);          
+         // drawTriangleBoi(joints);
+          drawSquareBoi(joints);
+
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
     }       
   }
   
+}
+
+void drawSquiglyBoi(KJoint[] joints)
+{
+  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderLeft);
+  drawBone(joints,  KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_HipRight);
+  drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_KneeLeft);
+  drawBone(joints,KinectPV2.JointType_KneeLeft,KinectPV2.JointType_FootRight );
+  
+}
+
+void drawTriangleBoi(KJoint[] joints)
+{
+  drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootRight );
+  drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootLeft );
+}
+
+void drawSquareBoi(KJoint[] joints)
+{
+  drawBone(joints, KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_ShoulderRight);
+  drawBone(joints, KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_FootLeft );
+  drawBone(joints, KinectPV2.JointType_ShoulderRight,KinectPV2.JointType_FootRight );
+  drawBone(joints, KinectPV2.JointType_FootRight,KinectPV2.JointType_FootLeft );
+
 }
 
 //DRAW BODY
@@ -302,6 +334,8 @@ void drawJoint(KJoint[] joints, int jointType) {
   float yMapped = map(joints[jointType].getY(), -0.3, 0.07, 0, height);
   float zMapped = map(joints[jointType].getZ(), 1, 8, 0, height*2);
   point(xMapped, yMapped, zMapped);
+  println(xMapped);
+  point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
 }
 
 void drawBone(KJoint[] joints, int jointType1, int jointType2) {
@@ -313,7 +347,10 @@ void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   float xMapped2 = map(joints[jointType2].getX(), -1.28, 1, 0, width);
   float yMapped2 = map(joints[jointType2].getY(), -0.3, 0.07, 0, height);
   float zMapped2 = map(joints[jointType2].getZ(), 1, 8, 0, height*2);
+ 
   strokeWeight(.02);
+  line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(),joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
+  
   //point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
   
   line(xMapped,yMapped,zMapped,xMapped2,yMapped2, zMapped2);
