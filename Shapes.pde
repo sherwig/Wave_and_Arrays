@@ -26,23 +26,35 @@ public class Shapes {
         
     triangle=createShape();
     triangle.beginShape(TRIANGLES);
+    triangle.noFill();
     triangle.vertex(trianglePoint, trianglePoint);
     triangle.vertex(trianglePoint-50, trianglePoint-50);
     triangle.vertex(squiglyPoint, squiglyPoint-100);
     triangle.endShape(CLOSE); 
-    
-    squigly.noFill();
+       
     square.setStroke(color(255));
     squigly.setStroke(color(255));
     triangle.setStroke(color(255));
+    
+    square.setStrokeWeight(4);
+    squigly.setStrokeWeight(4);
+    triangle.setStrokeWeight(4);
+    
+    
   }
   
   public void drawShapes()
   {
     shape(square,400,800);
     shape(squigly,600,200);
-    shape(triangle,200,600);
-    
+    shape(triangle,200,600);   
   }
+  
+  
+  //public void drawShapes()
+  //{
+    
+    
+  
   
 }

@@ -23,8 +23,8 @@ float topRight=0;
 float bottomRight=300;
 float a=0.0;
 float s=0.0;
-float threshold=400;
-float zVal = 350;
+float threshold=.5;
+float zVal = 950;
 float rotX = PI;
 
 void setup() {
@@ -66,17 +66,19 @@ void draw() {
   //popMatrix();
 
   shapes.drawShapes();
-  //translate the scene to the center 
+  shapes.square.setFill(color(0,0,255));
   
-  //pushMatrix();
-  //stroke(0,0,255);
-  //line(vert1,height,vert1,0);
+  //translate the scene to the center 
+  //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
-  //translate(width/2, height/2, 0);
-  //scale(zVal);
-  //rotateX(rotX);
-  //SkullyBoi();
-  //popMatrix();
+ 
+  pushMatrix();
+  stroke(0,0,255);
+  translate(width/2, height/2, 0);
+  scale(zVal);
+  rotateX(rotX);
+  SkullyBoi();
+  popMatrix();
 
   //SkullyBoi();
 
@@ -119,7 +121,7 @@ void SkullyBoi()
        }
         
         //Checking what third the skeloten is in
-        if(xSetter>vert2)
+        if(xSetter>.24)
         {       
            //spot[j]="right";
            println(2);
@@ -127,6 +129,7 @@ void SkullyBoi()
            bool[2]=true;
            if(bool[2]=true)
            {
+             drawTriangleBoi(joints);
              limbtracker.update2(joints);
             // println(xPos);
              //filling second PVector with the first PVectors values
@@ -140,8 +143,8 @@ void SkullyBoi()
              if (right1>threshold && limbtracker.flag==true) 
              {
                limbtracker.flag=false;
-               square.rotateY(0.1);  
-               square.rotateX(0.1);  
+               shapes.triangle.rotateY(0.1);  
+              shapes.triangle.rotateX(0.1);  
              }          
               else if(right1<=threshold)
               {
@@ -149,7 +152,7 @@ void SkullyBoi()
               }          
         }
        }
-        else if(xSetter<vert2 && xSetter>vert1)
+        else if(xSetter<.24 && xSetter>-.52)
         {
            //spot[j]="middle";    
            println(3);           
@@ -157,6 +160,7 @@ void SkullyBoi()
            bool[1]=true;
            if(bool[1]=true)
            {
+             drawSquiglyBoi(joints);          
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
   
@@ -164,7 +168,8 @@ void SkullyBoi()
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
              limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
              float center1=limbtracker2.bufferVariance();
-              
+             //println(center1);
+             
              // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
              // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
              // circles.add(new Circle(mx, my));     
@@ -180,7 +185,8 @@ void SkullyBoi()
                 a=a+.3;       
                 s=cos(a)*2;
                //println(s);
-                square.scale(s);            
+                square.scale(s);   
+                shapes.squigly.scale(s);
                 limbtracker2.flag=false;
               }
                   
@@ -191,23 +197,26 @@ void SkullyBoi()
            }                             
         }
         
-        else if(xSetter<vert1)
+        else if(xSetter<-.52)
         {       
-           //spot[j]="Left";            
+           //spot[j]="Left";
+
            println(4);                  
            bool[0]=true;
            if(bool[0]=true)
            {
+             drawSquareBoi(joints);
              limbtracker3.update2(joints);       
              ////Doing a comparison of the two
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
              limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandRight]);
              float left1=limbtracker3.bufferVariance();
+             println(left1);
              
-             if (left1>threshold && limbtracker3.flag==true) 
+             if (left1>.2 && limbtracker3.flag==true) 
              {
                limbtracker3.flag=false;
-               square.setFill(color(random(0,127),random(127,255),random(127,255)));
+               shapes.square.setFill(color(random(0,127),random(127,255),random(127,255)));
              }          
               
               else if(left1<=threshold)
@@ -219,9 +228,6 @@ void SkullyBoi()
 
       
           //drawBody(joints);  
-          //drawSquiglyBoi(joints);          
-         // drawTriangleBoi(joints);
-          drawSquareBoi(joints);
 
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
