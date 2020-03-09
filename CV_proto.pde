@@ -49,7 +49,7 @@ void setup() {
   limbtracker= new Limbtracker(25);
   limbtracker2= new Limbtracker(25);
   limbtracker3= new Limbtracker(25);
-   shapes= new Shapes();
+  shapes= new Shapes(0,0,0);
   
 }
 
@@ -65,18 +65,20 @@ void draw() {
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
 
+  shapes.drawShapes();
   //translate the scene to the center 
-  pushMatrix();
-  stroke(0,0,255);
-  line(vert1,height,vert1,0);
-  line(vert2,height,vert2,0);
-  translate(width/2, height/2, 0);
-  scale(zVal);
-  rotateX(rotX);
-  SkullyBoi();
-  popMatrix();
+  
+  //pushMatrix();
+  //stroke(0,0,255);
+  //line(vert1,height,vert1,0);
+  //line(vert2,height,vert2,0);
+  //translate(width/2, height/2, 0);
+  //scale(zVal);
+  //rotateX(rotX);
+  //SkullyBoi();
+  //popMatrix();
 
-  SkullyBoi();
+  //SkullyBoi();
 
   //circles.add(new Circle(mx, my));
 
