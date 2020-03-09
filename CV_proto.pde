@@ -394,17 +394,6 @@ void drawBody(KJoint[] joints) {
 //}
 
 
-//void drawBone(KJoint[] joints, int jointType1) {
-
-//  float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);  
-//  float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
-//  float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
-
-//  //println(xMapped);
-//  //println(yMapped);
-//  //println(zMapped);
-//}
-
 void drawJoint(KJoint[] joints, int jointType) {
   //strokeWeight(2.0f + joints[jointType].getZ()*8);
   strokeWeight(.05);   
