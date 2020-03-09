@@ -159,10 +159,7 @@ void SkullyBoi()
              limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
              float center1=limbtracker2.bufferVariance();
              //println(center1);
-             
-             // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
-             // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
-             // circles.add(new Circle(mx, my));     
+    
       
              //println(center1);            
              fill(255); 
@@ -314,7 +311,7 @@ void drawSquareBoi(KJoint[] joints)
 
   drawBone(joints, KinectPV2.JointType_KneeRight,KinectPV2.JointType_AnkleRight);
   drawBone(joints, KinectPV2.JointType_KneeLeft,KinectPV2.JointType_AnkleLeft);
-  drawBone(joints, KinectPV2.JointType_AnkleLeft,KinectPV2.JointType_AnkleRighta);
+  drawBone(joints, KinectPV2.JointType_AnkleLeft,KinectPV2.JointType_AnkleRight);
 
   
   
