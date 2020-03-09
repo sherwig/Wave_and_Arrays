@@ -114,8 +114,7 @@ void SkullyBoi()
         
         //Checking what third the skeloten is in
         if(xSetter>vert2)
-        {
-          
+        {       
            //spot[j]="right";
            println(2);
            
