@@ -313,8 +313,6 @@ void drawSquareBoi(KJoint[] joints)
   drawBone(joints, KinectPV2.JointType_KneeLeft,KinectPV2.JointType_AnkleLeft);
   drawBone(joints, KinectPV2.JointType_AnkleLeft,KinectPV2.JointType_AnkleRight);
 
-  
-  
 }
 
 //DRAW BODY
