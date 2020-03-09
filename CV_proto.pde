@@ -82,16 +82,6 @@ void draw() {
 
   //SkullyBoi();
 
-  //circles.add(new Circle(mx, my));
-
-  //for (int i=0; i<circles.size(); i++) 
-  //{
-  //  Circle c = circles.get(i);
-  //  c.display();
-  //  c.update();
-    
-  //  if (c.isDone()) circles.remove(c);
-  //}
 
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
@@ -463,65 +453,3 @@ void handState(int handState) {
     break;
   }
 }
-
-
-//class Circle {
-//  float x, y;
-//  float d;
-//  float hue;
-  
-//  Circle(float _x, float _y) {
-//    x = _x;
-//    y = _y;
-//    d = 100;
-//    hue = 120;
-//  }
-
-  //void display () {
-  //  //fill(hue, 255, 255);
-  //  rectMode(CENTER);
-  //  noFill();
-  //  stroke(hue, 255, 255);
-  //  rect(x-(hue/100), y-(hue/100), d-(hue/100), d-(hue/100));
-  //}
-
-  //void update() {
-  //  float diam=0;
-  //  ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonColorMap();
-  //  for (int i = 0; i < skeletonArray.size(); i++) {
-  //  KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
-  //  if (skeleton.isTracked()) 
-  //  {
-  //    KJoint[] joints = skeleton.getJoints();
-     
-  //    temp[i]=getJointX(joints,i);
-      
-  //    for (int j=0; j<temp.length;j++)
-  //    {
-  //      if(temp[j]>vert2)
-  //      {
-  
-  //        diam = map(joints[KinectPV2.JointType_HandRight].getX(), vert1, width, 1, 10);
-  //       // println(diam);
-          
-  //      }
-  //        else if(temp[j]<vert1)
-  //      {
-
-  //       // println(diam);
-          
-  //      }
-  //    }
-      
-  //  }
-  //  }
-  //   hue += 1;
-  //   d -= diam;
-  
-  //}
-  
-  //boolean isDone() {
-  //if (hue == 255) return true;
-  //else return false;
-  //}
-//}
