@@ -23,25 +23,12 @@ float topRight=0;
 float bottomRight=300;
 float a=0.0;
 float s=0.0;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
 boolean flag1=true;
 boolean flag2=true;
 boolean flag3=true;
-
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of bb7ded6... more updates
-=======
 float threshold=.5;
 float zVal = 950;
 float rotX = PI;
->>>>>>> 4f1b1016a07014b8439086b252f0fd6dddf69def
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
 
 void setup() {
   size(1920, 1080, P3D);
@@ -58,16 +45,15 @@ void setup() {
 
   square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
   square.setStroke(255);
-<<<<<<< HEAD
   square.setFill(0);
 
   limbtracker= new Limbtracker(25);
+  
   // positions = new PVector[7];
    //for( int i=0; i != 7; i++)
    // {
    //   positions[i]=new PVector(0,0,0);
    // }
-=======
     
   vert1=width/3; 
   vert2=vert1*2;
@@ -77,12 +63,10 @@ void setup() {
   limbtracker3= new Limbtracker(25);
   shapes= new Shapes(0,0,0);
   
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
 }
 
 void draw() {
   background(0);
-<<<<<<< HEAD
   vert1=width/3;
   vert2=vert1*2;
   //fill(0,0,255);
@@ -91,8 +75,6 @@ void draw() {
 
   noFill();
   shape(square, 800, 400);
-=======
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
 
  // shape(square, 800, 400);
  
@@ -103,14 +85,11 @@ void draw() {
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
 
-<<<<<<< HEAD
   //translate the scene to the center
-=======
   shapes.drawShapes();
   shapes.square.setFill(color(0,0,255));
   
   //translate the scene to the center 
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
 
@@ -124,19 +103,6 @@ void draw() {
 
   //SkullyBoi();
 
-<<<<<<< HEAD
-  circles.add(new Circle(mx, my));
-
-  for (int i=0; i<circles.size(); i++)
-  {
-    Circle c = circles.get(i);
-    c.display();
-    c.update();
-
-    if (c.isDone()) circles.remove(c);
-  }
-=======
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
 
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
@@ -153,8 +119,6 @@ void SkullyBoi()
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
-<<<<<<< HEAD
-
       KJoint[] joints = skeleton.getJoints();
 
        //println(joints);
@@ -180,12 +144,7 @@ void SkullyBoi()
        float[] comparison=limbtracker.distance(25);
 
      println(comparison);
-      for (int j=0; j<temp.length; j++)
-<<<<<<< HEAD
-      {
-=======
-      {       
-=======
+
     
      // println("Skully", skeletonArray.size());
       KJoint[] joints = skeleton.getJoints();       
@@ -197,15 +156,12 @@ void SkullyBoi()
        {
          bool[j]=false;
        }
-        
->>>>>>> 4f1b1016a07014b8439086b252f0fd6dddf69def
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
+
         //Checking what third the skeloten is in
         if(xSetter>.24)
         {       
            //spot[j]="right";
            println(2);
-<<<<<<< HEAD
            float[] xPos=getSkeletonX(joints);
            float[] yPos=getSkeletonY(joints);
            float[] zPos=getSkeletonZ(joints);
@@ -231,8 +187,7 @@ void SkullyBoi()
             else if(right1<=400)
             {
               flag2=true;
-            }
-=======
+            }           
            
            bool[2]=true;
            if(bool[2]=true)
@@ -258,18 +213,12 @@ void SkullyBoi()
               {
                 limbtracker.flag=true;
               }          
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
         }
        }
         else if(xSetter<.24 && xSetter>-.52)
-        {
-<<<<<<< HEAD
-           spot[j]="middle";
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
+        {      
+
            spot[j]="middle";    
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
            println(3);
            //Filling the limbtracker PVector with all the points
            float[] xPos=getSkeletonX(joints);
@@ -287,27 +236,7 @@ void SkullyBoi()
            limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
            float center1=limbtracker2.bufferVariance();
 
-           // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
-           // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
-           // circles.add(new Circle(mx, my));
 
-           //leftHandX+=(joints[KinectPV2.JointType_HandLeft].getX()-leftHandX)*speed;
-           //leftHandY+=(joints[KinectPV2.JointType_HandLeft].getY()-leftHandY)*speed;
-           //leftHandZ+=(joints[KinectPV2.JointType_HandLeft].getZ()-leftHandZ)*speed;
-
-           //println(joints[KinectPV2.JointType_HandLeft]);
-
-           //filling buffer with what we found from the comparison from earlier. One problem I am having is
-           //I know longer can just call the joint type, but rather have to figure out which joint is where
-           //in the comparison array.
-           // bufferCenter.update(comparison[KinectPV2.JointType_HandLeft]);
-
-
-           //float center1=bufferCenter.variance();
-
-           //bufferLeftHandCenter.update(leftHandX);
-
-           //float varianceRightHand=bufferRightHandCenter.variance();
 
            //println(center1);
            fill(255);
@@ -335,7 +264,6 @@ void SkullyBoi()
 
         }
          else if(temp[j]<vert1)
-<<<<<<< HEAD
         {
             spot[j]="Left";
 
@@ -370,8 +298,6 @@ void SkullyBoi()
 
     }
 
-=======
-=======
            //spot[j]="middle";    
            println(3);           
           
@@ -413,7 +339,6 @@ void SkullyBoi()
         }
         
         else if(xSetter<-.52)
->>>>>>> 4f1b1016a07014b8439086b252f0fd6dddf69def
         {       
            //spot[j]="Left";
 
@@ -448,7 +373,6 @@ void SkullyBoi()
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
     }       
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
   }
 
 }
@@ -620,37 +544,6 @@ void drawJoint(KJoint[] joints, int jointType) {
   point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
 }
 
-<<<<<<< HEAD
-float[] getSkeletonX(KJoint[] joints3D) {
-    int joints_number = 25;
-    float[] x_values = new float[joints_number];
-// For every joints, get the x value, store it in an array
-     for(int i = 0; i < joints_number; i++) {
-        x_values[i] = joints3D[i].getX();
-      }
-      return x_values;
-  }
-
-  float[] getSkeletonY(KJoint[] joints3D) {
-    int joints_number = 25;
-    float[] y_values = new float[joints_number];
-// For every joints, get the y value, store it in an array
-     for(int i = 0; i < joints_number; i++) {
-        y_values[i] = joints3D[i].getZ();
-      }
-      return y_values;
-  }
-
- float[] getSkeletonZ(KJoint[] joints3D) {
-    int joints_number = 25;
-    float[] z_values = new float[joints_number];
-// For every joints, get the z value, store it in an array
-     for(int i = 0; i < joints_number; i++) {
-        z_values[i] = joints3D[i].getZ();
-      }
-      return z_values;
-  }
-=======
 void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   //strokeWeight(2.0f + joints[jointType1].getZ()*8);
   

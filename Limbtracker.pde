@@ -7,15 +7,9 @@ public class Limbtracker {
   float[] y_values = new float[KinectPV2.JointType_Count];
   float[] x_values = new float[KinectPV2.JointType_Count];
   protected int sampleIndex;
-<<<<<<< HEAD
   FloatBuffer buffer;
-<<<<<<< HEAD
   protected float[][] positions;
-=======
->>>>>>> parent of bb7ded6... more updates
-=======
   boolean flag=true;
->>>>>>> 4f1b1016a07014b8439086b252f0fd6dddf69def
   
   public Limbtracker( int size ) {
     initBuffer( size );
@@ -34,7 +28,7 @@ public class Limbtracker {
     }
   };
    
-     //Fill first PVector with x, y, and z postitions of skelotens
+    //Fill first PVector with x, y, and z postitions of skelotens
    public Limbtracker update2(KJoint[] joints3D)
    {
      x_values=getX(joints3D);
