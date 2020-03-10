@@ -29,6 +29,8 @@ boolean flag3=true;
 float threshold=.5;
 float zVal = 950;
 float rotX = PI;
+int numShapes=0;
+int numShapesHigh=10;
 
 void setup() {
   size(1920, 1080, P3D);
@@ -53,8 +55,12 @@ void setup() {
   limbtracker= new Limbtracker(25);
   limbtracker2= new Limbtracker(25);
   limbtracker3= new Limbtracker(25);
-  shapes= new Shapes(0,0,0);
   
+  for(int i=0; i<10; i++)
+  {
+    shapes= new Shapes(0,0,0);
+  }
+
 }
 
 void draw() {
@@ -68,11 +74,11 @@ void draw() {
   //scale(3.8);
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
-
-  //translate the scene to the center
-  shapes.drawShapes();
-  shapes.square.setFill(color(0,0,255));
   
+      shapes.square.setFill(color(0,0,255));  
+      shapes.drawShapes(random(0,width),random(0,height));;     
+
+ 
   //translate the scene to the center 
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
@@ -392,7 +398,7 @@ void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   //float yMapped2 = map(joints[jointType2].getY(), -0.3, 0.07, 0, height);
   //float zMapped2 = map(joints[jointType2].getZ(), 1, 8, 0, height*2);
  
-  strokeWeight(.02);
+  strokeWeight(.01);
   line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(),joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
   
   //point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());

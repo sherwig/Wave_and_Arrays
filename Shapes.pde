@@ -2,6 +2,7 @@ public class Shapes {
   PShape square;
   PShape squigly;
   PShape triangle;
+  int numShapes=10;
  
   public Shapes(float squarePoint,float squiglyPoint, float trianglePoint)
   {
@@ -43,11 +44,14 @@ public class Shapes {
     
   }
   
-  public void drawShapes()
+  public void drawShapes(float x, float y)
   {
-    shape(square,400,800);
-    shape(squigly,600,200);
-    shape(triangle,200,600);   
+    for (int i=0; i<numShapes; i++)
+    {
+      shape(square,x,y);
+      shape(squigly,x,y);
+      shape(triangle,x,y);   
+    }
   }
   
   
