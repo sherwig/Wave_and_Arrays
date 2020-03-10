@@ -120,34 +120,8 @@ void SkullyBoi()
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
-
-       //println(joints);
-      temp[i]=getJointX(joints,i);
-       // println(temp);
-
-       //gets an x value of the whole skeloten
-       temp[i]=getJointX(joints,12);
-       // println(temp);
-        println(1);
-
-       //Getting three float arrays of all positions of the skelotens
-       float[] xPos=getSkeletonX(joints);
-       float[] yPos=getSkeletonY(joints);
-       float[] zPos=getSkeletonZ(joints);
-
-       //Filling the limbtracker PVector with all the points
-       limbtracker.update(xPos,yPos,zPos);
-       //filling second PVector with the first PVectors values
-       limbtracker.fillFollowing(25);
-
-       //Doing a comparison of the two
-       float[] comparison=limbtracker.distance(25);
-
-     println(comparison);
-
     
      // println("Skully", skeletonArray.size());
-      KJoint[] joints = skeleton.getJoints();       
        float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
        // println(xSetter);
         //println(1);
@@ -159,36 +133,7 @@ void SkullyBoi()
 
         //Checking what third the skeloten is in
         if(xSetter>.24)
-        {       
-           //spot[j]="right";
-           println(2);
-           float[] xPos=getSkeletonX(joints);
-           float[] yPos=getSkeletonY(joints);
-           float[] zPos=getSkeletonZ(joints);
-           positions=limbtracker.getPositions(xPos,yPos,zPos);
-
-           limbtracker.update(positions);
-
-           //filling second PVector with the first PVectors values
-           limbtracker.fillFollowing(KinectPV2.JointType_Count);
-
-           //Doing a comparison of the two
-           float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
-           limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
-           float right1=limbtracker.bufferVariance();
-
-           if (right1>400 && flag2==true)
-           {
-             flag2=false;
-            // square.scale(.95);
-             square.rotateY(0.1);
-             square.rotateX(0.1);
-           }
-            else if(right1<=400)
-            {
-              flag2=true;
-            }           
-           
+        {                            
            bool[2]=true;
            if(bool[2]=true)
            {
@@ -215,92 +160,10 @@ void SkullyBoi()
               }          
         }
        }
-        else if(xSetter<.24 && xSetter>-.52)
-        {      
-
-           spot[j]="middle";    
-           println(3);
-           //Filling the limbtracker PVector with all the points
-           float[] xPos=getSkeletonX(joints);
-           float[] yPos=getSkeletonY(joints);
-           float[] zPos=getSkeletonZ(joints);
-           println(xPos.length);
-           println("here");
-
-           positions2=limbtracker2.getPositions(xPos,yPos,zPos);
-           println(positions2);
-           limbtracker2.update(positions2);
-
-           //Doing a comparison of the two
-           float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
-           limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
-           float center1=limbtracker2.bufferVariance();
-
-
-
-           //println(center1);
-           fill(255);
-           textSize(32);
-           text(center1,50,50);
-           //float stroke=1;
-
-           //make a flag
-            if ( varianceRightHand>400)
-            {
-              a=a+.3;
-              s=cos(a)*2;
-             //println(s);
-              square.scale(s);
-
-              flag1=false;
-            }
-
-
-            else if(center1<=400)
-            {
-
-              flag1=true;
-            }
-
-        }
-         else if(temp[j]<vert1)
-        {
-            spot[j]="Left";
-
-           float[] xPos=getSkeletonX(joints);
-           float[] yPos=getSkeletonY(joints);
-           float[] zPos=getSkeletonZ(joints);
-           positions3=limbtracker3.getPositions(xPos,yPos,zPos);
-
-           limbtracker3.update(positions3);
-
-           //Doing a comparison of the two
-           float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
-           limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandLeft]);
-           float left1=limbtracker3.bufferVariance();
-
-           if (left1>400 && flag3==true)
-           {
-             flag3=false;
-             square.setFill(color(random(0,127),random(127,255),random(127,255)));
-           }
-            else if(left1<=400)
-            {
-              flag3=true;
-            }
-        }
-
-    }
-
-      drawBody(joints);
-       //text(skeletonArray.size(), 100,100);
-       //text(spot,150,150);
-
-    }
-
-           //spot[j]="middle";    
-           println(3);           
-          
+                 
+                    
+       else if(xSetter<.24 && xSetter>-.52)
+        {          
            bool[1]=true;
            if(bool[1]=true)
            {
@@ -313,8 +176,7 @@ void SkullyBoi()
              limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
              float center1=limbtracker2.bufferVariance();
              //println(center1);
-    
-      
+       
              //println(center1);            
              fill(255); 
              textSize(32);
@@ -326,7 +188,6 @@ void SkullyBoi()
                 a=a+.3;       
                 s=cos(a)*2;
                //println(s);
-                square.scale(s);   
                 shapes.squigly.scale(s);
                 limbtracker2.flag=false;
               }
@@ -341,7 +202,6 @@ void SkullyBoi()
         else if(xSetter<-.52)
         {       
            //spot[j]="Left";
-
            println(4);                  
            bool[0]=true;
            if(bool[0]=true)
@@ -562,7 +422,6 @@ void drawBone(KJoint[] joints, int jointType1, int jointType2) {
  // line(xMapped,yMapped,zMapped,xMapped2,yMapped2, zMapped2);
 
 }
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
 
 //Gets an X value of a joint.
 float getJointX(KJoint[] joints, int jointType)
@@ -603,68 +462,3 @@ void handState(int handState) {
     break;
   }
 }
-<<<<<<< HEAD
-
-
-class Circle {
-  float x, y;
-  float d;
-  float hue;
-
-  Circle(float _x, float _y) {
-    x = _x;
-    y = _y;
-    d = 100;
-    hue = 120;
-  }
-
-  void display () {
-    //fill(hue, 255, 255);
-    rectMode(CENTER);
-    noFill();
-    stroke(hue, 255, 255);
-    rect(x-(hue/100), y-(hue/100), d-(hue/100), d-(hue/100));
-  }
-
-  void update() {
-    float diam=0;
-    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonColorMap();
-    for (int i = 0; i < skeletonArray.size(); i++) {
-    KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
-    if (skeleton.isTracked())
-    {
-      KJoint[] joints = skeleton.getJoints();
-
-      temp[i]=getJointX(joints,i);
-
-      for (int j=0; j<temp.length;j++)
-      {
-        if(temp[j]>vert2)
-        {
-
-          diam = map(joints[KinectPV2.JointType_HandRight].getX(), vert1, width, 1, 10);
-         // println(diam);
-
-        }
-          else if(temp[j]<vert1)
-        {
-
-         // println(diam);
-
-        }
-      }
-
-    }
-    }
-     hue += 1;
-     d -= diam;
-
-  }
-
-  boolean isDone() {
-  if (hue == 255) return true;
-  else return false;
-  }
-}
-=======
->>>>>>> parent of efc252a... Revert "Merge branch 'master' of https://github.com/sherwig/CV_proto"
