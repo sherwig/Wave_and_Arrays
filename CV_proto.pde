@@ -6,7 +6,7 @@ String[] spot= new String [8];
 float[] temp=new float[7];      
 float vert1, vert2;
 Limbtracker limbtracker;
-Limbtracker limbtracker2; 
+Limbtracker limbtracker2;
 Limbtracker limbtracker3;
 Shapes shapes;
 Boolean[] bool=new Boolean[3];
@@ -23,6 +23,9 @@ float topRight=0;
 float bottomRight=300;
 float a=0.0;
 float s=0.0;
+boolean flag1=true;
+boolean flag2=true;
+boolean flag3=true;
 float threshold=.5;
 float zVal = 950;
 float rotX = PI;
@@ -32,16 +35,17 @@ void setup() {
   colorMode(RGB);
   kinect = new KinectPV2(this);
 
-  kinect.enableSkeletonColorMap(true);
-  kinect.enableColorImg(true);
+//  kinect.enableSkeletonColorMap(true);
+//  kinect.enableColorImg(true);
   kinect.enableSkeleton3DMap(true);
   kinect.enableDepthMaskImg(true);
-  kinect.enableSkeletonDepthMap(true);
+  //kinect.enableSkeletonDepthMap(true);
 
   kinect.init();
-  
-  square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
-  square.setStroke(255);
+
+  //square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
+  //square.setStroke(255);
+  //square.setFill(0);
     
   vert1=width/3; 
   vert2=vert1*2;
@@ -55,23 +59,24 @@ void setup() {
 
 void draw() {
   background(0);
+  //fill(0,0,255);
+  line(vert1,height,vert1,0);
+  line(vert2,height,vert2,0);
 
- // shape(square, 800, 400);
- 
-  //square.setFill(color(0,0,255));  
   //image(kinect.getColorImage(), 0, 0, width, height);
   //pushMatrix();
   //scale(3.8);
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
 
+  //translate the scene to the center
   shapes.drawShapes();
   shapes.square.setFill(color(0,0,255));
   
   //translate the scene to the center 
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
- 
+
   pushMatrix();
   stroke(0,0,255);
   translate(width/2, height/2, 0);
@@ -82,16 +87,6 @@ void draw() {
 
   //SkullyBoi();
 
-  //circles.add(new Circle(mx, my));
-
-  //for (int i=0; i<circles.size(); i++) 
-  //{
-  //  Circle c = circles.get(i);
-  //  c.display();
-  //  c.update();
-    
-  //  if (c.isDone()) circles.remove(c);
-  //}
 
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
@@ -102,16 +97,13 @@ void SkullyBoi()
 {
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
    //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();
-  //println(skeletonArray.size());
-  
+
   //individual JOINTS
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
-    
-     // println("Skully", skeletonArray.size());
-      KJoint[] joints = skeleton.getJoints();       
-       float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
+      KJoint[] joints = skeleton.getJoints();
+      float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
        // println(xSetter);
         //println(1);
        
@@ -119,13 +111,10 @@ void SkullyBoi()
        {
          bool[j]=false;
        }
-        
+
         //Checking what third the skeloten is in
         if(xSetter>.24)
-        {       
-           //spot[j]="right";
-           println(2);
-           
+        {                            
            bool[2]=true;
            if(bool[2]=true)
            {
@@ -143,8 +132,8 @@ void SkullyBoi()
              if (right1>threshold && limbtracker.flag==true) 
              {
                limbtracker.flag=false;
-               shapes.triangle.rotateY(0.1);  
-              shapes.triangle.rotateX(0.1);  
+              // shapes.triangle.rotateY(0.1);  
+               shapes.triangle.rotateX(0.3);  
              }          
               else if(right1<=threshold)
               {
@@ -152,11 +141,10 @@ void SkullyBoi()
               }          
         }
        }
-        else if(xSetter<.24 && xSetter>-.52)
-        {
-           //spot[j]="middle";    
-           println(3);           
-          
+                 
+                    
+       else if(xSetter<.24 && xSetter>-.52)
+        {          
            bool[1]=true;
            if(bool[1]=true)
            {
@@ -169,11 +157,7 @@ void SkullyBoi()
              limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
              float center1=limbtracker2.bufferVariance();
              //println(center1);
-             
-             // mx+=(joints[KinectPV2.JointType_HandRight].getX()-mx)*speed;
-             // my+=(joints[KinectPV2.JointType_HandRight].getY()-my)*speed;
-             // circles.add(new Circle(mx, my));     
-      
+       
              //println(center1);            
              fill(255); 
              textSize(32);
@@ -185,7 +169,6 @@ void SkullyBoi()
                 a=a+.3;       
                 s=cos(a)*2;
                //println(s);
-                square.scale(s);   
                 shapes.squigly.scale(s);
                 limbtracker2.flag=false;
               }
@@ -200,7 +183,6 @@ void SkullyBoi()
         else if(xSetter<-.52)
         {       
            //spot[j]="Left";
-
            println(4);                  
            bool[0]=true;
            if(bool[0]=true)
@@ -224,16 +206,13 @@ void SkullyBoi()
                 limbtracker3.flag=true;
               }   
           }
-        }
-
-      
-          //drawBody(joints);  
-
+        }      
+       //drawBody(joints);  
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
     }       
   }
-  
+
 }
 
 void drawSquiglyBoi(KJoint[] joints)
@@ -243,20 +222,88 @@ void drawSquiglyBoi(KJoint[] joints)
   drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_KneeLeft);
   drawBone(joints,KinectPV2.JointType_KneeLeft,KinectPV2.JointType_FootRight );
   
+  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderRight);
+  drawBone(joints,  KinectPV2.JointType_ShoulderRight,KinectPV2.JointType_HipLeft);
+  drawBone(joints, KinectPV2.JointType_HipLeft,KinectPV2.JointType_KneeRight);
+  drawBone(joints,KinectPV2.JointType_KneeRight,KinectPV2.JointType_FootLeft);
+  
+  drawBone(joints, KinectPV2.JointType_ShoulderRight, KinectPV2.JointType_ElbowLeft); 
+  drawBone(joints, KinectPV2.JointType_ElbowLeft, KinectPV2.JointType_WristLeft);
+  drawBone(joints, KinectPV2.JointType_WristLeft, KinectPV2.JointType_HandLeft);
+  
+  drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ElbowRight); 
+  drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_WristRight);
+  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_HandRight);
+  
+  
 }
 
 void drawTriangleBoi(KJoint[] joints)
 {
-  drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootRight );
-  drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootLeft );
+  //drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootRight );
+  //drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootLeft );
+  
+  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderLeft);
+  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderRight);
+  drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ShoulderRight);
+  
+  drawBone(joints, KinectPV2.JointType_ShoulderRight, KinectPV2.JointType_ElbowRight);
+  drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_WristRight);
+  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_ShoulderRight);
+  
+  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_HandRight);
+  drawBone(joints, KinectPV2.JointType_HandRight, KinectPV2.JointType_ThumbRight);
+  drawBone(joints, KinectPV2.JointType_ThumbRight, KinectPV2.JointType_HandTipRight);
+  
+  
+  drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ElbowLeft);
+  drawBone(joints, KinectPV2.JointType_ElbowLeft, KinectPV2.JointType_WristLeft);
+  drawBone(joints, KinectPV2.JointType_WristLeft, KinectPV2.JointType_ShoulderLeft);
+  
+  drawBone(joints, KinectPV2.JointType_WristLeft, KinectPV2.JointType_HandLeft);
+  drawBone(joints, KinectPV2.JointType_HandLeft, KinectPV2.JointType_ThumbLeft);
+  drawBone(joints, KinectPV2.JointType_ThumbLeft, KinectPV2.JointType_HandTipLeft);
+  
+  drawBone(joints, KinectPV2.JointType_Neck, KinectPV2.JointType_HipRight);
+  drawBone(joints, KinectPV2.JointType_Neck, KinectPV2.JointType_HipLeft);
+  drawBone(joints, KinectPV2.JointType_HipRight, KinectPV2.JointType_HipLeft);
+  
+  
+  drawBone(joints, KinectPV2.JointType_HipRight, KinectPV2.JointType_KneeRight);
+  drawBone(joints, KinectPV2.JointType_KneeRight, KinectPV2.JointType_AnkleRight);
+  drawBone(joints, KinectPV2.JointType_AnkleRight, KinectPV2.JointType_FootRight);
+  drawBone(joints, KinectPV2.JointType_FootRight, KinectPV2.JointType_KneeRight);
+
+  drawBone(joints, KinectPV2.JointType_HipLeft, KinectPV2.JointType_KneeLeft);
+  drawBone(joints, KinectPV2.JointType_KneeLeft, KinectPV2.JointType_AnkleLeft);
+  drawBone(joints, KinectPV2.JointType_AnkleLeft, KinectPV2.JointType_FootLeft);
+  drawBone(joints, KinectPV2.JointType_FootLeft, KinectPV2.JointType_KneeLeft);
+  
 }
 
 void drawSquareBoi(KJoint[] joints)
 {
   drawBone(joints, KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_ShoulderRight);
-  drawBone(joints, KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_FootLeft );
-  drawBone(joints, KinectPV2.JointType_ShoulderRight,KinectPV2.JointType_FootRight );
-  drawBone(joints, KinectPV2.JointType_FootRight,KinectPV2.JointType_FootLeft );
+  drawBone(joints, KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_HipLeft);
+  drawBone(joints, KinectPV2.JointType_ShoulderRight,KinectPV2.JointType_HipRight);
+  drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_HipLeft );
+  
+  drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_SpineMid);
+  drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_ElbowLeft);
+  drawBone(joints, KinectPV2.JointType_ElbowLeft, KinectPV2.JointType_HandLeft);
+  drawBone(joints, KinectPV2.JointType_HandLeft, KinectPV2.JointType_SpineMid);
+
+  drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_ElbowRight);
+  drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_HandRight);
+  drawBone(joints, KinectPV2.JointType_HandRight, KinectPV2.JointType_SpineMid);
+
+  drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_KneeRight);
+  drawBone(joints, KinectPV2.JointType_HipLeft,KinectPV2.JointType_KneeLeft);
+  drawBone(joints, KinectPV2.JointType_KneeRight,KinectPV2.JointType_KneeLeft);
+
+  drawBone(joints, KinectPV2.JointType_KneeRight,KinectPV2.JointType_AnkleRight);
+  drawBone(joints, KinectPV2.JointType_KneeLeft,KinectPV2.JointType_AnkleLeft);
+  drawBone(joints, KinectPV2.JointType_AnkleLeft,KinectPV2.JointType_AnkleRight);
 
 }
 
@@ -324,44 +371,33 @@ void drawBody(KJoint[] joints) {
 //}
 
 
-//void drawBone(KJoint[] joints, int jointType1) {
-
-//  float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);  
-//  float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
-//  float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
-
-//  //println(xMapped);
-//  //println(yMapped);
-//  //println(zMapped);
-//}
-
 void drawJoint(KJoint[] joints, int jointType) {
   //strokeWeight(2.0f + joints[jointType].getZ()*8);
   strokeWeight(.05);   
-  float xMapped = map(joints[jointType].getX(), -1.28, 1, 0, width);
-  float yMapped = map(joints[jointType].getY(), -0.3, 0.07, 0, height);
-  float zMapped = map(joints[jointType].getZ(), 1, 8, 0, height*2);
-  point(xMapped, yMapped, zMapped);
-  println(xMapped);
+  //float xMapped = map(joints[jointType].getX(), -1.28, 1, 0, width);
+  //float yMapped = map(joints[jointType].getY(), -0.3, 0.07, 0, height);
+  //float zMapped = map(joints[jointType].getZ(), 1, 8, 0, height*2);
+  //point(xMapped, yMapped, zMapped);
+  //println(xMapped);
   point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
 }
 
 void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   //strokeWeight(2.0f + joints[jointType1].getZ()*8);
   
-  float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);
-  float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
-  float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
-  float xMapped2 = map(joints[jointType2].getX(), -1.28, 1, 0, width);
-  float yMapped2 = map(joints[jointType2].getY(), -0.3, 0.07, 0, height);
-  float zMapped2 = map(joints[jointType2].getZ(), 1, 8, 0, height*2);
+  //float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);
+  //float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
+  //float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
+  //float xMapped2 = map(joints[jointType2].getX(), -1.28, 1, 0, width);
+  //float yMapped2 = map(joints[jointType2].getY(), -0.3, 0.07, 0, height);
+  //float zMapped2 = map(joints[jointType2].getZ(), 1, 8, 0, height*2);
  
   strokeWeight(.02);
   line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(),joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
   
   //point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
   
-  line(xMapped,yMapped,zMapped,xMapped2,yMapped2, zMapped2);
+ // line(xMapped,yMapped,zMapped,xMapped2,yMapped2, zMapped2);
 
 }
 
@@ -404,65 +440,3 @@ void handState(int handState) {
     break;
   }
 }
-
-
-//class Circle {
-//  float x, y;
-//  float d;
-//  float hue;
-  
-//  Circle(float _x, float _y) {
-//    x = _x;
-//    y = _y;
-//    d = 100;
-//    hue = 120;
-//  }
-
-  //void display () {
-  //  //fill(hue, 255, 255);
-  //  rectMode(CENTER);
-  //  noFill();
-  //  stroke(hue, 255, 255);
-  //  rect(x-(hue/100), y-(hue/100), d-(hue/100), d-(hue/100));
-  //}
-
-  //void update() {
-  //  float diam=0;
-  //  ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonColorMap();
-  //  for (int i = 0; i < skeletonArray.size(); i++) {
-  //  KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
-  //  if (skeleton.isTracked()) 
-  //  {
-  //    KJoint[] joints = skeleton.getJoints();
-     
-  //    temp[i]=getJointX(joints,i);
-      
-  //    for (int j=0; j<temp.length;j++)
-  //    {
-  //      if(temp[j]>vert2)
-  //      {
-  
-  //        diam = map(joints[KinectPV2.JointType_HandRight].getX(), vert1, width, 1, 10);
-  //       // println(diam);
-          
-  //      }
-  //        else if(temp[j]<vert1)
-  //      {
-
-  //       // println(diam);
-          
-  //      }
-  //    }
-      
-  //  }
-  //  }
-  //   hue += 1;
-  //   d -= diam;
-  
-  //}
-  
-  //boolean isDone() {
-  //if (hue == 255) return true;
-  //else return false;
-  //}
-//}
