@@ -79,7 +79,7 @@ void draw() {
   shapes.square.setFill(color(0,0,255));
   
   //translate the scene to the center 
-  //line(vert1,height,vert1,0);
+  //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
  
   pushMatrix();
