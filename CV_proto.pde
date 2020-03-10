@@ -39,13 +39,13 @@ void setup() {
 //  kinect.enableColorImg(true);
   kinect.enableSkeleton3DMap(true);
   kinect.enableDepthMaskImg(true);
-  kinect.enableSkeletonDepthMap(true);
+  //kinect.enableSkeletonDepthMap(true);
 
   kinect.init();
 
-  square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
-  square.setStroke(255);
-  square.setFill(0);
+  //square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
+  //square.setStroke(255);
+  //square.setFill(0);
     
   vert1=width/3; 
   vert2=vert1*2;
@@ -59,16 +59,10 @@ void setup() {
 
 void draw() {
   background(0);
-  vert1=width/3;
-  vert2=vert1*2;
   //fill(0,0,255);
   line(vert1,height,vert1,0);
   line(vert2,height,vert2,0);
 
-  noFill();
-  //shape(square, 800, 400);
- 
-  //square.setFill(color(0,0,255));  
   //image(kinect.getColorImage(), 0, 0, width, height);
   //pushMatrix();
   //scale(3.8);
