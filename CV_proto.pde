@@ -46,14 +46,6 @@ void setup() {
   square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
   square.setStroke(255);
   square.setFill(0);
-
-  limbtracker= new Limbtracker(25);
-  
-  // positions = new PVector[7];
-   //for( int i=0; i != 7; i++)
-   // {
-   //   positions[i]=new PVector(0,0,0);
-   // }
     
   vert1=width/3; 
   vert2=vert1*2;
@@ -74,9 +66,7 @@ void draw() {
   line(vert2,height,vert2,0);
 
   noFill();
-  shape(square, 800, 400);
-
- // shape(square, 800, 400);
+  //shape(square, 800, 400);
  
   //square.setFill(color(0,0,255));  
   //image(kinect.getColorImage(), 0, 0, width, height);
@@ -113,16 +103,13 @@ void SkullyBoi()
 {
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
    //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();
-  //println(skeletonArray.size());
 
   //individual JOINTS
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
-    
-     // println("Skully", skeletonArray.size());
-       float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
+      float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
        // println(xSetter);
         //println(1);
        
@@ -225,11 +212,8 @@ void SkullyBoi()
                 limbtracker3.flag=true;
               }   
           }
-        }
-
-      
-          //drawBody(joints);  
-
+        }      
+       //drawBody(joints);  
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
     }       
