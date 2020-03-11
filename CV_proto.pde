@@ -103,6 +103,23 @@ void draw() {
 
   //SkullyBoi();
 
+  for (Square squar : squareArr) 
+  {
+    squar.display(random(0,width),random(0,height));
+    
+  }
+  
+   for (Squigly squig : squiglyArr) 
+  {
+    squig.display(random(0,width),random(0,height));
+    
+  }
+   for (Triangle tri : triangleArr) 
+  {
+    tri.display(random(0,width),random(0,height));
+    
+  }
+
 
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
