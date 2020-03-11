@@ -68,7 +68,9 @@ void setup() {
   
     for (int i = 0; i < 25; i++) 
     {
-    squareArr.add(new Square(square));
+    squareArr.add(new Square(0));
+    squiglyArr.add(new Squigly(0));
+    triangleArr.add(new Triangle(0));
   }
 
 }
@@ -147,7 +149,7 @@ void SkullyBoi()
              {
                limbtracker.flag=false;
               // shapes.triangle.rotateY(0.1);  
-               shapes.triangle.rotateX(0.3);  
+               //shapes.triangle.rotateX(0.3);  
              }          
               else if(right1<=threshold)
               {
@@ -183,7 +185,7 @@ void SkullyBoi()
                 a=a+.3;       
                 s=cos(a)*2;
                //println(s);
-                shapes.squigly.scale(s);
+                //shapes.squigly.scale(s);
                 limbtracker2.flag=false;
               }
                   
@@ -212,7 +214,7 @@ void SkullyBoi()
              if (left1>.2 && limbtracker3.flag==true) 
              {
                limbtracker3.flag=false;
-               shapes.square.setFill(color(random(0,127),random(127,255),random(127,255)));
+               //shapes.square.setFill(color(random(0,127),random(127,255),random(127,255)));
              }          
               
               else if(left1<=threshold)
