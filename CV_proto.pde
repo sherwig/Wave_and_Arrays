@@ -13,6 +13,7 @@ Boolean[] bool=new Boolean[3];
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 //ArrayList<Circle> circles = new ArrayList<Circle>();
+Jazz jazz;
 float mx;
 float my;
 float speed = 0.05;
@@ -61,6 +62,11 @@ void setup() {
   limbtracker= new Limbtracker(25);
   limbtracker2= new Limbtracker(25);
   limbtracker3= new Limbtracker(25);
+  
+  jazz=new Jazz();
+  jazz.file1.loop();
+  jazz.file2.loop();
+  jazz.file3.loop();
   
   squareArr=new ArrayList<Square>();
   squiglyArr=new ArrayList<Squigly>();
@@ -165,6 +171,7 @@ void SkullyBoi()
              if (right1>threshold && limbtracker.flag==true) 
              {
                limbtracker.flag=false;
+               jazz.P1.play();
               // shapes.triangle.rotateY(0.1);  
                //shapes.triangle.rotateX(0.3);  
              }          
@@ -201,6 +208,7 @@ void SkullyBoi()
               {
                 a=a+.3;       
                 s=cos(a)*2;
+                jazz.B1.play();
                //println(s);
                 //shapes.squigly.scale(s);
                 limbtracker2.flag=false;
@@ -231,6 +239,7 @@ void SkullyBoi()
              if (left1>.2 && limbtracker3.flag==true) 
              {
                limbtracker3.flag=false;
+               jazz.D1.play();
                //shapes.square.setFill(color(random(0,127),random(127,255),random(127,255)));
              }          
               
