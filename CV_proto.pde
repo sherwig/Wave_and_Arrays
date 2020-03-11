@@ -8,7 +8,7 @@ float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2;
 Limbtracker limbtracker3;
-Shapes shapes;
+//Shapes shapes;
 Boolean[] bool=new Boolean[3];
 //FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
@@ -16,7 +16,7 @@ KinectPV2 kinect;
 float mx;
 float my;
 float speed = 0.05;
-PShape square;
+//PShape square;
 float topLeft=0;
 float bottomLeft=300;
 float topRight=0;
@@ -31,6 +31,12 @@ float zVal = 950;
 float rotX = PI;
 int numShapes=0;
 int numShapesHigh=10;
+ArrayList <Square> squareArr;
+ArrayList <Squigly> squiglyArr;
+ArrayList <Triangle> triangleArr;
+Square square;
+Triangle triangle; 
+Squigly squigly;
 
 void setup() {
   size(1920, 1080, P3D);
@@ -56,9 +62,13 @@ void setup() {
   limbtracker2= new Limbtracker(25);
   limbtracker3= new Limbtracker(25);
   
-  for(int i=0; i<10; i++)
-  {
-    shapes= new Shapes(0,0,0);
+  squareArr=new ArrayList<Square>();
+  squiglyArr=new ArrayList<Squigly>();
+  triangleArr=new ArrayList<Triangle>();
+  
+    for (int i = 0; i < 25; i++) 
+    {
+    squareArr.add(new Square(square));
   }
 
 }
@@ -74,9 +84,7 @@ void draw() {
   //scale(3.8);
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
-  
-      shapes.square.setFill(color(0,0,255));  
-      shapes.drawShapes(random(0,width),random(0,height));;     
+      
 
  
   //translate the scene to the center 
