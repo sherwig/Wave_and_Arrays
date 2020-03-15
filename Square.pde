@@ -13,5 +13,10 @@ public class Square {
   {
       shape(square,x,y);
   }
+  
+  void RotateX(float amount) {
+      // Locating and drawing the shape
+     square.rotateX(amount);   
+    }
  
 };

@@ -22,6 +22,12 @@ public class Triangle {
       shape(triangle,x,y);
       popMatrix();
     }
+    
+   void RotateX(float amount) {
+      // Locating and drawing the shape
+     triangle.rotateX(amount);
+   
+    }
   
 }
        

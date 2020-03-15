@@ -64,15 +64,15 @@ void setup() {
   limbtracker3= new Limbtracker(25);
   
   jazz=new Jazz();
-  jazz.file1.loop();
-  jazz.file2.loop();
-  jazz.file3.loop();
+  //jazz.file1.loop();
+  //jazz.file2.loop();
+  //jazz.file3.loop();
   
   squareArr=new ArrayList<Square>();
   squiglyArr=new ArrayList<Squigly>();
   triangleArr=new ArrayList<Triangle>();
   
-    for (int i = 0; i < 25; i++) 
+    for (int i = 0; i < 4; i++) 
     {
     squareArr.add(new Square(0));
     squiglyArr.add(new Squigly(0));
@@ -92,9 +92,7 @@ void draw() {
   //scale(3.8);
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
-      
 
- 
   //translate the scene to the center 
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
@@ -111,9 +109,10 @@ void draw() {
 
   for (Square squar : squareArr) 
   {
-    println(squar);
-
-      squar.display(random(0,width),random(0,height));    
+      squar.display(200,200);    
+      squar.display(200,700);         
+      squar.display(1600,150);    
+      squar.display(1300,550);    
   }
   
     //for (int i=0; i<10; i++);
@@ -123,13 +122,20 @@ void draw() {
   
    for (Squigly squig : squiglyArr) 
   {
-    //squig.display(random(0,width),random(0,height));
+    println(squiglyArr.size());
+    squig.display(600,400);
+    squig.display(600,1000);
+    squig.display(1000,400);
+    squig.display(800,700);
+
     
   }
    for (Triangle tri : triangleArr) 
   {
-    //tri.display(random(0,width),random(0,height));
-    
+    tri.display(900,300);
+    tri.display(900,800);
+    tri.display(1400,400);
+    tri.display(1300,300);   
   }
 
 
@@ -177,7 +183,15 @@ void SkullyBoi()
              if (right1>threshold && limbtracker.flag==true) 
              {
                limbtracker.flag=false;
+               
+                for (Triangle tri : triangleArr) 
+                 {
+                   println("Here");
+                   tri.RotateX(.2);
+                 }
                jazz.P1.play();
+               
+           
               // shapes.triangle.rotateY(0.1);  
                //shapes.triangle.rotateX(0.3);  
              }          
@@ -215,6 +229,12 @@ void SkullyBoi()
                 a=a+.3;       
                 s=cos(a)*2;
                 jazz.B1.play();
+                
+                for (Squigly squig : squiglyArr) 
+                 {
+                   println("Here");
+                   squig.RotateX(random(0.1,0.4));
+                 }
                //println(s);
                 //shapes.squigly.scale(s);
                 limbtracker2.flag=false;

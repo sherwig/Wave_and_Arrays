@@ -33,5 +33,10 @@ void display(float x, float y) {
     popMatrix();
   }
 
+   void RotateX(float amount) {
+      // Locating and drawing the shape
+     squigly.rotateX(amount);
+   
+    }
 
 }
