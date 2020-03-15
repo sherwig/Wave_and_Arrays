@@ -112,16 +112,14 @@ void draw() {
   for (Square squar : squareArr) 
   {
     println(squar);
-    for (int i=0; i<10; i+=10);
-    {
-      squar.display(200,200);
-    }
+
+      squar.display(random(0,width),random(0,height));    
   }
   
-    for (int i=0; i<10; i++);
-    {
-      squareArr[i].display(200,200);
-    }
+    //for (int i=0; i<10; i++);
+    //{
+    //  squareArr[i].display(200,200);
+    //}
   
    for (Squigly squig : squiglyArr) 
   {
