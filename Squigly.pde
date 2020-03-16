@@ -33,10 +33,25 @@ void display(float x, float y) {
     popMatrix();
   }
 
-   void RotateX(float amount) {
+   void RotateY(float amount) {
       // Locating and drawing the shape
-     squigly.rotateX(amount);
+     squigly.rotateY(amount);
    
+    }
+    
+    void RotateX(float amount) {
+      // Locating and drawing the shape
+     squigly.rotateX(amount);   
+    }
+    
+    void RandomColor() {
+      // Locating and drawing the shape
+      squigly.setStroke(color(random(0,255),random(0,255),random(0,255)));   
+    }
+    
+     void RandomStroke() {
+      // Locating and drawing the shape
+      squigly.setStrokeWeight(random(3,7));   
     }
 
 }

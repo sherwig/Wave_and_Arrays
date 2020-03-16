@@ -8,9 +8,7 @@ float vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2;
 Limbtracker limbtracker3;
-//Shapes shapes;
 Boolean[] bool=new Boolean[3];
-//FloatList[][] inventory= new FloatList[3][25];
 KinectPV2 kinect;
 //ArrayList<Circle> circles = new ArrayList<Circle>();
 Jazz jazz;
@@ -122,7 +120,7 @@ void draw() {
   
    for (Squigly squig : squiglyArr) 
   {
-    println(squiglyArr.size());
+    //println(squiglyArr.size());
     squig.display(600,400);
     squig.display(600,1000);
     squig.display(1000,400);
@@ -177,28 +175,43 @@ void SkullyBoi()
          
              //Doing a comparison of the two
              float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
-             limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft]);
-             float right1=limbtracker.bufferVariance();
+             limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft],comparison[KinectPV2.JointType_HandRight],comparison[KinectPV2.JointType_FootLeft],comparison[KinectPV2.JointType_FootRight],comparison[KinectPV2.JointType_Head]);
+             float right[]=limbtracker.bufferVariance(limbtracker.buffer);
             
-             if (right1>threshold && limbtracker.flag==true) 
+             if (right[0]>threshold && limbtracker.flag[0]==true) 
              {
-               limbtracker.flag=false;
-               
+               limbtracker.flag[0]=false;              
                 for (Triangle tri : triangleArr) 
                  {
-                   println("Here");
+                  // println("Here");
                    tri.RotateX(.2);
                  }
                jazz.P1.play();
-               
-           
-              // shapes.triangle.rotateY(0.1);  
-               //shapes.triangle.rotateX(0.3);  
              }          
-              else if(right1<=threshold)
+              else if(right[0]<=threshold)
               {
-                limbtracker.flag=true;
-              }          
+                
+                limbtracker.flag[0]=true;
+              } 
+             
+             
+             if (right[1]>threshold && limbtracker.flag[1]==true) 
+             {
+               limbtracker.flag[1]=false;              
+                for (Triangle tri : triangleArr) 
+                 {
+                  // println("Here");
+                   tri.RotateX(.2);
+                 }
+               jazz.P2.play();
+             }          
+              else if(right[1]<=threshold)
+              {
+                
+                limbtracker.flag[1]=true;
+              }   
+              
+              
         }
        }
                  
@@ -214,17 +227,15 @@ void SkullyBoi()
   
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
-             limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft]);
-             float center1=limbtracker2.bufferVariance();
+             limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft],comparison2[KinectPV2.JointType_HandRight],comparison2[KinectPV2.JointType_FootLeft],comparison2[KinectPV2.JointType_FootRight],comparison2[KinectPV2.JointType_Head]);
+             float center[]=limbtracker.bufferVariance(limbtracker.buffer);
              //println(center1);
        
-             //println(center1);            
-             fill(255); 
-             textSize(32);
-             text(center1,50,50);
-             //float stroke=1;
+             //fill(255); 
+             //textSize(32);
+             //text(center1,50,50);
   
-              if (center1>threshold && limbtracker2.flag==true) 
+              if (center[0]>threshold && limbtracker2.flag[0]==true) 
               {
                 a=a+.3;       
                 s=cos(a)*2;
@@ -232,17 +243,66 @@ void SkullyBoi()
                 
                 for (Squigly squig : squiglyArr) 
                  {
-                   println("Here");
-                   squig.RotateX(random(0.1,0.4));
+                  // println("Here");
+                   squig.RotateY(.4);
                  }
-               //println(s);
-                //shapes.squigly.scale(s);
-                limbtracker2.flag=false;
+                limbtracker2.flag[0]=false;
               }
                   
-              else if(center1<=threshold)
+              else if(center[0]<=threshold)
               {          
-                limbtracker2.flag=true;
+                limbtracker2.flag[0]=true;
+              }
+         
+           if (center[1]>threshold && limbtracker2.flag[1]==true) 
+              {            
+                jazz.B2.play();
+                
+                for (Squigly squig : squiglyArr) 
+                 {
+                  // println("Here");
+                   squig.RotateX(.4);
+                 }
+                limbtracker2.flag[1]=false;
+              }
+                  
+              else if(center[1]<=threshold)
+              {          
+                limbtracker2.flag[1]=true;
+              }
+              
+              if (center[2]>threshold && limbtracker2.flag[2]==true) 
+              {            
+                jazz.B3.play();
+                
+                for (Squigly squig : squiglyArr) 
+                 {
+                  // println("Here");
+                   squig.RandomColor();
+                 }
+                limbtracker2.flag[2]=false;
+              }
+                  
+              else if(center[2]<=threshold)
+              {          
+                limbtracker2.flag[2]=true;
+              }
+              
+              if (center[3]>threshold && limbtracker2.flag[3]==true) 
+              {            
+                jazz.B4.play();
+                
+                for (Squigly squig : squiglyArr) 
+                 {
+                  // println("Here");
+                   squig.RandomStroke();
+                 }
+                limbtracker2.flag[3]=false;
+              }
+                  
+              else if(center[3]<=threshold)
+              {          
+                limbtracker2.flag[3]=true;
               }
            }                             
         }
@@ -258,20 +318,18 @@ void SkullyBoi()
              limbtracker3.update2(joints);       
              ////Doing a comparison of the two
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
-             limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandRight]);
-             float left1=limbtracker3.bufferVariance();
-             println(left1);
+             limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandLeft],comparison3[KinectPV2.JointType_HandRight],comparison3[KinectPV2.JointType_FootLeft],comparison3[KinectPV2.JointType_FootRight],comparison3[KinectPV2.JointType_Head]);
+             float left[]=limbtracker.bufferVariance(limbtracker.buffer);
              
-             if (left1>.2 && limbtracker3.flag==true) 
+             if (left[0]>.2 && limbtracker3.flag[0]==true) 
              {
-               limbtracker3.flag=false;
+               limbtracker3.flag[0]=false;
                jazz.D1.play();
-               //shapes.square.setFill(color(random(0,127),random(127,255),random(127,255)));
              }          
               
-              else if(left1<=threshold)
+              else if(left[0]<=threshold)
               {
-                limbtracker3.flag=true;
+                limbtracker3.flag[0]=true;
               }   
           }
         }      

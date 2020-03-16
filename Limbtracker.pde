@@ -1,15 +1,15 @@
 public class Limbtracker {
-  
   protected int size;
   protected PVector[] limbtracker1, limbtracker2;
+  protected int limbtracked=5;
   float[] comparison= new float[KinectPV2.JointType_Count]; 
   float[] z_values = new float[KinectPV2.JointType_Count];
   float[] y_values = new float[KinectPV2.JointType_Count];
   float[] x_values = new float[KinectPV2.JointType_Count];
+  float[] variance= new float[limbtracked];
   protected int sampleIndex;
-  FloatBuffer buffer;
-  protected float[][] positions;
-  boolean flag=true;
+  FloatBuffer[] buffer;
+  boolean[] flag;
   
   public Limbtracker( int size ) {
     initBuffer( size );
@@ -19,7 +19,8 @@ public class Limbtracker {
     this.size = size;
     limbtracker1 = new PVector[size];
     limbtracker2 = new PVector[size];
-    buffer= new FloatBuffer(30);
+    buffer=new FloatBuffer[limbtracked];
+    flag=new boolean[limbtracked];
     sampleIndex = 0;
     for( int i=0; i != limbtracker1.length; i++) 
     {
@@ -65,14 +66,22 @@ public class Limbtracker {
     return comparison; 
   };
   
-  public void fillBuffer(float value)
-  {
-    buffer.update(value);   
+  public void fillBuffer(float value,float value2,float value3,float value4,float value5)
+  { 
+    println(buffer.length);
+        buffer[0].update(value);  
+        buffer[1].update(value2);  
+        buffer[2].update(value3);  
+        buffer[3].update(value4);  
+        buffer[4].update(value5);     
   };
- 
-  public float bufferVariance()
-  {
-    float variance=buffer.variance();
+   
+  public float[] bufferVariance(FloatBuffer[] buffer)
+  {   
+    for (int i=0; i<limbtracked; i++)
+    {
+      variance[i]=buffer[i].variance();      
+    }    
     return variance;  
   };
   
