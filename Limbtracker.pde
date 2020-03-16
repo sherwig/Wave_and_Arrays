@@ -68,7 +68,7 @@ public class Limbtracker {
   
   public void fillBuffer(float value,float value2,float value3,float value4,float value5)
   { 
-    println(buffer.length);
+    //println(buffer.length);
         buffer[0].update(value);  
         buffer[1].update(value2);  
         buffer[2].update(value3);  

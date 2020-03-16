@@ -78,8 +78,7 @@ void setup() {
     squiglyArr.add(new Squigly(0));
     triangleArr.add(new Triangle(0));
   }
-  
-  
+   
     triangle=new Triangle(0); 
     squigly= new Squigly(0);
     square= new Square(0);
@@ -119,44 +118,20 @@ void draw() {
   //    squar.display(1300,550);    
   //}
   
-
-  square.display(200,200);    
-  square.display(200,700);         
-  square.display(1600,150);    
-  square.display(1300,550);   
-  
-    //for (int i=0; i<10; i++);
-    //{
-    //  squareArr[i].display(200,200);
-    //}
-  
-  // for (Squigly squig : squiglyArr) 
-  //{
-  //  //println(squiglyArr.size());
-  //  squig.display(600,400);
-  //  squig.display(600,1000);
-  //  squig.display(1000,400);
-  //  squig.display(800,700);   
-  //}
-    
+    square.display(200,200);    
+    square.display(200,700);         
+    square.display(1600,150);    
+    square.display(1300,550);   
     
     squigly.display(600,400);
     squigly.display(600,1000);
     squigly.display(1000,400);
     squigly.display(800,700);
-  
-  // for (Triangle tri : triangleArr) 
-  //{
-  //  tri.display(900,300);
-  //  tri.display(900,800);
-  //  tri.display(1400,400);
-  //  tri.display(1300,300);   
-  //}
 
- triangle.display(900,300);
- triangle.display(900,800);
- triangle.display(1400,400);
- triangle.display(1300,300);   
+   triangle.display(900,300);
+   triangle.display(900,800);
+   triangle.display(1400,400);
+   triangle.display(1300,300);   
 
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
@@ -230,9 +205,7 @@ void SkullyBoi()
               {
                 
                 limbtracker.flag[1]=true;
-              }   
-              
-              
+              }                           
         }
        }
                  
@@ -552,38 +525,4 @@ void drawBone(KJoint[] joints, int jointType1, int jointType2) {
 float getJointX(KJoint[] joints, int jointType)
 {
     return (joints[jointType].getX());
-}
-
-//draw hand state
-void drawHandState(KJoint joint) {
-  noStroke();
-  handState(joint.getState());
-  pushMatrix();
-  translate(joint.getX(), joint.getY(), joint.getZ());
-  ellipse(0, 0, 70, 70);
-  popMatrix();
-}
-
-/*
-Different hand state
- KinectPV2.HandState_Open
- KinectPV2.HandState_Closed
- KinectPV2.HandState_Lasso
- KinectPV2.HandState_NotTracked
- */
-void handState(int handState) {
-  switch(handState) {
-  case KinectPV2.HandState_Open:
-    fill(0, 255, 0);
-    break;
-  case KinectPV2.HandState_Closed:
-    fill(255, 0, 0);
-    break;
-  case KinectPV2.HandState_Lasso:
-    fill(0, 0, 255);
-    break;
-  case KinectPV2.HandState_NotTracked:
-    fill(255, 255, 255);
-    break;
-  }
 }
