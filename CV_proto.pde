@@ -37,6 +37,8 @@ Square square;
 Triangle triangle; 
 Squigly squigly;
 
+
+
 void setup() {
   size(1920, 1080, P3D);
   colorMode(RGB);
@@ -76,7 +78,11 @@ void setup() {
     squiglyArr.add(new Squigly(0));
     triangleArr.add(new Triangle(0));
   }
-
+  
+  
+    triangle=new Triangle(0); 
+    squigly= new Squigly(0);
+    square= new Square(0);
 }
 
 void draw() {
@@ -105,37 +111,52 @@ void draw() {
 
   //SkullyBoi();
 
-  for (Square squar : squareArr) 
-  {
-      squar.display(200,200);    
-      squar.display(200,700);         
-      squar.display(1600,150);    
-      squar.display(1300,550);    
-  }
+  //for (Square squar : squareArr) 
+  //{
+  //    squar.display(200,200);    
+  //    squar.display(200,700);         
+  //    squar.display(1600,150);    
+  //    squar.display(1300,550);    
+  //}
+  
+
+  square.display(200,200);    
+  square.display(200,700);         
+  square.display(1600,150);    
+  square.display(1300,550);   
   
     //for (int i=0; i<10; i++);
     //{
     //  squareArr[i].display(200,200);
     //}
   
-   for (Squigly squig : squiglyArr) 
-  {
-    //println(squiglyArr.size());
-    squig.display(600,400);
-    squig.display(600,1000);
-    squig.display(1000,400);
-    squig.display(800,700);
-
+  // for (Squigly squig : squiglyArr) 
+  //{
+  //  //println(squiglyArr.size());
+  //  squig.display(600,400);
+  //  squig.display(600,1000);
+  //  squig.display(1000,400);
+  //  squig.display(800,700);   
+  //}
     
-  }
-   for (Triangle tri : triangleArr) 
-  {
-    tri.display(900,300);
-    tri.display(900,800);
-    tri.display(1400,400);
-    tri.display(1300,300);   
-  }
+    
+    squigly.display(600,400);
+    squigly.display(600,1000);
+    squigly.display(1000,400);
+    squigly.display(800,700);
+  
+  // for (Triangle tri : triangleArr) 
+  //{
+  //  tri.display(900,300);
+  //  tri.display(900,800);
+  //  tri.display(1400,400);
+  //  tri.display(1300,300);   
+  //}
 
+ triangle.display(900,300);
+ triangle.display(900,800);
+ triangle.display(1400,400);
+ triangle.display(1300,300);   
 
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
