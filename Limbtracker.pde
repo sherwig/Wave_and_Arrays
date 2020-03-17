@@ -24,11 +24,14 @@ public class Limbtracker {
     flag=new boolean[KinectPV2.JointType_Count];
     sampleIndex = 0;
     
+<<<<<<< HEAD
     for( int i=0; i != KinectPV2.JointType_Count; i++) 
     {
       buffer[i]= new FloatBuffer(30);
       activated[i]=false;
     }
+=======
+>>>>>>> 04a88443bf5e337db902434fcbb2d3ffb58a0a2e
     
     for( int i=0; i != limbtracker1.length; i++) 
     {
@@ -87,6 +90,7 @@ public class Limbtracker {
        }       
      return variance;
   };
+<<<<<<< HEAD
   
   public boolean limbActivated(int jointIndex)
   {
@@ -94,6 +98,10 @@ public class Limbtracker {
   };
   
   public boolean limbFlailing(int jointIndex)
+=======
+   
+  public float[] bufferVariance(FloatBuffer[] buffer)
+>>>>>>> 04a88443bf5e337db902434fcbb2d3ffb58a0a2e
   {   
     return flag[jointIndex];
   };
