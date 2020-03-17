@@ -210,19 +210,17 @@ void SkullyBoi()
        }
                  
                     
-       else if(xSetter<.24 && xSetter>-.52)
+       else if(xSetter<.24 && xSetter>-.52 && bool[1]==false)
         {          
-           bool[1]=true;
-           if(bool[1]=true)
-           {
+             bool[1]=true;                      
              drawSquiglyBoi(joints);          
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
   
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
-             limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft],comparison2[KinectPV2.JointType_HandRight],comparison2[KinectPV2.JointType_FootLeft],comparison2[KinectPV2.JointType_FootRight],comparison2[KinectPV2.JointType_Head]);
-              float center[]=limbtracker2.bufferVariance(limbtracker2.buffer);
+             float center[]=limbtracker2.fillBuffer(comparison2);
+            //limbtracker2.bufferVariance();
                         
              //println(center1);
        
@@ -230,26 +228,21 @@ void SkullyBoi()
              //textSize(32);
              //text(center1,50,50);
   
-              if (center[0]>threshold && limbtracker2.flag[0]==true) 
-              {
-                a=a+.3;       
-                s=cos(a)*2;
+              if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
+              {              
                 jazz.B1.play();
-                
+              }
+              
+              if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
+              {
                 for (Squigly squig : squiglyArr) 
                  {
                   // println("Here");
-                   squig.RotateY(.4);
+                   squig.RotateY(.01);
                  }
-                limbtracker2.flag[0]=false;
-              }
-                  
-              else if(center[0]<=threshold)
-              {          
-                limbtracker2.flag[0]=true;
-              }
-         
-           if (center[1]>threshold && limbtracker2.flag[1]==true) 
+              }               
+                
+           if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.B2.play();
                 
@@ -299,7 +292,7 @@ void SkullyBoi()
               {          
                 limbtracker2.flag[3]=true;
               }
-           }                             
+                                        
         }
         
         else if(xSetter<-.52)

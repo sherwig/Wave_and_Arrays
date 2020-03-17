@@ -2,14 +2,16 @@ public class Limbtracker {
   protected int size;
   protected PVector[] limbtracker1, limbtracker2;
   protected int limbtracked=5;
+  float threshold=.5;
   float[] comparison= new float[KinectPV2.JointType_Count]; 
   float[] z_values = new float[KinectPV2.JointType_Count];
   float[] y_values = new float[KinectPV2.JointType_Count];
   float[] x_values = new float[KinectPV2.JointType_Count];
   float[] variance= new float[limbtracked];
   protected int sampleIndex;
-  FloatBuffer[] buffer;
+  FloatBuffer[] buffer=new FloatBuffer[KinectPV2.JointType_Count];
   boolean[] flag;
+  boolean[] activated =new boolean[KinectPV2.JointType_Count];
   
   public Limbtracker( int size ) {
     initBuffer( size );
@@ -19,9 +21,15 @@ public class Limbtracker {
     this.size = size;
     limbtracker1 = new PVector[size];
     limbtracker2 = new PVector[size];
-    buffer=new FloatBuffer[limbtracked];
-    flag=new boolean[limbtracked];
+    flag=new boolean[KinectPV2.JointType_Count];
     sampleIndex = 0;
+    
+    for( int i=0; i != KinectPV2.JointType_Count; i++) 
+    {
+      buffer[i]= new FloatBuffer(30);
+      activated[i]=false;
+    }
+    
     for( int i=0; i != limbtracker1.length; i++) 
     {
       limbtracker1[i]=new PVector(0,0,0);
@@ -66,24 +74,30 @@ public class Limbtracker {
     return comparison; 
   };
   
-  public void fillBuffer(float value,float value2,float value3,float value4,float value5)
+  public float[] fillBuffer(float [] value)
   { 
-    //println(buffer.length);
-        buffer[0].update(value);  
-        buffer[1].update(value2);  
-        buffer[2].update(value3);  
-        buffer[3].update(value4);  
-        buffer[4].update(value5);     
+        //println(buffer.length);
+       for (int i=0; i<KinectPV2.JointType_Count; i++) 
+       {
+         buffer[i].update(value[i]);  
+         variance[i]=buffer[i].variance(); 
+         boolean wasActive=flag[i];        
+         flag[i]=(variance[i]>threshold);
+         activated[i]=(wasActive==false && flag[i]==true);      
+       }       
+     return variance;
+  };
+  
+  public boolean limbActivated(int jointIndex)
+  {
+    return activated[jointIndex];    
+  };
+  
+  public boolean limbFlailing(int jointIndex)
+  {   
+    return flag[jointIndex];
   };
    
-  public float[] bufferVariance(FloatBuffer buffer)
-  {   
-    for (int i=0; i<limbtracked; i++)
-    {
-      variance[i]=buffer[i].variance();      
-    }    
-    return variance;  
-  };
   
 public float[] getX(KJoint[] joints3D) 
   {  
