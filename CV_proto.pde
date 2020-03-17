@@ -221,6 +221,7 @@ void SkullyBoi()
   
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
+             println(comparison2);
              limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft],comparison2[KinectPV2.JointType_HandRight],comparison2[KinectPV2.JointType_FootLeft],comparison2[KinectPV2.JointType_FootRight],comparison2[KinectPV2.JointType_Head]);
               float center[]=limbtracker2.bufferVariance(limbtracker2.buffer);
                         

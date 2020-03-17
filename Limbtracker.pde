@@ -22,6 +22,8 @@ public class Limbtracker {
     buffer=new FloatBuffer[limbtracked];
     flag=new boolean[limbtracked];
     sampleIndex = 0;
+    
+    
     for( int i=0; i != limbtracker1.length; i++) 
     {
       limbtracker1[i]=new PVector(0,0,0);
@@ -76,7 +78,7 @@ public class Limbtracker {
         buffer[4].update(value5);     
   };
    
-  public float[] bufferVariance(FloatBuffer buffer)
+  public float[] bufferVariance(FloatBuffer[] buffer)
   {   
     for (int i=0; i<limbtracked; i++)
     {
