@@ -128,10 +128,10 @@ void draw() {
     squigly.display(1000,400);
     squigly.display(800,700);
 
-   triangle.display(900,300);
-   triangle.display(900,800);
-   triangle.display(1400,400);
-   triangle.display(1300,300);   
+    triangle.display(900,300);
+    triangle.display(900,800);
+    triangle.display(1400,400);
+    triangle.display(1300,300);   
 
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
@@ -222,7 +222,8 @@ void SkullyBoi()
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
              limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft],comparison2[KinectPV2.JointType_HandRight],comparison2[KinectPV2.JointType_FootLeft],comparison2[KinectPV2.JointType_FootRight],comparison2[KinectPV2.JointType_Head]);
-             float center[]=limbtracker.bufferVariance(limbtracker.buffer);
+              float center[]=limbtracker2.bufferVariance(limbtracker2.buffer);
+                        
              //println(center1);
        
              //fill(255); 
@@ -313,7 +314,7 @@ void SkullyBoi()
              ////Doing a comparison of the two
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
              limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandLeft],comparison3[KinectPV2.JointType_HandRight],comparison3[KinectPV2.JointType_FootLeft],comparison3[KinectPV2.JointType_FootRight],comparison3[KinectPV2.JointType_Head]);
-             float left[]=limbtracker.bufferVariance(limbtracker.buffer);
+             float left[]=limbtracker3.bufferVariance(limbtracker3.buffer);
              
              if (left[0]>.2 && limbtracker3.flag[0]==true) 
              {

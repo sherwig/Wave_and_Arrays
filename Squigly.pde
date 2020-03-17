@@ -53,5 +53,7 @@ void display(float x, float y) {
       // Locating and drawing the shape
       squigly.setStrokeWeight(random(3,7));   
     }
+    
+    //opacity size rotation, movement
 
 }

@@ -76,7 +76,7 @@ public class Limbtracker {
         buffer[4].update(value5);     
   };
    
-  public float[] bufferVariance(FloatBuffer[] buffer)
+  public float[] bufferVariance(FloatBuffer buffer)
   {   
     for (int i=0; i<limbtracked; i++)
     {
