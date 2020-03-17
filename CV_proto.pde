@@ -158,55 +158,37 @@ void SkullyBoi()
        }
 
         //Checking what third the skeloten is in
-        if(xSetter>.24)
+        if(xSetter>.24 && bool[2]==false)
         {                            
-           bool[2]=true;
-           if(bool[2]=true)
-           {
+             bool[2]=true;          
              drawTriangleBoi(joints);
              limbtracker.update2(joints);
-            // println(xPos);
              //filling second PVector with the first PVectors values
              limbtracker.fillFollowing(KinectPV2.JointType_Count);
          
              //Doing a comparison of the two
              float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
-             limbtracker.fillBuffer(comparison[KinectPV2.JointType_HandLeft],comparison[KinectPV2.JointType_HandRight],comparison[KinectPV2.JointType_FootLeft],comparison[KinectPV2.JointType_FootRight],comparison[KinectPV2.JointType_Head]);
-             float right[]=limbtracker.bufferVariance(limbtracker.buffer);
-            
-             if (right[0]>threshold && limbtracker.flag[0]==true) 
+             limbtracker2.fillBuffer(comparison);
+             
+             if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
              {
-               limbtracker.flag[0]=false;              
                 for (Triangle tri : triangleArr) 
                  {
                   // println("Here");
                    tri.RotateX(.2);
                  }
                jazz.P1.play();
-             }          
-              else if(right[0]<=threshold)
-              {
-                
-                limbtracker.flag[0]=true;
-              } 
+             }                                  
              
-             
-             if (right[1]>threshold && limbtracker.flag[1]==true) 
+             if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
              {
-               limbtracker.flag[1]=false;              
                 for (Triangle tri : triangleArr) 
                  {
                   // println("Here");
                    tri.RotateX(.2);
                  }
                jazz.P2.play();
-             }          
-              else if(right[1]<=threshold)
-              {
-                
-                limbtracker.flag[1]=true;
-              }                           
-        }
+             }                 
        }
                  
                     
@@ -219,21 +201,8 @@ void SkullyBoi()
   
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
-<<<<<<< HEAD
-             float center[]=limbtracker2.fillBuffer(comparison2);
-            //limbtracker2.bufferVariance();
-=======
-             println(comparison2);
-             limbtracker2.fillBuffer(comparison2[KinectPV2.JointType_HandLeft],comparison2[KinectPV2.JointType_HandRight],comparison2[KinectPV2.JointType_FootLeft],comparison2[KinectPV2.JointType_FootRight],comparison2[KinectPV2.JointType_Head]);
-              float center[]=limbtracker2.bufferVariance(limbtracker2.buffer);
->>>>>>> 04a88443bf5e337db902434fcbb2d3ffb58a0a2e
-                        
-             //println(center1);
-       
-             //fill(255); 
-             //textSize(32);
-             //text(center1,50,50);
-  
+             limbtracker2.fillBuffer(comparison2);
+           
               if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.B1.play();
@@ -250,22 +219,16 @@ void SkullyBoi()
                 
            if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
-                jazz.B2.play();
-                
+                jazz.B2.play();                
                 for (Squigly squig : squiglyArr) 
                  {
                   // println("Here");
                    squig.RotateX(.4);
                  }
-                limbtracker2.flag[1]=false;
               }
-                  
-              else if(center[1]<=threshold)
-              {          
-                limbtracker2.flag[1]=true;
-              }
+
               
-              if (center[2]>threshold && limbtracker2.flag[2]==true) 
+              if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.B3.play();
                 
@@ -274,15 +237,9 @@ void SkullyBoi()
                   // println("Here");
                    squig.RandomColor();
                  }
-                limbtracker2.flag[2]=false;
               }
-                  
-              else if(center[2]<=threshold)
-              {          
-                limbtracker2.flag[2]=true;
-              }
-              
-              if (center[3]>threshold && limbtracker2.flag[3]==true) 
+                    
+              if (limbtracker2.limbActivated(KinectPV2.JointType_FootLeft)) 
               {            
                 jazz.B4.play();
                 
@@ -291,47 +248,33 @@ void SkullyBoi()
                   // println("Here");
                    squig.RandomStroke();
                  }
-                limbtracker2.flag[3]=false;
-              }
-                  
-              else if(center[3]<=threshold)
-              {          
-                limbtracker2.flag[3]=true;
               }
                                         
         }
         
-        else if(xSetter<-.52)
+        else if(xSetter<-.52 && bool[0]==false)
         {       
            //spot[j]="Left";
            println(4);                  
            bool[0]=true;
-           if(bool[0]=true)
-           {
+
              drawSquareBoi(joints);
              limbtracker3.update2(joints);       
              ////Doing a comparison of the two
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
-             limbtracker3.fillBuffer(comparison3[KinectPV2.JointType_HandLeft],comparison3[KinectPV2.JointType_HandRight],comparison3[KinectPV2.JointType_FootLeft],comparison3[KinectPV2.JointType_FootRight],comparison3[KinectPV2.JointType_Head]);
-             float left[]=limbtracker3.bufferVariance(limbtracker3.buffer);
+             limbtracker3.fillBuffer(comparison3);          
              
-             if (left[0]>.2 && limbtracker3.flag[0]==true) 
+             if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
              {
-               limbtracker3.flag[0]=false;
                jazz.D1.play();
-             }          
-              
-              else if(left[0]<=threshold)
-              {
-                limbtracker3.flag[0]=true;
-              }   
+             }                         
           }
         }      
        //drawBody(joints);  
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
     }       
-  }
+  
 
 }
 
