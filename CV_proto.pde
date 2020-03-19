@@ -168,30 +168,38 @@ void SkullyBoi()
          
              //Doing a comparison of the two
              float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
-             limbtracker2.fillBuffer(comparison);
+             limbtracker.fillBuffer(comparison);
              
-             if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
-             {
-                for (Triangle tri : triangleArr) 
-                 {
-                  // println("Here");
-                   tri.RotateX(.2);
-                 }
-               jazz.P1.play();
-             }                                  
-             
-             if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
-             {
-                for (Triangle tri : triangleArr) 
-                 {
-                  // println("Here");
-                   tri.RotateX(.2);
-                 }
-               jazz.P2.play();
-             }                 
-       }
-                 
+              if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft)) 
+              {              
+                jazz.P1.play();
+              }
+              
+              if(limbtracker.limbFlailing(KinectPV2.JointType_HandLeft))
+              {
+                triangle.RotateY(.01);            
+              }               
+                
+              if (limbtracker.limbActivated(KinectPV2.JointType_HandRight)) 
+              {            
+                jazz.P2.play();   
+                triangle.RotateX(.4);               
+              }
+              
+              if (limbtracker.limbActivated(KinectPV2.JointType_FootRight)) 
+              {            
+                jazz.P3.play();
+                triangle.RandomColor();
+               
+              }
                     
+              if (limbtracker.limbActivated(KinectPV2.JointType_FootLeft)) 
+              {            
+                jazz.P4.play();
+                triangle.RandomStroke();
+              }            
+       }
+                                  
        else if(xSetter<.24 && xSetter>-.52 && bool[1]==false)
         {          
              bool[1]=true;                      
@@ -210,44 +218,29 @@ void SkullyBoi()
               
               if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
               {
-                for (Squigly squig : squiglyArr) 
-                 {
-                  // println("Here");
-                   squig.RotateY(.01);
-                 }
+                squigly.RotateY(.01);
+              
               }               
                 
            if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
-                jazz.B2.play();                
-                for (Squigly squig : squiglyArr) 
-                 {
-                  // println("Here");
-                   squig.RotateX(.4);
-                 }
+                jazz.B2.play();   
+                squigly.RotateX(.4);
+               
               }
 
               
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.B3.play();
-                
-                for (Squigly squig : squiglyArr) 
-                 {
-                  // println("Here");
-                   squig.RandomColor();
-                 }
+                squigly.RandomColor();
+               
               }
                     
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootLeft)) 
               {            
                 jazz.B4.play();
-                
-                for (Squigly squig : squiglyArr) 
-                 {
-                  // println("Here");
-                   squig.RandomStroke();
-                 }
+                squigly.RandomStroke();
               }
                                         
         }
@@ -264,10 +257,38 @@ void SkullyBoi()
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
              limbtracker3.fillBuffer(comparison3);          
              
-             if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
-             {
-               jazz.D1.play();
-             }                         
+               if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
+              {              
+                jazz.D1.play();
+              }
+              
+              if(limbtracker3.limbFlailing(KinectPV2.JointType_HandLeft))
+              {
+                square.RotateY(.01);
+              
+              }               
+                
+           if (limbtracker3.limbActivated(KinectPV2.JointType_HandRight)) 
+              {            
+                jazz.D2.play();   
+                square.RotateX(.4);
+               
+              }
+
+              
+              if (limbtracker3.limbActivated(KinectPV2.JointType_FootRight)) 
+              {            
+                jazz.D3.play();
+                square.RandomColor();
+               
+              }
+                    
+              if (limbtracker3.limbActivated(KinectPV2.JointType_FootLeft)) 
+              {            
+                jazz.D4.play();
+                square.RandomStroke();
+              }
+                                               
           }
         }      
        //drawBody(joints);  

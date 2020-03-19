@@ -14,9 +14,25 @@ public class Square {
       shape(square,x,y);
   }
   
-  void RotateX(float amount) {
+ void RotateY(float amount) {
+      // Locating and drawing the shape
+     square.rotateY(amount);
+   
+    }
+    
+    void RotateX(float amount) {
       // Locating and drawing the shape
      square.rotateX(amount);   
+    }
+    
+    void RandomColor() {
+      // Locating and drawing the shape
+      square.setStroke(color(random(0,255),random(0,255),random(0,255)));   
+    }
+    
+     void RandomStroke() {
+      // Locating and drawing the shape
+      square.setStrokeWeight(random(3,7));   
     }
  
 };

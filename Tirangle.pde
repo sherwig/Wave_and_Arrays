@@ -23,10 +23,25 @@ public class Triangle {
       popMatrix();
     }
     
-   void RotateX(float amount) {
+ void RotateY(float amount) {
       // Locating and drawing the shape
-     triangle.rotateX(amount);
+     triangle.rotateY(amount);
    
+    }
+    
+    void RotateX(float amount) {
+      // Locating and drawing the shape
+     triangle.rotateX(amount);   
+    }
+    
+    void RandomColor() {
+      // Locating and drawing the shape
+      triangle.setStroke(color(random(0,255),random(0,255),random(0,255)));   
+    }
+    
+     void RandomStroke() {
+      // Locating and drawing the shape
+      triangle.setStrokeWeight(random(3,7));   
     }
   
 }
