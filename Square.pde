@@ -27,7 +27,7 @@ public class Square {
     
     void RandomColor() {
       // Locating and drawing the shape
-      square.setStroke(color(random(0,255),random(0,255),random(0,255)));   
+      square.setFill(color(random(0,255),random(0,255),random(0,255)));   
     }
     
      void RandomStroke() {

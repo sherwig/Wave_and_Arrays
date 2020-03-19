@@ -116,8 +116,7 @@ void draw() {
   //    squar.display(200,700);         
   //    squar.display(1600,150);    
   //    squar.display(1300,550);    
-  //}
-  
+  //} 
     square.display(200,200);    
     square.display(200,700);         
     square.display(1600,150);    
@@ -164,8 +163,7 @@ void SkullyBoi()
              drawTriangleBoi(joints);
              limbtracker.update2(joints);
              //filling second PVector with the first PVectors values
-             limbtracker.fillFollowing(KinectPV2.JointType_Count);
-         
+             limbtracker.fillFollowing(KinectPV2.JointType_Count);       
              //Doing a comparison of the two
              float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
              limbtracker.fillBuffer(comparison);
@@ -222,13 +220,11 @@ void SkullyBoi()
               
               }               
                 
-           if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
+             if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.B2.play();   
-                squigly.RotateX(.4);
-               
+                squigly.RotateX(.4);              
               }
-
               
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
@@ -248,9 +244,8 @@ void SkullyBoi()
         else if(xSetter<-.52 && bool[0]==false)
         {       
            //spot[j]="Left";
-           println(4);                  
-           bool[0]=true;
-
+           //println(4);                  
+             bool[0]=true;
              drawSquareBoi(joints);
              limbtracker3.update2(joints);       
              ////Doing a comparison of the two
@@ -268,13 +263,12 @@ void SkullyBoi()
               
               }               
                 
-           if (limbtracker3.limbActivated(KinectPV2.JointType_HandRight)) 
+              if (limbtracker3.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.D2.play();   
                 square.RotateX(.4);
                
               }
-
               
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
@@ -287,8 +281,7 @@ void SkullyBoi()
               {            
                 jazz.D4.play();
                 square.RandomStroke();
-              }
-                                               
+              }                                               
           }
         }      
        //drawBody(joints);  
@@ -296,7 +289,6 @@ void SkullyBoi()
        //text(spot,150,150);
     }       
   
-
 }
 
 void drawSquiglyBoi(KJoint[] joints)
@@ -472,9 +464,6 @@ void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   //float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);
   //float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
   //float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
-  //float xMapped2 = map(joints[jointType2].getX(), -1.28, 1, 0, width);
-  //float yMapped2 = map(joints[jointType2].getY(), -0.3, 0.07, 0, height);
-  //float zMapped2 = map(joints[jointType2].getZ(), 1, 8, 0, height*2);
  
   strokeWeight(.01);
   line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(),joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
