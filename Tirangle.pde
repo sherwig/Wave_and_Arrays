@@ -1,19 +1,24 @@
 public class Triangle {
   PShape triangle;
+  int r=0; 
+  int g=255; 
+  int b=255;
   
   public Triangle(float trianglePoint)
   {    
     triangle=createShape();
     triangle.beginShape(TRIANGLES);
-    triangle.noFill();
+    //triangle.noFill();
+  
     triangle.vertex(trianglePoint, trianglePoint);
-    triangle.vertex(trianglePoint-50, trianglePoint-50);
-    triangle.vertex(trianglePoint, trianglePoint-100);
+    triangle.vertex(trianglePoint-75, trianglePoint-75);
+    triangle.vertex(trianglePoint, trianglePoint-150);
     triangle.endShape(CLOSE); 
     
-    triangle.setStroke(color(255));
+    triangle.setStroke(color(r,g,b));
     triangle.setStrokeWeight(4);
-
+   triangle.setFill(color(r,g,b));
+    
   };
   
   void display(float x, float y) {
@@ -32,6 +37,11 @@ public class Triangle {
     void RotateX(float amount) {
       // Locating and drawing the shape
      triangle.rotateX(amount);   
+    }
+   
+    void changeOpacity(float amount)
+    {
+         triangle.setStroke(color(r,g,b,amount));       
     }
     
     void RandomColor() {

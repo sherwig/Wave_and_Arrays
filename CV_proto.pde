@@ -4,7 +4,7 @@ import java.util.ArrayList;
 float rightHandX=0;
 String[] spot= new String [8];
 float[] temp=new float[7];      
-float vert1, vert2;
+int vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2;
 Limbtracker limbtracker3;
@@ -36,8 +36,10 @@ ArrayList <Triangle> triangleArr;
 Square square;
 Triangle triangle; 
 Squigly squigly;
-
-
+color col1=color(255,251,157);
+//color col2=color(221,160,221);
+color col2=color(0,0,255);
+color col3=color(255,127,80);
 
 void setup() {
   size(1920, 1080, P3D);
@@ -82,13 +84,19 @@ void setup() {
     triangle=new Triangle(0); 
     squigly= new Squigly(0);
     square= new Square(0);
+    
+  setGradient(0, 0, vert2, height, col1, col3);
+  setGradient(vert2, 0, width, height, col3, col2);
 }
 
 void draw() {
-  background(0);
+   
+
+ // setGradient(vert2, 0, width, height, col3, col1);
+   
   //fill(0,0,255);
-  line(vert1,height,vert1,0);
-  line(vert2,height,vert2,0);
+  //line(vert1,height,vert1,0);
+  //line(vert2,height,vert2,0);
 
   //image(kinect.getColorImage(), 0, 0, width, height);
   //pushMatrix();
@@ -100,13 +108,6 @@ void draw() {
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
 
-  pushMatrix();
-  stroke(0,0,255);
-  translate(width/2, height/2, 0);
-  scale(zVal);
-  rotateX(rotX);
-  SkullyBoi();
-  popMatrix();
 
   //SkullyBoi();
 
@@ -132,6 +133,16 @@ void draw() {
     triangle.display(1400,400);
     triangle.display(1300,300);   
 
+  pushMatrix();
+  stroke(0,0,255);
+  translate(width/2, height/2, 0);
+  scale(zVal);
+  rotateX(rotX);
+  SkullyBoi();
+  popMatrix();
+  
+
+  
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
 }
@@ -194,14 +205,13 @@ void SkullyBoi()
               if (limbtracker.limbActivated(KinectPV2.JointType_FootLeft)) 
               {            
                 jazz.P4.play();
-                triangle.RandomStroke();
-              }            
+               }            
        }
                                   
        else if(xSetter<.24 && xSetter>-.52 && bool[1]==false)
         {          
-             bool[1]=true;                      
-             drawSquiglyBoi(joints);          
+             bool[1]=true;
+          
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
   
@@ -293,6 +303,7 @@ void SkullyBoi()
 
 void drawSquiglyBoi(KJoint[] joints)
 {
+  
   drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderLeft);
   drawBone(joints,  KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_HipRight);
   drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_KneeLeft);
@@ -310,7 +321,6 @@ void drawSquiglyBoi(KJoint[] joints)
   drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ElbowRight); 
   drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_WristRight);
   drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_HandRight);
-  
   
 }
 
@@ -479,3 +489,16 @@ float getJointX(KJoint[] joints, int jointType)
 {
     return (joints[jointType].getX());
 }
+
+
+void setGradient(int x, int y, float w, float h, color c1, color c2) {
+  //noFill();
+    for (int i = x; i <= x+w; i++) {
+      float inter = map(i, x, x+w, 0, 1);
+      color c = lerpColor(c1, c2, inter);
+      //fill(c,9);
+      //rect(i, y, i, y+h);      
+      stroke(c,7);
+      line(i, y, i, y+h);
+    }
+  }

@@ -1,12 +1,16 @@
 public class Square {
   PShape square;
   int numShapes=10;
+  int r=255; 
+  int g=0; 
+  int b=255;
   
   public Square(float squarePoint)
   {    
-    square=createShape(RECT,squarePoint,squarePoint, squarePoint+200, squarePoint+200);      
-    square.setStroke(color(255));
-    square.setStrokeWeight(4);   
+    square=createShape(RECT,squarePoint,squarePoint, squarePoint+150, squarePoint+150);      
+    square.setStroke(color(r,g,b));
+    square.setStrokeWeight(4);  
+    square.setFill(color(r,g,b));
   }
   
   public void display(float x, float y)
@@ -24,6 +28,12 @@ public class Square {
       // Locating and drawing the shape
      square.rotateX(amount);   
     }
+    
+    void changeOpacity(float amount)
+    {
+         square.setFill(color(r,g,b,amount));       
+    }
+    
     
     void RandomColor() {
       // Locating and drawing the shape

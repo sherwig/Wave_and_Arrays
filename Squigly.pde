@@ -1,5 +1,8 @@
 public class Squigly {
   PShape squigly;
+  int r=255; 
+  int g=165; 
+  int b=0;
   
   public Squigly(float squiglyPoint)
   {
@@ -20,9 +23,9 @@ public class Squigly {
     squigly.vertex(squiglyPoint, squiglyPoint-(squiglyOffset*4));
     squigly.endShape(CLOSE);      
     
-    squigly.setStroke(color(255));
+    squigly.setStroke(color(r,g,b));
     squigly.setStrokeWeight(4);
-       
+  
 
 };
 
@@ -42,6 +45,11 @@ void display(float x, float y) {
     void RotateX(float amount) {
       // Locating and drawing the shape
      squigly.rotateX(amount);   
+    }
+          
+    void changeOpacity(float amount)
+    {
+         squigly.setStroke(color(r,g,b,amount));       
     }
     
     void RandomColor() {
