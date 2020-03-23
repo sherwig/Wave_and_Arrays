@@ -8,6 +8,7 @@ public class Gradients {
     float halfH = height/2;
     
     beginShape();
+    noStroke();
     fill(colorStart);
     vertex(startX, -halfH);
     fill(colorStop);

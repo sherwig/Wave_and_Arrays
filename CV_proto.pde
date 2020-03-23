@@ -59,21 +59,24 @@ void setup() {
   limbtracker3= new Limbtracker(25);
   
   gradient=new Gradients();
+ 
+  //Jazz loops
   jazz=new Jazz();
   //jazz.file1.loop();
   //jazz.file2.loop();
   //jazz.file3.loop();
   
-  squareArr=new ArrayList<Square>();
-  squiglyArr=new ArrayList<Squigly>();
-  triangleArr=new ArrayList<Triangle>();
+  //Different way to fill and draw shapes from classes
+  //squareArr=new ArrayList<Square>();
+  //squiglyArr=new ArrayList<Squigly>();
+  //triangleArr=new ArrayList<Triangle>();
   
-    for (int i = 0; i < 4; i++) 
-    {
-    squareArr.add(new Square(0));
-    squiglyArr.add(new Squigly(0));
-    triangleArr.add(new Triangle(0));
-  }
+  //  for (int i = 0; i < 4; i++) 
+  //  {
+  //  squareArr.add(new Square(0));
+  //  squiglyArr.add(new Squigly(0));
+  //  triangleArr.add(new Triangle(0));
+  //}
    
     triangle=new Triangle(0); 
     squigly= new Squigly(0);
@@ -82,18 +85,16 @@ void setup() {
 }
 
 void draw() {
-
-  //fill(0,0,255);
-  //line(vert1,height,vert1,0);
-  //line(vert2,height,vert2,0);
-
+  
+  //Image being grabbed from kinect
   //image(kinect.getColorImage(), 0, 0, width, height);
   //pushMatrix();
   //scale(3.8);
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
 
-  //  line(vert1,height,vert1,0);
+  //lines in thirds for debugging
+  //line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
 
   //Thirds
@@ -108,10 +109,10 @@ void draw() {
   //gradient.linear(quad3,width,height*2, col3, col1);
 
   //Single Quad
-  gradient.quad(width*2,height*2,col1,col3,col1,col1);
+  //gradient.quad(width*2,height*2,col1,col3,col1,col1);
   
   //Radial gradient
-  //gradient.radial(width*3,height*3,col1,col3,100);
+  gradient.radial(width*3,height*3,col1,col3,100);
 
   pushMatrix();
   pushStyle();
