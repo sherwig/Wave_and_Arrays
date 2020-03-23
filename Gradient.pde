@@ -1,86 +1,69 @@
-//package com.haxademic.core.draw.color;
-//import com.haxademic.core.app.P;
-
-import processing.core.PApplet;
-import processing.core.PGraphics;
-
 public class Gradients {
-  
-  public void linear( PApplet p, float width, float height, int colorStart, int colorStop ) {
-    linear(p.g, width, height, colorStart, colorStop);
-  }
-  
-  public void linear( PGraphics p, float width, float height, int colorStart, int colorStop )
+    
+  public void linear( float width, float height, int colorStart, int colorStop)
   {
-    p.pushMatrix();
+    pushMatrix();
     
     float halfW = width/2;
     float halfH = height/2;
     
-    p.beginShape();
-    p.fill(colorStart);
-    p.vertex(-halfW, -halfH);
-    p.fill(colorStop);
-    p.vertex(halfW, -halfH);
-    p.fill(colorStop);
-    p.vertex(halfW, halfH);
-    p.fill(colorStart);
-    p.vertex(-halfW, halfH);
-    p.endShape(P.CLOSE);
+    beginShape();
+    fill(colorStart);
+    vertex(-halfW, -halfH);
+    fill(colorStop);
+    vertex(halfW, -halfH);
+    fill(colorStop);
+    vertex(halfW, halfH);
+    fill(colorStart);
+    vertex(-halfW, halfH);
+    endShape(CLOSE);
     
-    p.popMatrix();
+    popMatrix();
   }
-  
-  public void quad( PApplet p, float width, float height, int colorTL, int colorTR, int colorBR, int colorBL ) {
-    quad(p.g, width, height, colorTL, colorTR, colorBR, colorBL);
-  }
-  
-  public void quad( PGraphics p, float width, float height, int colorTL, int colorTR, int colorBR, int colorBL )
+    
+  public void quad( float width, float height, int colorTL, int colorTR, int colorBR, int colorBL )
   {
-    p.pushMatrix();
+    pushMatrix();
     
     float halfW = width/2;
     float halfH = height/2;
     
-    p.beginShape();
-    p.fill(colorTL);
-    p.vertex(-halfW, -halfH);
-    p.fill(colorTR);
-    p.vertex(halfW, -halfH);
-    p.fill(colorBR);
-    p.vertex(halfW, halfH);
-    p.fill(colorBL);
-    p.vertex(-halfW, halfH);
-    p.endShape(P.CLOSE);
+    beginShape();
+    fill(colorTL);
+    vertex(-halfW, -halfH);
+    fill(colorTR);
+    vertex(halfW, -halfH);
+    fill(colorBR);
+    vertex(halfW, halfH);
+    fill(colorBL);
+    vertex(-halfW, halfH);
+    endShape(CLOSE);
     
-    p.popMatrix();
+    popMatrix();
   }
   
-  public void radial( PApplet p, float width, float height, int colorInner, int colorOuter, int numSegments ) {
-    radial(p.g, width, height, colorInner, colorOuter, numSegments);
-  }
   
-  public void radial( PGraphics p, float width, float height, int colorInner, int colorOuter, int numSegments )
+  public void radial( float width, float height, int colorInner, int colorOuter, int numSegments )
   {
-    p.pushMatrix();
+    pushMatrix();
 
     float halfW = width/2;
     float halfH = height/2;
     
-    float segmentRadians = P.TWO_PI / numSegments;
-    p.noStroke();
-    for(float r=0; r < P.TWO_PI; r += segmentRadians) {
+    float segmentRadians = TWO_PI / numSegments;
+    noStroke();
+    for(float r=0; r < TWO_PI; r += segmentRadians) {
       float r2 = r + segmentRadians;
-      p.beginShape();
-      p.fill(colorInner);
-      p.vertex(0,0);
-      p.fill(colorOuter);
-      p.vertex(P.sin(r) * halfW, P.cos(r) * halfH);
-      p.vertex(P.sin(r2) * halfW, P.cos(r2) * halfH);
-      p.endShape(P.CLOSE);
+      beginShape();
+      fill(colorInner);
+      vertex(0,0);
+      fill(colorOuter);
+      vertex(sin(r) * halfW, cos(r) * halfH);
+      vertex(sin(r2) * halfW, cos(r2) * halfH);
+      endShape(CLOSE);
     }
     
-    p.popMatrix();
+    popMatrix();
   }
   
 }

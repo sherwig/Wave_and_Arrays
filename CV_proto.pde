@@ -40,6 +40,7 @@ color col1=color(255,251,157);
 //color col2=color(221,160,221);
 color col2=color(0,0,255);
 color col3=color(255,127,80);
+Gradients gradient;
 
 void setup() {
   size(1920, 1080, P3D);
@@ -65,6 +66,7 @@ void setup() {
   limbtracker2= new Limbtracker(25);
   limbtracker3= new Limbtracker(25);
   
+  gradient=new Gradients();
   jazz=new Jazz();
   //jazz.file1.loop();
   //jazz.file2.loop();
@@ -87,6 +89,7 @@ void setup() {
     
   setGradient(0, 0, vert2, height, col1, col3);
   setGradient(vert2, 0, width, height, col3, col2);
+
 }
 
 void draw() {
@@ -104,10 +107,18 @@ void draw() {
   //image(kinect.getDepthMaskImage(), 0, 0);
   //popMatrix();
 
-  //translate the scene to the center 
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
 
+  gradient.linear(width*2,height*2, 0, 255);
+
+  pushMatrix();
+  stroke(0,0,255);
+  translate(width/2, height/2, 0);
+  scale(zVal);
+  rotateX(rotX);
+  SkullyBoi();
+  popMatrix();
 
   //SkullyBoi();
 
@@ -133,16 +144,6 @@ void draw() {
     triangle.display(1400,400);
     triangle.display(1300,300);   
 
-  pushMatrix();
-  stroke(0,0,255);
-  translate(width/2, height/2, 0);
-  scale(zVal);
-  rotateX(rotX);
-  SkullyBoi();
-  popMatrix();
-  
-
-  
   //fill(0, 0, 0);
   //text(frameRate, 50, 50);
 }
