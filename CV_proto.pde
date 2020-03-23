@@ -96,15 +96,22 @@ void draw() {
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
 
+  //Thirds
   //gradient.linear(0,vert1,height*2, col1, col3); 
   //gradient.linear(vert1,vert2,height*2, col3, col1); 
   //gradient.linear(vert2,width*2,height*2, col1, col3);
+  
+  //Quads
+  //gradient.linear(0,quad1,height*2, col1, col3); 
+  //gradient.linear(quad1,quad2,height*2, col3, col1); 
+  //gradient.linear(quad2,quad3,height*2, col1, col3); 
+  //gradient.linear(quad3,width,height*2, col3, col1);
 
-  gradient.linear(0,quad1,height*2, col1, col3); 
-  gradient.linear(quad1,quad2,height*2, col3, col1); 
-  gradient.linear(quad2,quad3,height*2, col1, col3); 
-  gradient.linear(quad3,width,height*2, col3, col1);
-
+  //Single Quad
+  gradient.quad(width*2,height*2,col1,col3,col1,col1);
+  
+  //Radial gradient
+  //gradient.radial(width*3,height*3,col1,col3,100);
 
   pushMatrix();
   pushStyle();
