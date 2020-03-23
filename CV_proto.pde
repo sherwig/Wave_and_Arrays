@@ -1,8 +1,7 @@
 import KinectPV2.KJoint;
 import KinectPV2.*;
 import java.util.ArrayList;
-String[] spot= new String [8];
-float[] temp=new float[7];      
+String[] spot= new String [8];     
 int vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2;
@@ -11,19 +10,8 @@ Boolean[] bool=new Boolean[3];
 KinectPV2 kinect;
 //ArrayList<Circle> circles = new ArrayList<Circle>();
 Jazz jazz;
-float mx;
-float my;
-float speed = 0.05;
-//PShape square;
-float topLeft=0;
-float bottomLeft=300;
-float topRight=0;
-float bottomRight=300;
 float a=0.0;
 float s=0.0;
-boolean flag1=true;
-boolean flag2=true;
-boolean flag3=true;
 float threshold=.5;
 float zVal = 950;
 float rotX = PI;
@@ -94,9 +82,7 @@ void setup() {
 }
 
 void draw() {
-   
 
-   
   //fill(0,0,255);
   //line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);

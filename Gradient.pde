@@ -35,7 +35,7 @@ public class Gradients {
     popMatrix();
   }
     
-  public void quad( float width, float height, int colorTL, int colorTR, int colorBR, int colorBL )
+  public void quad( float width, float height, color colorTL, color colorTR, color colorBR, color colorBL )
   {
     pushMatrix();
     
@@ -57,7 +57,7 @@ public class Gradients {
   }
   
   
-  public void radial( float width, float height, int colorInner, int colorOuter, int numSegments )
+  public void radial( float width, float height, color colorInner, color colorOuter, int numSegments )
   {
     pushMatrix();
 
