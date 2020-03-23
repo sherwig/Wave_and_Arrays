@@ -1,7 +1,6 @@
 import KinectPV2.KJoint;
 import KinectPV2.*;
 import java.util.ArrayList;
-float rightHandX=0;
 String[] spot= new String [8];
 float[] temp=new float[7];      
 int vert1, vert2;
@@ -41,6 +40,7 @@ color col1=color(255,251,157);
 color col2=color(0,0,255);
 color col3=color(255,127,80);
 Gradients gradient;
+float quad1,quad2,quad3;
 
 void setup() {
   size(1920, 1080, P3D);
@@ -61,6 +61,10 @@ void setup() {
     
   vert1=width/3; 
   vert2=vert1*2;
+  
+  quad1=width/4;
+  quad2=quad1*2;
+  quad3=quad2+quad1;
 
   limbtracker= new Limbtracker(25);
   limbtracker2= new Limbtracker(25);
@@ -87,15 +91,11 @@ void setup() {
     squigly= new Squigly(0);
     square= new Square(0);
     
-  setGradient(0, 0, vert2, height, col1, col3);
-  setGradient(vert2, 0, width, height, col3, col2);
-
 }
 
 void draw() {
    
 
- // setGradient(vert2, 0, width, height, col3, col1);
    
   //fill(0,0,255);
   //line(vert1,height,vert1,0);
@@ -110,14 +110,24 @@ void draw() {
   //  line(vert1,height,vert1,0);
   //line(vert2,height,vert2,0);
 
-  gradient.linear(width*2,height*2, 0, 255);
+  //gradient.linear(0,vert1,height*2, col1, col3); 
+  //gradient.linear(vert1,vert2,height*2, col3, col1); 
+  //gradient.linear(vert2,width*2,height*2, col1, col3);
+
+  gradient.linear(0,quad1,height*2, col1, col3); 
+  gradient.linear(quad1,quad2,height*2, col3, col1); 
+  gradient.linear(quad2,quad3,height*2, col1, col3); 
+  gradient.linear(quad3,width,height*2, col3, col1);
+
 
   pushMatrix();
+  pushStyle();
   stroke(0,0,255);
   translate(width/2, height/2, 0);
   scale(zVal);
   rotateX(rotX);
   SkullyBoi();
+  popStyle();
   popMatrix();
 
   //SkullyBoi();
@@ -460,7 +470,9 @@ void drawBody(KJoint[] joints) {
 
 void drawJoint(KJoint[] joints, int jointType) {
   //strokeWeight(2.0f + joints[jointType].getZ()*8);
+  pushStyle();
   strokeWeight(.05);   
+  popStyle();
   //float xMapped = map(joints[jointType].getX(), -1.28, 1, 0, width);
   //float yMapped = map(joints[jointType].getY(), -0.3, 0.07, 0, height);
   //float zMapped = map(joints[jointType].getZ(), 1, 8, 0, height*2);
@@ -475,8 +487,10 @@ void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   //float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);
   //float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
   //float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
+  pushStyle();
+  strokeWeight(.01);  
+  popStyle();
  
-  strokeWeight(.01);
   line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(),joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
   
   //point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
@@ -490,16 +504,3 @@ float getJointX(KJoint[] joints, int jointType)
 {
     return (joints[jointType].getX());
 }
-
-
-void setGradient(int x, int y, float w, float h, color c1, color c2) {
-  //noFill();
-    for (int i = x; i <= x+w; i++) {
-      float inter = map(i, x, x+w, 0, 1);
-      color c = lerpColor(c1, c2, inter);
-      //fill(c,9);
-      //rect(i, y, i, y+h);      
-      stroke(c,7);
-      line(i, y, i, y+h);
-    }
-  }

@@ -1,22 +1,36 @@
 public class Gradients {
     
-  public void linear( float width, float height, int colorStart, int colorStop)
+  public void linear( float startX,float endX, float height, color colorStart, color colorStop)
   {
     pushMatrix();
     
-    float halfW = width/2;
+    float halfW = (endX+startX)/2;
     float halfH = height/2;
     
     beginShape();
     fill(colorStart);
-    vertex(-halfW, -halfH);
+    vertex(startX, -halfH);
     fill(colorStop);
-    vertex(halfW, -halfH);
+    vertex(endX, -halfH);
     fill(colorStop);
-    vertex(halfW, halfH);
+    vertex(endX, halfH);
     fill(colorStart);
-    vertex(-halfW, halfH);
+    vertex(startX, halfH);
+    println(halfW); 
     endShape(CLOSE);
+    
+    
+    //beginShape();
+    //fill(colorStart);
+    //vertex(-halfW, -halfH);
+    //fill(colorStop);
+    //vertex(halfW, -halfH);
+    //fill(colorStop);
+    //vertex(halfW, halfH);
+    //fill(colorStart);
+    //vertex(-halfW, halfH);
+    //println(halfW); 
+    //endShape(CLOSE);
     
     popMatrix();
   }

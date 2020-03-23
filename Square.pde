@@ -31,7 +31,7 @@ public class Square {
     
     void changeOpacity(float amount)
     {
-         square.setFill(color(r,g,b,amount));       
+       square.setFill(color(r,g,b,amount));       
     }
     
     
