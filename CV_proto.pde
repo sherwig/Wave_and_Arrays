@@ -23,10 +23,10 @@ ArrayList <Triangle> triangleArr;
 Square square;
 Triangle triangle; 
 Squigly squigly;
-color col1=color(255,251,157);
+color col1=color(255,251,157,3);
 //color col2=color(221,160,221);
 color col2=color(0,0,255);
-color col3=color(255,127,80);
+color col3=color(255,127,80,3);
 Gradients gradient;
 float quad1,quad2,quad3;
 
@@ -153,7 +153,8 @@ void SkullyBoi()
 {
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
    //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();
-
+  
+  
   //individual JOINTS
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
@@ -163,15 +164,37 @@ void SkullyBoi()
        // println(xSetter);
         //println(1);
        
+       col3=color(255,127,80,100);
+       col1=color(255,251,157,100);
        for (int j=0; j<bool.length; j++)
        {
          bool[j]=false;
        }
-
+       
+       for (int j=0; j<bool.length; j++)
+       {
+         if (bool[2]==false)
+         {        
+           triangle.setColor(128,128,128,150);
+         }
+         
+         if (bool[1]==false)
+         {
+         squigly.setColor(128,128,128,150);
+         }  
+           
+         if (bool[0]==false)
+         {
+          square.setColor(128,128,128,150);
+         }  
+          
+       }
+              
         //Checking what third the skeloten is in
         if(xSetter>.24 && bool[2]==false)
         {                            
-             bool[2]=true;          
+             bool[2]=true;  
+             triangle.setColor(0,255,255,100);
              drawTriangleBoi(joints);
              limbtracker.update2(joints);
              //filling second PVector with the first PVectors values
@@ -183,24 +206,25 @@ void SkullyBoi()
               if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.P1.play();
+                triangle.scale(1.05);
               }
               
               if(limbtracker.limbFlailing(KinectPV2.JointType_HandLeft))
               {
-                triangle.RotateY(.01);            
+               // triangle.RotateY(.01);            
               }               
                 
               if (limbtracker.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
-                jazz.P2.play();   
-                triangle.RotateX(.4);               
+                jazz.P2.play();  
+                 triangle.changeOpacity(15);
+                //triangle.RotateX(.4);               
               }
               
               if (limbtracker.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.P3.play();
-                triangle.RandomColor();
-               
+             
               }
                     
               if (limbtracker.limbActivated(KinectPV2.JointType_FootLeft)) 
@@ -212,10 +236,10 @@ void SkullyBoi()
        else if(xSetter<.24 && xSetter>-.52 && bool[1]==false)
         {          
              bool[1]=true;
-          
+             squigly.setColor(255,165,0,100);
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
-  
+             drawSquiglyBoi(joints);
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
              limbtracker2.fillBuffer(comparison2);
@@ -223,31 +247,34 @@ void SkullyBoi()
               if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.B1.play();
+                //squigly.changeSizePositive(2);
+                squigly.scale(1.05);
               }
               
               if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
               {
-                squigly.RotateY(.01);
+               // squigly.RotateY(.01);
               
               }               
                 
              if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.B2.play();   
-                squigly.RotateX(.4);              
+               // squigly.RotateX(.4); 
+               squigly.changeOpacity(15);
               }
               
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.B3.play();
-                squigly.RandomColor();
+                //squigly.RandomColor();
                
               }
                     
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootLeft)) 
               {            
                 jazz.B4.play();
-                squigly.RandomStroke();
+               // squigly.RandomStroke();
               }
                                         
         }
@@ -257,6 +284,7 @@ void SkullyBoi()
            //spot[j]="Left";
            //println(4);                  
              bool[0]=true;
+             square.setColor(255,0,255,100);
              drawSquareBoi(joints);
              limbtracker3.update2(joints);       
              ////Doing a comparison of the two
@@ -266,32 +294,34 @@ void SkullyBoi()
                if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.D1.play();
+                square.scale(1.05);
               }
               
               if(limbtracker3.limbFlailing(KinectPV2.JointType_HandLeft))
               {
-                square.RotateY(.01);
+               // square.RotateY(.01);
               
               }               
                 
               if (limbtracker3.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
-                jazz.D2.play();   
-                square.RotateX(.4);
+                jazz.D2.play();
+                square.changeOpacity(15);
+                //square.RotateX(.4);
                
               }
               
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.D3.play();
-                square.RandomColor();
+
                
               }
                     
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootLeft)) 
               {            
                 jazz.D4.play();
-                square.RandomStroke();
+                //square.RandomStroke();
               }                                               
           }
         }      

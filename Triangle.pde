@@ -3,7 +3,8 @@ public class Triangle {
   int r=0; 
   int g=255; 
   int b=255;
-  
+  int alpha=100;
+
   public Triangle(float trianglePoint)
   {    
     triangle=createShape();
@@ -15,9 +16,9 @@ public class Triangle {
     triangle.vertex(trianglePoint, trianglePoint-150);
     triangle.endShape(CLOSE); 
     
-    triangle.setStroke(color(r,g,b));
-    triangle.setStrokeWeight(4);
-   triangle.setFill(color(r,g,b));
+    triangle.setStroke(color(r,g,b,alpha));
+    triangle.setStrokeWeight(2);
+    triangle.setFill(color(r,g,b,alpha));
     
   };
   
@@ -38,21 +39,32 @@ public class Triangle {
       // Locating and drawing the shape
      triangle.rotateX(amount);   
     }
-   
-    void changeOpacity(float amount)
-    {
-         triangle.setStroke(color(r,g,b,amount));       
-    }
     
-    void RandomColor() {
-      // Locating and drawing the shape
-      triangle.setStroke(color(random(0,255),random(0,255),random(0,255)));   
+    void setColor(int r, int g, int b, int alpha) {
+      triangle.setFill(color(r,g,b,alpha));   
+      triangle.setStroke(color(r,g,b,alpha)); 
     }
     
      void RandomStroke() {
       // Locating and drawing the shape
       triangle.setStrokeWeight(random(3,7));   
     }
+    
+    void scale(float scaleVal) {
+      triangle.scale(scaleVal);
+    }
+    
+   void changeOpacity(float amount)
+    {
+      alpha+=amount;
+      if (alpha>=255) 
+      {
+         alpha=255; 
+      }
+      triangle.setFill(color(r,g,b,alpha)); 
+      triangle.setStroke(color(r,g,b,alpha));
+    }
+    
   
 }
        

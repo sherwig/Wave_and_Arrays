@@ -3,10 +3,11 @@ public class Squigly {
   int r=255; 
   int g=165; 
   int b=0;
-  
+  int alpha=100;
+  float squiglyOffset=50;
+
   public Squigly(float squiglyPoint)
   {
-    float squiglyOffset=50;
     squigly = createShape();       
     squigly.beginShape(LINES);         
     //squigly.vertex(squiglyPoint, squiglyPoint);
@@ -23,7 +24,7 @@ public class Squigly {
     squigly.vertex(squiglyPoint, squiglyPoint-(squiglyOffset*4));
     squigly.endShape(CLOSE);      
     
-    squigly.setStroke(color(r,g,b));
+    squigly.setStroke(color(r,g,b,alpha));
     squigly.setStrokeWeight(4);
   
 
@@ -37,31 +38,36 @@ void display(float x, float y) {
   }
 
    void RotateY(float amount) {
-      // Locating and drawing the shape
      squigly.rotateY(amount);
    
     }
     
     void RotateX(float amount) {
-      // Locating and drawing the shape
      squigly.rotateX(amount);   
     }
           
     void changeOpacity(float amount)
     {
-         squigly.setStroke(color(r,g,b,amount));       
+      alpha+=amount;
+      if (alpha>=255) 
+      {
+         alpha=255; 
+      }
+      squigly.setStroke(color(r,g,b,alpha));  
     }
     
-    void RandomColor() {
-      // Locating and drawing the shape
-      squigly.setStroke(color(random(0,255),random(0,255),random(0,255)));   
+    void setColor(int r, int g, int b, int alpha) {
+      squigly.setStroke(color(r,g,b,alpha));   
     }
     
      void RandomStroke() {
-      // Locating and drawing the shape
       squigly.setStrokeWeight(random(3,7));   
     }
     
-    //opacity size rotation, movement
+    void scale(float scaleVal) {
+      squigly.scale(scaleVal);
+    }
+    
+    //opacity, size, rotation, movement
 
 }
