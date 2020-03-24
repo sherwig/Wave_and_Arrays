@@ -42,10 +42,6 @@ void setup() {
   //kinect.enableSkeletonDepthMap(true);
 
   kinect.init();
-
-  //square = createShape(RECT,topLeft,topRight, bottomLeft, bottomRight);
-  //square.setStroke(255);
-  //square.setFill(0);
     
   vert1=width/3; 
   vert2=vert1*2;
