@@ -194,7 +194,7 @@ void SkullyBoi()
         if(xSetter>.24 && bool[2]==false)
         {                            
              bool[2]=true;  
-             triangle.setColor(0,255,255,100);
+             triangle.setColor(triangle.r,triangle.g,triangle.b,triangle.alpha);
              drawTriangleBoi(joints);
              limbtracker.update2(joints);
              //filling second PVector with the first PVectors values
@@ -236,7 +236,7 @@ void SkullyBoi()
        else if(xSetter<.24 && xSetter>-.52 && bool[1]==false)
         {          
              bool[1]=true;
-             squigly.setColor(255,165,0,100);
+             squigly.setColor(squigly.r,squigly.g,squigly.b,squigly.alpha);
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
              drawSquiglyBoi(joints);
@@ -249,7 +249,7 @@ void SkullyBoi()
                 jazz.B1.play();
                 //squigly.changeSizePositive(2);
                // squigly.scale();
-               squigly.changePosition(200,200);
+               squigly.changePosition();
                
               }
               
@@ -260,15 +260,16 @@ void SkullyBoi()
               
               if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
               {
-               // squigly.RotateY(.01);
+               // squigly.RotateX(.01);
               
               }               
                 
              if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.B2.play();   
-               // squigly.RotateX(.4); 
-               squigly.changeOpacity(15);
+               squigly.RotateX(.1); 
+               
+               //squigly.changeOpacity(15);
               }
               
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
@@ -291,7 +292,7 @@ void SkullyBoi()
            //spot[j]="Left";
            //println(4);                  
              bool[0]=true;
-             square.setColor(255,0,255,100);
+             square.setColor(square.r,square.g,square.b,square.alpha);
              drawSquareBoi(joints);
              limbtracker3.update2(joints);       
              ////Doing a comparison of the two

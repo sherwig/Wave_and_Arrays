@@ -1,8 +1,8 @@
 public class Squigly {
   PShape squigly;
-  int r=255; 
-  int g=165; 
-  int b=0;
+  int r=30; 
+  int g=247; 
+  int b=37;
   int alpha=100;
   float squiglyOffset=50;
   float scaleValNegMaster=1;
@@ -44,6 +44,8 @@ void display(float x, float y) {
     }
     
     void RotateX(float amount) {
+      
+      
      squigly.rotateX(amount);   
     }
           
@@ -123,26 +125,54 @@ void display(float x, float y) {
         float negative=.9;
         
         float lerpValue=.5;
-        
-        
+     
         scaleVal=lerp(negative,positive,.85);
         
         squigly.scale(scaleVal);
       //  println(scaleVal);
     }
     
+    float getRandomPos()
+    {
+     float randomSet=floor(random(0,4));
+     float randomReturn=0;
+     
+     if(randomSet==0)
+     {
+      randomReturn=100;        
+     }    
+     
+     else if(randomSet==1)
+     {
+      randomReturn=-100;       
+     }
+     
+     else if(randomSet==2)
+     {
+      randomReturn=50;       
+     }
+     else if(randomSet==3)
+     {
+      randomReturn=-50;       
+     }
+      
+      return (randomReturn);
+    }
+        
+    void changePosition()
+    {                 
+      for (int i = 0; i < squigly.getVertexCount(); i++) {
+          PVector v = squigly.getVertex(i);
+          float randomGetter=getRandomPos();
+          float targetPostionX=v.x+100; 
+          float targetPostionY=v.y+100; 
+          v.x=lerp(v.x,targetPostionX,.05);
+          v.y=lerp(v.y,targetPostionY,.05);
+          squigly.setVertex(i,v);
+          //display(v.x,v.y);         
+          //println(squigly.getVertexCount());
+      }
     
-          
-    void changePosition(float x, float y)
-    {      
-      float targetPostionX=random(100,width-100); 
-      float targetPostionY=random(100,height-100); 
-      
-      x=lerp(x,targetPostionX,.05);
-      y=lerp(y,targetPostionY,.05);
-      
-      display(x,y);
-      
     }
     
         
