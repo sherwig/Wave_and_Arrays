@@ -120,8 +120,6 @@ void draw() {
   popStyle();
   popMatrix();
 
-  //SkullyBoi();
-
   //for (Square squar : squareArr) 
   //{
   //    squar.display(200,200);    
@@ -152,9 +150,7 @@ void draw() {
 void SkullyBoi()
 {
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
-   //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();
-  
-  
+   //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();  
   //individual JOINTS
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
@@ -267,7 +263,7 @@ void SkullyBoi()
              if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.B2.play();   
-               squigly.RotateX(.1); 
+               squigly.RotateY(PI); 
                
                //squigly.changeOpacity(15);
               }

@@ -124,9 +124,9 @@ void display(float x, float y) {
         float positive=1.1; 
         float negative=.9;
         
-        float lerpValue=.5;
+        float lerpValue=.85;
      
-        scaleVal=lerp(negative,positive,.85);
+        scaleVal=lerp(negative,positive,lerpValue);
         
         squigly.scale(scaleVal);
       //  println(scaleVal);
@@ -169,8 +169,6 @@ void display(float x, float y) {
           v.x=lerp(v.x,targetPostionX,.05);
           v.y=lerp(v.y,targetPostionY,.05);
           squigly.setVertex(i,v);
-          //display(v.x,v.y);         
-          //println(squigly.getVertexCount());
       }
     
     }
