@@ -8,15 +8,12 @@ Limbtracker limbtracker2;
 Limbtracker limbtracker3;
 Boolean[] bool=new Boolean[3];
 KinectPV2 kinect;
-//ArrayList<Circle> circles = new ArrayList<Circle>();
 Jazz jazz;
 float a=0.0;
 float s=0.0;
 float threshold=.5;
 float zVal = 950;
 float rotX = PI;
-int numShapes=0;
-int numShapesHigh=10;
 ArrayList <Square> squareArr;
 ArrayList <Squigly> squiglyArr;
 ArrayList <Triangle> triangleArr;
@@ -63,9 +60,9 @@ void setup() {
   //jazz.file3.loop();
   
   //Different way to fill and draw shapes from classes
-  //squareArr=new ArrayList<Square>();
-  //squiglyArr=new ArrayList<Squigly>();
-  //triangleArr=new ArrayList<Triangle>();
+  squareArr=new ArrayList<Square>();
+  squiglyArr=new ArrayList<Squigly>();
+  triangleArr=new ArrayList<Triangle>();
   
   //  for (int i = 0; i < 4; i++) 
   //  {
@@ -73,7 +70,9 @@ void setup() {
   //  squiglyArr.add(new Squigly(0));
   //  triangleArr.add(new Triangle(0));
   //}
-   
+    
+   // squareArr.add(new Square(0,200,200));
+    
     triangle=new Triangle(0); 
     squigly= new Squigly(0);
     square= new Square(0);
@@ -127,7 +126,13 @@ void draw() {
   //    squar.display(1600,150);    
   //    squar.display(1300,550);    
   //} 
-    square.display(200,200);    
+  
+  //for (i<squarArray) 
+  //{
+  //  square[i].display();
+  //}
+  
+    square.display();    
     square.display(200,700);         
     square.display(1600,150);    
     square.display(1300,550);   
@@ -244,7 +249,7 @@ void SkullyBoi()
               {              
                 jazz.B1.play();
                 //squigly.changeSizePositive(2);
-               // squigly.scale();
+                
                squigly.changePosition();
                
               }
@@ -257,13 +262,18 @@ void SkullyBoi()
               if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
               {
                // squigly.RotateX(.01);
-              
-              }               
+               squigly.changeScale(true);
+              }   
+              else
+              {
+                squigly.changeScale(false);
+                
+              }
                 
              if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.B2.play();   
-               squigly.RotateY(PI); 
+                squigly.changeRotation(); 
                
                //squigly.changeOpacity(15);
               }
@@ -271,16 +281,14 @@ void SkullyBoi()
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.B3.play();
-                //squigly.RandomColor();
-               
+                //squigly.RandomColor();               
               }
                     
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootLeft)) 
               {            
                 jazz.B4.play();
                // squigly.RandomStroke();
-              }
-                                        
+              }                                       
         }
         
         else if(xSetter<-.52 && bool[0]==false)
