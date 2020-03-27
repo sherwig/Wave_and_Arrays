@@ -248,7 +248,14 @@ void SkullyBoi()
               {              
                 jazz.B1.play();
                 //squigly.changeSizePositive(2);
-                squigly.scale(1.05);
+               // squigly.scale();
+               squigly.changePosition(200,200);
+               
+              }
+              
+              else 
+              {
+              // squigly.scale();              
               }
               
               if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
