@@ -21,7 +21,7 @@ public class Shape
       offset=new PVector();
       basePosition=new PVector(x,y);
       currentPosition=new PVector(x,y);   
-  }
+  };
   
    public void display()
     {
