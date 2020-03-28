@@ -1,8 +1,8 @@
 public class Triangle extends Shape{
 
-  public Triangle(float trianglePoint)
+  public Triangle(float trianglePoint,float x, float y)
   {    
-    super(0,255,255,100);
+    super(0,255,255,100,x,y);
     shape=createShape();
     shape.beginShape(TRIANGLES);
     //triangle.noFill();

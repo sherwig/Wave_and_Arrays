@@ -32,11 +32,11 @@ public class Shape
       rotate(rotation);
       shape(shape,0, 0,shape.width*currentScale,shape.height*currentScale);  
       popMatrix();
-  };
+    };
     
     void changeRotation() 
     {
-       if(random(0,1)>.5) 
+      if(random(0,1)>.5) 
       {       
         offsetRotation=random(-PI,PI);
       }
@@ -46,14 +46,16 @@ public class Shape
       }          
     };
     
-    void setColor(int r, int g, int b,int alpha) {
+    void setColor(int r, int g, int b,int alpha)
+    {
       shape.setFill(color(r,g,b,alpha));   
       shape.setStroke(color(r,g,b,alpha));
     };
     
-     void RandomStroke() {
+     void RandomStroke() 
+     {
       shape.setStrokeWeight(random(3,7));   
-    };
+     };
     
      void changeScale(boolean flailing) 
      {
@@ -69,7 +71,7 @@ public class Shape
        
      };
     
-    
+       
     void changeOpacity(float amount)
     {
       alpha+=amount;
@@ -90,9 +92,7 @@ public class Shape
       else 
       {
         offset.set(0,0);
-      }
-            
+      }            
     };
-  
-  
+    
 }

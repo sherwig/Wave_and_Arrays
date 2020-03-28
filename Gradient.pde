@@ -19,8 +19,7 @@ public class Gradients {
     vertex(startX, halfH);
     println(halfW); 
     endShape(CLOSE);
-    
-    
+       
     //beginShape();
     //fill(colorStart);
     //vertex(-halfW, -halfH);

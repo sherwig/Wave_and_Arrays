@@ -6,7 +6,7 @@ int vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2;
 Limbtracker limbtracker3;
-Boolean[] bool=new Boolean[3];
+Boolean[] zoneSetter=new Boolean[3];
 KinectPV2 kinect;
 Jazz jazz;
 float a=0.0;
@@ -28,55 +28,57 @@ Gradients gradient;
 float quad1,quad2,quad3;
 
 void setup() {
-  size(1920, 1080, P3D);
-  colorMode(RGB);
-  kinect = new KinectPV2(this);
-
-//  kinect.enableSkeletonColorMap(true);
-//  kinect.enableColorImg(true);
-  kinect.enableSkeleton3DMap(true);
-  kinect.enableDepthMaskImg(true);
-  //kinect.enableSkeletonDepthMap(true);
-
-  kinect.init();
+    size(1920, 1080, P3D);
+    colorMode(RGB);
+    kinect = new KinectPV2(this);
+  
+    //kinect.enableSkeletonColorMap(true);
+    //kinect.enableColorImg(true);
+    kinect.enableSkeleton3DMap(true);
+    kinect.enableDepthMaskImg(true);
+    //kinect.enableSkeletonDepthMap(true);
+  
+    kinect.init();
+      
+    vert1=width/3; 
+    vert2=vert1*2;
     
-  vert1=width/3; 
-  vert2=vert1*2;
-  
-  quad1=width/4;
-  quad2=quad1*2;
-  quad3=quad2+quad1;
-
-  limbtracker= new Limbtracker(25);
-  limbtracker2= new Limbtracker(25);
-  limbtracker3= new Limbtracker(25);
-  
-  gradient=new Gradients();
+    quad1=width/4;
+    quad2=quad1*2;
+    quad3=quad2+quad1;
+    
+    limbtracker= new Limbtracker(25);
+    limbtracker2= new Limbtracker(25);
+    limbtracker3= new Limbtracker(25);
+    
+    gradient=new Gradients();
  
-  //Jazz loops
-  jazz=new Jazz();
-  //jazz.file1.loop();
-  //jazz.file2.loop();
-  //jazz.file3.loop();
+    //Jazz loops
+    jazz=new Jazz();
+    //jazz.file1.loop();
+    //jazz.file2.loop();
+    //jazz.file3.loop();
   
-  //Different way to fill and draw shapes from classes
-  squareArr=new ArrayList<Square>();
-  squiglyArr=new ArrayList<Squigly>();
-  triangleArr=new ArrayList<Triangle>();
-  
-  //  for (int i = 0; i < 4; i++) 
-  //  {
-  //  squareArr.add(new Square(0));
-  //  squiglyArr.add(new Squigly(0));
-  //  triangleArr.add(new Triangle(0));
-  //}
-    
-   // squareArr.add(new Square(0,200,200));
-    
-    triangle=new Triangle(0); 
-    squigly= new Squigly(0);
-    square= new Square(0);
-    
+    //Different way to fill and draw shapes from classes
+    squareArr=new ArrayList<Square>();
+    squiglyArr=new ArrayList<Squigly>();
+    triangleArr=new ArrayList<Triangle>();
+      
+    squareArr.add(new Square(0,200,200));
+    squareArr.add(new Square(0,200,700));
+    squareArr.add(new Square(0,1600,150));
+    squareArr.add(new Square(0,1300,550));
+           
+    squiglyArr.add(new Squigly(0,600,400));
+    squiglyArr.add(new Squigly(0,600,1000));
+    squiglyArr.add(new Squigly(0,1000,400));
+    squiglyArr.add(new Squigly(0,800,700));
+             
+    triangleArr.add(new Triangle(0,900,300));
+    triangleArr.add(new Triangle(0,900,800));
+    triangleArr.add(new Triangle(0,1400,400));
+    triangleArr.add(new Triangle(0,1300,300));
+       
 }
 
 void draw() {
@@ -119,38 +121,44 @@ void draw() {
   popStyle();
   popMatrix();
 
-  //for (Square squar : squareArr) 
-  //{
-  //    squar.display(200,200);    
-  //    squar.display(200,700);         
-  //    squar.display(1600,150);    
-  //    squar.display(1300,550);    
-  //} 
+  for (Square squar : squareArr) 
+  {
+     squar.display();
+  } 
   
-  //for (i<squarArray) 
-  //{
-  //  square[i].display();
-  //}
+  for (Triangle tri : triangleArr) 
+  {
+     tri.display();
+  }     
   
-    square.display();    
-    square.display(200,700);         
-    square.display(1600,150);    
-    square.display(1300,550);   
+  for (Squigly squig : squiglyArr) 
+  {
+     squig.display();
+  } 
+  
+    //for (int i=0; i<squareArr.size(); i++) 
+    //{
+    //  squareArr[i].display();
+    //}
+   
+    //square.display();    
+    //square.display(200,700);         
+    //square.display(1600,150);    
+    //square.display(1300,550);   
     
-    squigly.display(600,400);
-    squigly.display(600,1000);
-    squigly.display(1000,400);
-    squigly.display(800,700);
+    //squigly.display(600,400);
+    //squigly.display(600,1000);
+    //squigly.display(1000,400);
+    //squigly.display(800,700);
 
-    triangle.display(900,300);
-    triangle.display(900,800);
-    triangle.display(1400,400);
-    triangle.display(1300,300);   
+    //triangle.display(900,300);
+    //triangle.display(900,800);
+    //triangle.display(1400,400);
+    //triangle.display(1300,300);   
 
-  //fill(0, 0, 0);
-  //text(frameRate, 50, 50);
+    //fill(0, 0, 0);
+    //text(frameRate, 50, 50);
 }
-
 
 void SkullyBoi()
 {
@@ -162,39 +170,35 @@ void SkullyBoi()
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
       float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
-       // println(xSetter);
-        //println(1);
-       
+       // println(xSetter);    
        col3=color(255,127,80,100);
        col1=color(255,251,157,100);
-       for (int j=0; j<bool.length; j++)
+       
+       for (int j=0; j<zoneSetter.length; j++)
        {
-         bool[j]=false;
+         zoneSetter[j]=false;
        }
        
-       for (int j=0; j<bool.length; j++)
+       for (int j=0; j<zoneSetter.length; j++)
        {
-         if (bool[2]==false)
+         if (zoneSetter[2]==false)
          {        
            triangle.setColor(128,128,128,150);
-         }
-         
-         if (bool[1]==false)
+         }         
+         if (zoneSetter[1]==false)
          {
-         squigly.setColor(128,128,128,150);
+           squigly.setColor(128,128,128,150);
          }  
            
-         if (bool[0]==false)
+         if (zoneSetter[0]==false)
          {
-          square.setColor(128,128,128,150);
-         }  
-          
-       }
-              
+           square.setColor(128,128,128,150);
+         }           
+       }              
         //Checking what third the skeloten is in
-        if(xSetter>.24 && bool[2]==false)
+        if(xSetter>.24 && zoneSetter[2]==false)
         {                            
-             bool[2]=true;  
+             zoneSetter[2]=true;  
              triangle.setColor(triangle.r,triangle.g,triangle.b,triangle.alpha);
              drawTriangleBoi(joints);
              limbtracker.update2(joints);
@@ -207,7 +211,7 @@ void SkullyBoi()
               if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.P1.play();
-                triangle.scale(1.05);
+                //triangle.scale(1.05);
               }
               
               if(limbtracker.limbFlailing(KinectPV2.JointType_HandLeft))
@@ -232,11 +236,11 @@ void SkullyBoi()
               {            
                 jazz.P4.play();
                }            
-       }
-                                  
-       else if(xSetter<.24 && xSetter>-.52 && bool[1]==false)
+         }
+       
+       else if(xSetter<.24 && xSetter>-.52 && zoneSetter[1]==false)
         {          
-             bool[1]=true;
+             zoneSetter[1]=true;
              squigly.setColor(squigly.r,squigly.g,squigly.b,squigly.alpha);
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
@@ -244,14 +248,12 @@ void SkullyBoi()
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
              limbtracker2.fillBuffer(comparison2);
-           
+             
               if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.B1.play();
-                //squigly.changeSizePositive(2);
-                
-               squigly.changePosition();
-               
+                //squigly.changeSizePositive(2);                
+                squigly.changePosition();               
               }
               
               else 
@@ -291,11 +293,10 @@ void SkullyBoi()
               }                                       
         }
         
-        else if(xSetter<-.52 && bool[0]==false)
+        else if(xSetter<-.52 && zoneSetter[0]==false)
         {       
-           //spot[j]="Left";
-           //println(4);                  
-             bool[0]=true;
+             //println(4);                  
+             zoneSetter[0]=true;
              square.setColor(square.r,square.g,square.b,square.alpha);
              drawSquareBoi(joints);
              limbtracker3.update2(joints);       
@@ -306,7 +307,7 @@ void SkullyBoi()
                if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.D1.play();
-                square.scale(1.05);
+                //square.scale(1.05);
               }
               
               if(limbtracker3.limbFlailing(KinectPV2.JointType_HandLeft))
@@ -326,8 +327,7 @@ void SkullyBoi()
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.D3.play();
-
-               
+       
               }
                     
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootLeft)) 
@@ -345,8 +345,7 @@ void SkullyBoi()
 }
 
 void drawSquiglyBoi(KJoint[] joints)
-{
-  
+{  
   drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderLeft);
   drawBone(joints,  KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_HipRight);
   drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_KneeLeft);
@@ -363,8 +362,7 @@ void drawSquiglyBoi(KJoint[] joints)
   
   drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ElbowRight); 
   drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_WristRight);
-  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_HandRight);
-  
+  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_HandRight);  
 }
 
 void drawTriangleBoi(KJoint[] joints)
@@ -407,7 +405,6 @@ void drawTriangleBoi(KJoint[] joints)
   drawBone(joints, KinectPV2.JointType_KneeLeft, KinectPV2.JointType_AnkleLeft);
   drawBone(joints, KinectPV2.JointType_AnkleLeft, KinectPV2.JointType_FootLeft);
   drawBone(joints, KinectPV2.JointType_FootLeft, KinectPV2.JointType_KneeLeft);
-  
 }
 
 void drawSquareBoi(KJoint[] joints)
@@ -433,7 +430,6 @@ void drawSquareBoi(KJoint[] joints)
   drawBone(joints, KinectPV2.JointType_KneeRight,KinectPV2.JointType_AnkleRight);
   drawBone(joints, KinectPV2.JointType_KneeLeft,KinectPV2.JointType_AnkleLeft);
   drawBone(joints, KinectPV2.JointType_AnkleLeft,KinectPV2.JointType_AnkleRight);
-
 }
 
 //DRAW BODY
@@ -521,14 +517,9 @@ void drawBone(KJoint[] joints, int jointType1, int jointType2) {
   //float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
   pushStyle();
   strokeWeight(.01);  
-  popStyle();
- 
+  popStyle(); 
   line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(),joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
-  
-  //point(joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
-  
- // line(xMapped,yMapped,zMapped,xMapped2,yMapped2, zMapped2);
-
+    
 }
 
 //Gets an X value of a joint.

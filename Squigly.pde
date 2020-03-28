@@ -2,7 +2,7 @@ public class Squigly extends Shape {
   float squiglyOffset=50;
   float scaleValNegMaster=1;
   float scaleVal=1;
-  float x,y;
+  //float x,y;
    
   public Squigly(float squiglyPoint,float x, float y)
   {
@@ -26,17 +26,6 @@ public class Squigly extends Shape {
   
 
 };
-
-void display(float x, float y) {
-    // Locating and drawing the shape
-    pushMatrix();
-    shape(squigly,x,y);
-    popMatrix();
-  }
-
-   
-                      
-    
+                         
     //opacity, size, rotation, movement
-
 }
