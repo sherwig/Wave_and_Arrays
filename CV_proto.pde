@@ -49,9 +49,9 @@ void setup() {
  
     //Jazz loops
     jazz=new Jazz();
-    //jazz.file1.loop();
-    //jazz.file2.loop();
-    //jazz.file3.loop();
+    jazz.file1.loop();
+    jazz.file2.loop();
+    jazz.file3.loop();
   
     //Different way to fill and draw shapes from classes
     squareArr=new ArrayList<Square>();
@@ -71,8 +71,7 @@ void setup() {
     triangleArr.add(new Triangle(0,900,300));
     triangleArr.add(new Triangle(0,900,800));
     triangleArr.add(new Triangle(0,1400,400));
-    triangleArr.add(new Triangle(0,1300,300));
-       
+    triangleArr.add(new Triangle(0,1300,300));       
 }
 
 void draw() {
@@ -129,33 +128,13 @@ void draw() {
   {
      squig.display();
   } 
-  
-    //for (int i=0; i<squareArr.size(); i++) 
-    //{
-    //  squareArr[i].display();
-    //}
-   
-    //square.display();    
-    //square.display(200,700);         
-    //square.display(1600,150);    
-    //square.display(1300,550);   
-    
-    //squigly.display(600,400);
-    //squigly.display(600,1000);
-    //squigly.display(1000,400);
-    //squigly.display(800,700);
-
-    //triangle.display(900,300);
-    //triangle.display(900,800);
-    //triangle.display(1400,400);
-    //triangle.display(1300,300);   
-
     //fill(0, 0, 0);
     //text(frameRate, 50, 50);
 }
 
 void SkullyBoi()
 {
+   setNonActiveColor();  
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
    //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();  
   //individual JOINTS
@@ -167,39 +146,8 @@ void SkullyBoi()
        // println(xSetter);    
        col3=color(255,127,80,100);
        col1=color(255,251,157,100);
-       println(zoneSetter);       
-       for (int j=0; j<zoneSetter.length; j++)
-       {
-         zoneSetter[j]=false;
-       }
-       
-       for (int j=0; j<zoneSetter.length; j++)
-       {
-         if (zoneSetter[2]==false)
-         {     
-          for (Triangle tri : triangleArr) 
-          {
-             tri.setColor(128,128,128,150);
-          }            
-         }         
-        
-         if (zoneSetter[1]==false)
-         {           
-          for (Squigly squig : squiglyArr) 
-          {
-             squig.setColor(128,128,128,150); 
-          }       
-         }  
-           
-         if (zoneSetter[0]==false)
-         {
-          for (Square squar : squareArr) 
-          {
-           squar.setColor(128,128,128,150);
-          } 
-           
-         }           
-       }              
+       //println(zoneSetter);       
+                 
         //Checking what third the skeloten is in
         if(xSetter>.24 && zoneSetter[2]==false)
         {                            
@@ -208,7 +156,7 @@ void SkullyBoi()
              {
                 tri.setColor(tri.r,tri.g,tri.b,tri.alpha);
              }                  
-            // drawTriangleBoi(joints);
+             //drawTriangleBoi(joints);
              limbtracker.update2(joints);
              //filling second PVector with the first PVectors values
              limbtracker.fillFollowing(KinectPV2.JointType_Count);       
@@ -251,8 +199,12 @@ void SkullyBoi()
               }
               
               if (limbtracker.limbActivated(KinectPV2.JointType_FootRight)) 
-              {            
-                jazz.P3.play();
+              {      
+                for (Triangle tri : triangleArr) 
+                {
+                  tri.changeOpacity(5);
+                }
+                  jazz.P3.play();
              
               }
                     
@@ -316,6 +268,10 @@ void SkullyBoi()
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.B3.play();
+                for (Squigly squig : squiglyArr) 
+                {
+                   squig.changeOpacity(5); 
+                }   
                 //squigly.RandomColor();               
               }
                     
@@ -339,7 +295,7 @@ void SkullyBoi()
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
              limbtracker3.fillBuffer(comparison3);          
              
-               if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
+              if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                  jazz.D1.play();
                  for (Square squar : squareArr) 
@@ -376,7 +332,10 @@ void SkullyBoi()
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootRight)) 
               {            
                 jazz.D3.play();
-       
+                 for (Square squar : squareArr) 
+                 {
+                   squar.changeOpacity(5);
+                 }  
               }
                     
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootLeft)) 
@@ -390,6 +349,42 @@ void SkullyBoi()
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
     }       
+  
+}
+
+void setNonActiveColor()
+{
+  for (int j=0; j<zoneSetter.length; j++)
+       {
+         zoneSetter[j]=false;
+       }       
+       for (int j=0; j<zoneSetter.length; j++)
+       {
+         if (zoneSetter[2]==false)
+         {     
+          for (Triangle tri : triangleArr) 
+          {
+             tri.setColor(128,128,128,150);
+          }            
+         }         
+        
+         if (zoneSetter[1]==false)
+         {           
+          for (Squigly squig : squiglyArr) 
+          {
+             squig.setColor(128,128,128,150); 
+          }       
+         }  
+           
+         if (zoneSetter[0]==false)
+         {
+          for (Square squar : squareArr) 
+          {
+           squar.setColor(128,128,128,150);
+          } 
+           
+         }           
+       }
   
 }
 
