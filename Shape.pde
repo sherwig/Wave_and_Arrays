@@ -1,9 +1,9 @@
 public class Shape
 {
   PShape shape; 
-  int r=255; 
-  int g=0; 
-  int b=255;
+  int r=128; 
+  int g=128; 
+  int b=128;
   int alpha=100;
   PVector offset;
   PVector currentPosition;
@@ -47,9 +47,9 @@ public class Shape
     };
     
     void setColor(int r, int g, int b,int alpha)
-    {
-      shape.setFill(color(r,g,b,alpha));   
-      shape.setStroke(color(r,g,b,alpha));
+    {      
+       shape.setStroke(color(r,g,b,alpha));
+       shape.setFill(color(r,g,b,alpha));
     };
     
      void RandomStroke() 

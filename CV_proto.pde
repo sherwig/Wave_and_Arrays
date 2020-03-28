@@ -182,25 +182,39 @@ void SkullyBoi()
        for (int j=0; j<zoneSetter.length; j++)
        {
          if (zoneSetter[2]==false)
-         {        
-           triangle.setColor(128,128,128,150);
+         {     
+          for (Triangle tri : triangleArr) 
+          {
+             tri.setColor(128,128,128,150);
+          }            
          }         
          if (zoneSetter[1]==false)
-         {
-           squigly.setColor(128,128,128,150);
+         {           
+          for (Squigly squig : squiglyArr) 
+          {
+             squig.setColor(128,128,128,150); 
+          } 
+      
          }  
            
          if (zoneSetter[0]==false)
          {
-           square.setColor(128,128,128,150);
+          for (Square squar : squareArr) 
+          {
+           squar.setColor(128,128,128,150);
+          } 
+           
          }           
        }              
         //Checking what third the skeloten is in
         if(xSetter>.24 && zoneSetter[2]==false)
         {                            
-             zoneSetter[2]=true;  
-             triangle.setColor(triangle.r,triangle.g,triangle.b,triangle.alpha);
-             drawTriangleBoi(joints);
+             zoneSetter[2]=true;    
+             for (Triangle tri : triangleArr) 
+             {
+                tri.setColor(tri.r,tri.g,tri.b,tri.alpha);
+             }                  
+            // drawTriangleBoi(joints);
              limbtracker.update2(joints);
              //filling second PVector with the first PVectors values
              limbtracker.fillFollowing(KinectPV2.JointType_Count);       
@@ -210,20 +224,37 @@ void SkullyBoi()
              
               if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
-                jazz.P1.play();
-                //triangle.scale(1.05);
+                 jazz.P1.play();
+                 for (Triangle tri : triangleArr) 
+                 {
+                    tri.changePosition();
+                 } 
               }
               
               if(limbtracker.limbFlailing(KinectPV2.JointType_HandLeft))
               {
-               // triangle.RotateY(.01);            
-              }               
+                for (Triangle tri : triangleArr) 
+                {
+                  tri.changeScale(true);
+                }             
+              } 
+              
+              else
+              {
+                for (Triangle tri : triangleArr) 
+                {
+                  tri.changeScale(false);
+                }
+              }
                 
               if (limbtracker.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.P2.play();  
-                 triangle.changeOpacity(15);
-                //triangle.RotateX(.4);               
+                for (Triangle tri : triangleArr) 
+                {
+                  tri.changeRotation();
+                }
+                              
               }
               
               if (limbtracker.limbActivated(KinectPV2.JointType_FootRight)) 
@@ -241,10 +272,13 @@ void SkullyBoi()
        else if(xSetter<.24 && xSetter>-.52 && zoneSetter[1]==false)
         {          
              zoneSetter[1]=true;
-             squigly.setColor(squigly.r,squigly.g,squigly.b,squigly.alpha);
+             for (Squigly squig : squiglyArr) 
+             {
+               squig.setColor(squig.r,squig.g,squig.b,squig.alpha); 
+             }           
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
-             drawSquiglyBoi(joints);
+            // drawSquiglyBoi(joints);
              //Doing a comparison of the two
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
              limbtracker2.fillBuffer(comparison2);
@@ -252,31 +286,38 @@ void SkullyBoi()
               if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                 jazz.B1.play();
-                //squigly.changeSizePositive(2);                
-                squigly.changePosition();               
+                //squigly.changeSizePositive(2);
+                for (Squigly squig : squiglyArr) 
+                {
+                  squig.changePosition();
+                }                                  
               }
-              
-              else 
-              {
-              // squigly.scale();              
-              }
-              
+                           
               if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
               {
                // squigly.RotateX(.01);
-               squigly.changeScale(true);
-              }   
+               for (Squigly squig : squiglyArr) 
+                {
+                   squig.changeScale(true);
+                }              
+              } 
+              
               else
               {
-                squigly.changeScale(false);
-                
+                for (Squigly squig : squiglyArr) 
+                {
+                   squig.changeScale(false);
+                }   
+               
               }
                 
              if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
-                jazz.B2.play();   
-                squigly.changeRotation(); 
-               
+                jazz.B2.play();  
+                for (Squigly squig : squiglyArr) 
+                {
+                   squig.changeRotation(); 
+                }                                 
                //squigly.changeOpacity(15);
               }
               
@@ -297,8 +338,11 @@ void SkullyBoi()
         {       
              //println(4);                  
              zoneSetter[0]=true;
-             square.setColor(square.r,square.g,square.b,square.alpha);
-             drawSquareBoi(joints);
+             for (Square squar : squareArr) 
+             {
+               squar.setColor(squar.r,squar.g,squar.b,squar.alpha);
+             }             
+           //  drawSquareBoi(joints);
              limbtracker3.update2(joints);       
              ////Doing a comparison of the two
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
@@ -306,22 +350,38 @@ void SkullyBoi()
              
                if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
-                jazz.D1.play();
-                //square.scale(1.05);
+                 jazz.D1.play();
+                 for (Square squar : squareArr) 
+                 {
+                   squar.changePosition();
+                 }  
               }
               
               if(limbtracker3.limbFlailing(KinectPV2.JointType_HandLeft))
               {
+                 for (Square squar : squareArr) 
+                 {
+                   squar.changeScale(true);
+                 }  
                // square.RotateY(.01);
               
-              }               
+              }      
+              
+              else 
+              {
+                for (Square squar : squareArr) 
+                 {
+                   squar.changeScale(false);
+                 }  
+              }
                 
               if (limbtracker3.limbActivated(KinectPV2.JointType_HandRight)) 
               {            
                 jazz.D2.play();
-                square.changeOpacity(15);
-                //square.RotateX(.4);
-               
+                for (Square squar : squareArr) 
+                 {
+                   squar.changeRotation();
+                 }                
               }
               
               if (limbtracker3.limbActivated(KinectPV2.JointType_FootRight)) 

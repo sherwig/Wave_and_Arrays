@@ -1,5 +1,9 @@
 public class Square extends Shape{
-  
+  int r=255; 
+  int g=0; 
+  int b=255;
+  int alpha=100;
+    
   public Square(float squarePoint, float x, float y )
   {    
     super(255,0,255,100,x,y);

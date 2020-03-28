@@ -1,5 +1,10 @@
 public class Triangle extends Shape{
 
+  int r=0; 
+  int g=255; 
+  int b=255;
+  int alpha=100;
+  
   public Triangle(float trianglePoint,float x, float y)
   {    
     super(0,255,255,100,x,y);

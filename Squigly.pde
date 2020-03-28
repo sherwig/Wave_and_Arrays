@@ -1,8 +1,9 @@
 public class Squigly extends Shape {
   float squiglyOffset=50;
-  float scaleValNegMaster=1;
-  float scaleVal=1;
-  //float x,y;
+  int r=30; 
+  int g=247; 
+  int b=37;
+  int alpha=100;
    
   public Squigly(float squiglyPoint,float x, float y)
   {
