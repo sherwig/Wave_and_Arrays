@@ -1,7 +1,6 @@
 import KinectPV2.KJoint;
 import KinectPV2.*;
 import java.util.ArrayList;
-String[] spot= new String [8];     
 int vert1, vert2;
 Limbtracker limbtracker;
 Limbtracker limbtracker2;
@@ -9,17 +8,12 @@ Limbtracker limbtracker3;
 Boolean[] zoneSetter=new Boolean[3];
 KinectPV2 kinect;
 Jazz jazz;
-float a=0.0;
-float s=0.0;
 float threshold=.5;
 float zVal = 950;
 float rotX = PI;
 ArrayList <Square> squareArr;
 ArrayList <Squigly> squiglyArr;
 ArrayList <Triangle> triangleArr;
-Square square;
-Triangle triangle; 
-Squigly squigly;
 color col1=color(255,251,157,3);
 //color col2=color(221,160,221);
 color col2=color(0,0,255);
@@ -173,7 +167,7 @@ void SkullyBoi()
        // println(xSetter);    
        col3=color(255,127,80,100);
        col1=color(255,251,157,100);
-       
+       println(zoneSetter);       
        for (int j=0; j<zoneSetter.length; j++)
        {
          zoneSetter[j]=false;
@@ -188,13 +182,13 @@ void SkullyBoi()
              tri.setColor(128,128,128,150);
           }            
          }         
+        
          if (zoneSetter[1]==false)
          {           
           for (Squigly squig : squiglyArr) 
           {
              squig.setColor(128,128,128,150); 
-          } 
-      
+          }       
          }  
            
          if (zoneSetter[0]==false)
@@ -218,7 +212,6 @@ void SkullyBoi()
              limbtracker.update2(joints);
              //filling second PVector with the first PVectors values
              limbtracker.fillFollowing(KinectPV2.JointType_Count);       
-             //Doing a comparison of the two
              float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
              limbtracker.fillBuffer(comparison);
              
@@ -278,8 +271,7 @@ void SkullyBoi()
              }           
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
-            // drawSquiglyBoi(joints);
-             //Doing a comparison of the two
+             //drawSquiglyBoi(joints);
              float[] comparison2=limbtracker2.distance(KinectPV2.JointType_Count);
              limbtracker2.fillBuffer(comparison2);
              
@@ -342,9 +334,8 @@ void SkullyBoi()
              {
                squar.setColor(squar.r,squar.g,squar.b,squar.alpha);
              }             
-           //  drawSquareBoi(joints);
-             limbtracker3.update2(joints);       
-             ////Doing a comparison of the two
+             //drawSquareBoi(joints);
+             limbtracker3.update2(joints);                    
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
              limbtracker3.fillBuffer(comparison3);          
              
@@ -363,8 +354,6 @@ void SkullyBoi()
                  {
                    squar.changeScale(true);
                  }  
-               // square.RotateY(.01);
-              
               }      
               
               else 
