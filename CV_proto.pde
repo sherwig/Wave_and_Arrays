@@ -134,7 +134,7 @@ void draw() {
 
 void SkullyBoi()
 {
-   setNonActiveColor();  
+   setNonActive();  
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
    //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();  
   //individual JOINTS
@@ -352,7 +352,7 @@ void SkullyBoi()
   
 }
 
-void setNonActiveColor()
+void setNonActive()
 {
   for (int j=0; j<zoneSetter.length; j++)
        {
@@ -381,8 +381,7 @@ void setNonActiveColor()
           for (Square squar : squareArr) 
           {
            squar.setColor(128,128,128,150);
-          } 
-           
+          }           
          }           
        }
   
