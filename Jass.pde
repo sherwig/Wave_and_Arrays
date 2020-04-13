@@ -57,67 +57,59 @@ public class Jazz
     file2.loop();
     file3.loop(); 
   };
-
-  
-  public void playLoops()
-  {
-    file1.loop();
-    file2.loop();
-    file3.loop(); 
-  };
     
-  public void keyPressed() {
-      // Set a random background color each time you hit then number keys
-      //red=int(random(255));
-      //green=int(random(255));
-      //blue=int(random(255));        
-      switch(key) {
-      case '1':
-        P1.play();
-        break;
-      case '2':
-        P2.play();
-        break;
-      case '3':
-        P3.play();
-        break;
-      case '4':
-        P4.play();
-        break;
-      case '5':
-        P5.play();
-        break;
-      case '6':
-        B1.play();
-        break;
-      case '7':
-        B2.play();
-        break;
-      case '8':
-        B3.play();
-        break;
-      case '9':
-        B4.play();
-        break;
-      case '0':
-        B5.play();
-        break;
-      case 'q':
-        D1.play();
-        break;
-      case 'w':
-        D2.play();
-        break;
-      case 'e':
-        D3.play();
-        break;
-      case 'r':
-        D4.play();
-        break;
-      case 't':
-        D5.play();
-        break;
-      }; 
-  }
+  //public void keyPressed() {
+  //    // Set a random background color each time you hit then number keys
+  //    //red=int(random(255));
+  //    //green=int(random(255));
+  //    //blue=int(random(255));        
+  //    switch(key) {
+  //    case '1':
+  //      P1.play();
+  //      break;
+  //    case '2':
+  //      P2.play();
+  //      break;
+  //    case '3':
+  //      P3.play();
+  //      break;
+  //    case '4':
+  //      P4.play();
+  //      break;
+  //    case '5':
+  //      P5.play();
+  //      break;
+  //    case '6':
+  //      B1.play();
+  //      break;
+  //    case '7':
+  //      B2.play();
+  //      break;
+  //    case '8':
+  //      B3.play();
+  //      break;
+  //    case '9':
+  //      B4.play();
+  //      break;
+  //    case '0':
+  //      B5.play();
+  //      break;
+  //    case 'q':
+  //      D1.play();
+  //      break;
+  //    case 'w':
+  //      D2.play();
+  //      break;
+  //    case 'e':
+  //      D3.play();
+  //      break;
+  //    case 'r':
+  //      D4.play();
+  //      break;
+  //    case 't':
+  //      D5.play();
+  //      break;
+  //    }; 
+  //}
 
 }

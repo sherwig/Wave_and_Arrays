@@ -232,15 +232,30 @@ void SkullyBoi()
               {
                 for (Triangle tri : triangleArr) 
                 {
-                  tri.changeScale(true);
-                }             
+                 tri.changeScale(true,maxOffset,minOffset);
+                }   
+                if(offsetShapes) 
+                {
+                   for (Triangle2 tri : triangleArr2) 
+                   {
+                     tri.changeScale(true,maxOffset,minOffset);
+                   }          
+                }
               } 
               
               else
               {
                 for (Triangle tri : triangleArr) 
                 {
-                  tri.changeScale(false);
+                  tri.changeScale(false,maxOffset,minOffset);
+                }
+                
+                if(offsetShapes) 
+                {
+                   for (Triangle2 tri : triangleArr2) 
+                   {
+                     tri.changeScale(false,maxOffset,minOffset);
+                   }          
                 }
               }
                 
@@ -251,20 +266,28 @@ void SkullyBoi()
                 {
                   tri.changeRotation();
                 }
+               
+               if(offsetShapes) 
+               {
+                 for (Triangle2 tri : triangleArr2) 
+                 {
+                   tri.changeRotation();
+                 } 
+               }
                               
               }
               
-              if (limbtracker.limbActivated(KinectPV2.JointType_FootRight)) 
+              if (limbtracker.limbActivated(KinectPV2.JointType_KneeRight)) 
               {      
-                for (Triangle tri : triangleArr) 
-                {
-                  tri.changeOpacity(5);
-                }
+                //for (Triangle tri : triangleArr) 
+                //{
+                //  tri.changeOpacity(5);
+                //}
                   jazz.P3.play();
              
               }
                     
-              if (limbtracker.limbActivated(KinectPV2.JointType_FootLeft)) 
+              if (limbtracker.limbActivated(KinectPV2.JointType_KneeLeft)) 
               {            
                 jazz.P4.play();
                }            
@@ -277,6 +300,7 @@ void SkullyBoi()
              {
                squig.setColor(squig.r,squig.g,squig.b,squig.alpha); 
              }           
+         
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
              //drawSquiglyBoi(joints);
@@ -285,56 +309,104 @@ void SkullyBoi()
              
               if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
-                jazz.B1.play();
+                 jazz.B1.play();
+                 jazz.B1.amp(jazz.bampc);
+                 jazz.B1.rate(jazz.p5Rate);//relating note by 5th
+                 jazz.file1.amp(jazz.scamp);
+                 jazz.file2.amp(jazz.scamp);
+                 jazz.file3.amp(jazz.scamp);  
                 //squigly.changeSizePositive(2);
-                for (Squigly squig : squiglyArr) 
-                {
-                  squig.changePosition();
-                }                                  
+               for (Squigly squig : squiglyArr) 
+                 {
+                   squig.changePosition(offsetAmountNeg,offsetAmountPos);
+                 } 
+                 if(offsetShapes) 
+                 {
+                   for (Squigly2 squig : squiglyArr2) 
+                   {
+                     squig.changePosition(offsetAmountNeg,offsetAmountPos);
+                   }          
+                 }                          
               }
                            
               if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
               {
                // squigly.RotateX(.01);
-               for (Squigly squig : squiglyArr) 
-                {
-                   squig.changeScale(true);
-                }              
+              for (Squigly squig : squiglyArr) 
+               {
+                 squig.changeScale(true,maxOffset,minOffset);
+               } 
+                 if(offsetShapes) 
+                 {
+                   for (Squigly2 squig : squiglyArr2) 
+                   {
+                     squig.changeScale(true,maxOffset,minOffset);
+                   }          
+                 }       
               } 
               
               else
               {
-                for (Squigly squig : squiglyArr) 
-                {
-                   squig.changeScale(false);
-                }   
+               for (Squigly squig : squiglyArr) 
+               {
+                 squig.changeScale(false,maxOffset,minOffset);
+               } 
+                 if(offsetShapes) 
+                 {
+                   for (Squigly2 squig : squiglyArr2) 
+                   {
+                     squig.changeScale(false,maxOffset,minOffset);
+                   }          
+                 }
                
               }
                 
-             if (limbtracker2.limbActivated(KinectPV2.JointType_HandRight)) 
+             if (limbtracker2.limbActivated(KinectPV2.JointType_KneeRight)) 
               {            
-                jazz.B2.play();  
+                  jazz.B2.play();
+                  jazz.B2.amp(jazz.bampc);
+                  jazz.B2.rate(jazz.p5Rate);//relating note by 5th
+                  jazz.file1.amp(jazz.scamp);
+                  jazz.file2.amp(jazz.scamp);
+                  jazz.file3.amp(jazz.scamp);                 
+                
                 for (Squigly squig : squiglyArr) 
                 {
                    squig.changeRotation(); 
-                }                                 
-               //squigly.changeOpacity(15);
+                }      
+                
+                if(offsetShapes) 
+                 {
+                   for (Squigly2 squig : squiglyArr2) 
+                   {
+                     squig.changeRotation();
+                   }          
+                 }
               }
               
-              if (limbtracker2.limbActivated(KinectPV2.JointType_FootRight)) 
+              if (limbtracker2.limbActivated(KinectPV2.JointType_KneeLeft)) 
               {            
                 jazz.B3.play();
-                for (Squigly squig : squiglyArr) 
-                {
-                   squig.changeOpacity(5); 
-                }   
+                jazz.B3.amp(jazz.bampc);
+                jazz.B3.rate(jazz.p5Rate);//relating note by 5th
+                jazz.file1.amp(jazz.scamp);
+                jazz.file2.amp(jazz.scamp);
+                jazz.file3.amp(jazz.scamp);                 
+                //for (Squigly squig : squiglyArr) 
+                //{
+                //   squig.changeOpacity(5); 
+                //}   
                 //squigly.RandomColor();               
               }
                     
               if (limbtracker2.limbActivated(KinectPV2.JointType_FootLeft)) 
               {            
                 jazz.B4.play();
-               // squigly.RandomStroke();
+                jazz.B4.amp(jazz.bampc);
+                jazz.B4.rate(jazz.p5Rate);//relating note by 5th
+                jazz.file1.amp(jazz.scamp);
+                jazz.file2.amp(jazz.scamp);
+                jazz.file3.amp(jazz.scamp);                
               }                                       
         }
         
@@ -356,24 +428,45 @@ void SkullyBoi()
                  jazz.D1.play();
                  for (Square squar : squareArr) 
                  {
-                   squar.changePosition();
+                   squar.changePosition(offsetAmountNeg,offsetAmountPos);
                  }  
+                  if(offsetShapes) 
+                   {
+                     for (Square2 squar : squareArr2) 
+                     {
+                       squar.changePosition(offsetAmountNeg,offsetAmountPos);
+                     }          
+                   }
               }
               
               if(limbtracker3.limbFlailing(KinectPV2.JointType_HandLeft))
               {
-                 for (Square squar : squareArr) 
-                 {
-                   squar.changeScale(true);
-                 }  
+                  for (Square squar : squareArr) 
+                   {
+                     squar.changeScale(true,maxOffset,minOffset);
+                   } 
+                    if(offsetShapes) 
+                     {
+                       for (Square2 squar : squareArr2) 
+                       {
+                         squar.changeScale(true,maxOffset,minOffset);
+                       }          
+                     }
               }      
               
               else 
               {
                 for (Square squar : squareArr) 
-                 {
-                   squar.changeScale(false);
-                 }  
+                   {
+                     squar.changeScale(false,maxOffset,minOffset);
+                   } 
+                    if(offsetShapes) 
+                     {
+                       for (Square2 squar : squareArr2) 
+                       {
+                         squar.changeScale(false,maxOffset,minOffset);
+                       }          
+                     }
               }
                 
               if (limbtracker3.limbActivated(KinectPV2.JointType_HandRight)) 
@@ -385,16 +478,23 @@ void SkullyBoi()
                  }                
               }
               
-              if (limbtracker3.limbActivated(KinectPV2.JointType_FootRight)) 
+              if (limbtracker3.limbActivated(KinectPV2.JointType_KneeRight)) 
               {            
                 jazz.D3.play();
-                 for (Square squar : squareArr) 
+                for (Square squar : squareArr) 
                  {
-                   squar.changeOpacity(5);
-                 }  
+                   squar.changeRotation();
+                 } 
+                   if(offsetShapes) 
+                   {
+                     for (Square2 squar : squareArr2) 
+                     {
+                       squar.changeRotation();
+                     }          
+                   }
               }
                     
-              if (limbtracker3.limbActivated(KinectPV2.JointType_FootLeft)) 
+              if (limbtracker3.limbActivated(KinectPV2.JointType_KneeLeft)) 
               {            
                 jazz.D4.play();
                 //square.RandomStroke();
@@ -406,6 +506,7 @@ void SkullyBoi()
        //text(spot,150,150);
     }       
   
+  }
 }
 
 void setNonActive()
