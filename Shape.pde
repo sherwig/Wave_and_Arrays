@@ -11,6 +11,7 @@ public class Shape
   float currentScale=1; 
   float rotation=0;
   float offsetRotation=0;
+  PVector v;
  
   public Shape(int r, int g, int b, int alpha, float x, float y)
   {
@@ -94,5 +95,28 @@ public class Shape
         offset.set(0,0);
       }            
     };
+    
+     void setCenterPosition()
+  {
+    float sumX=0; 
+    float sumY=0;
+    
+    for (int i = 0; i < shape.getVertexCount(); i++)
+    {
+      v= shape.getVertex(i);
+      sumX+=v.x; 
+      sumY+=v.y;  
+    }
+    float centerX=0;
+    float centerY=0;
+    centerX=sumX/shape.getVertexCount();
+    centerY=sumY/shape.getVertexCount();
+   
+   for (int i = 0; i < shape.getVertexCount(); i++)
+    {
+      v=shape.getVertex(i);
+      shape.setVertex(i, v.x-centerX, v.y -centerY);     
+    }
+  };
     
 }
