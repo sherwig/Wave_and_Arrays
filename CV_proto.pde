@@ -12,14 +12,29 @@ float threshold=.5;
 float zVal = 950;
 float rotX = PI;
 ArrayList <Square> squareArr;
+ArrayList <Square2> squareArr2;
 ArrayList <Squigly> squiglyArr;
+ArrayList <Squigly2> squiglyArr2;
 ArrayList <Triangle> triangleArr;
+ArrayList <Triangle2> triangleArr2;
 color col1=color(255,251,157,3);
 //color col2=color(221,160,221);
 color col2=color(0,0,255);
 color col3=color(255,127,80,3);
+int col3R=255;
+int col3B=251;
+int col3G=157;
+int col1R=213;
+int col1B=23;
+int col1G=157;
 Gradients gradient;
 float quad1,quad2,quad3;
+int zoneCounter=0;
+boolean offsetShapes=false;
+float offsetAmountNeg=-100;
+float offsetAmountPos=100;
+float maxOffset=2;
+float minOffset=1;
 
 void setup() {
     size(1920, 1080, P3D);
@@ -57,21 +72,46 @@ void setup() {
     squareArr=new ArrayList<Square>();
     squiglyArr=new ArrayList<Squigly>();
     triangleArr=new ArrayList<Triangle>();
+    triangleArr2=new ArrayList<Triangle2>();
+    squiglyArr2=new ArrayList<Squigly2>();
+    squareArr2=new ArrayList<Square2>();
+
       
-    squareArr.add(new Square(0,200,200));
+squareArr.add(new Square(0,200,200));
+    squareArr2.add(new Square2(20,200,200));
     squareArr.add(new Square(0,200,700));
+    squareArr2.add(new Square2(20,200,700));
     squareArr.add(new Square(0,1600,150));
+    squareArr2.add(new Square2(20,1600,150));
     squareArr.add(new Square(0,1300,550));
+    squareArr2.add(new Square2(20,1300,550));
+
+    //squareArr.add(new Square(0,600,450));
+    //squareArr.add(new Square(0,1000,750));
            
     squiglyArr.add(new Squigly(0,600,400));
+    squiglyArr2.add(new Squigly2(20,600,400));
     squiglyArr.add(new Squigly(0,600,1000));
-    squiglyArr.add(new Squigly(0,1000,400));
+    squiglyArr2.add(new Squigly2(20,600,1000));
+    squiglyArr.add(new Squigly(0,1000,400));    
+    squiglyArr2.add(new Squigly2(20,1000,400));
     squiglyArr.add(new Squigly(0,800,700));
+    squiglyArr2.add(new Squigly2(20,800,700));
+
+    //squiglyArr.add(new Squigly(0,1500,800));
+    //squiglyArr.add(new Squigly(0,300,700));
              
     triangleArr.add(new Triangle(0,900,300));
+    triangleArr2.add(new Triangle2(10,900,300));
     triangleArr.add(new Triangle(0,900,800));
+    triangleArr2.add(new Triangle2(10,900,800));
     triangleArr.add(new Triangle(0,1400,400));
-    triangleArr.add(new Triangle(0,1300,300));       
+    triangleArr2.add(new Triangle2(10,1400,400));
+    triangleArr.add(new Triangle(0,1300,900)); 
+    triangleArr2.add(new Triangle2(10,1300,900));
+    
+    
+    
 }
 
 void draw() {
@@ -128,6 +168,16 @@ void draw() {
   {
      squig.display();
   } 
+  
+  jazz.file1.amp(0.1);
+  jazz.file3.amp(0.1);
+  jazz.file2.amp(0.2);
+  //initialize volume levels Bass
+  jazz.B1.amp(jazz.bamp);
+  jazz.B2.amp(jazz.bamp);
+  jazz.B3.amp(jazz.bamp);
+  jazz.B4.amp(jazz.bamp);
+  jazz.B5.amp(jazz.bamp);
     //fill(0, 0, 0);
     //text(frameRate, 50, 50);
 }
@@ -168,8 +218,14 @@ void SkullyBoi()
                  jazz.P1.play();
                  for (Triangle tri : triangleArr) 
                  {
-                    tri.changePosition();
+                    tri.changePosition(offsetAmountNeg,offsetAmountPos);
                  } 
+                 if(offsetShapes) 
+                 {
+                   for (Triangle2 tri : triangleArr2) 
+                   {
+                     tri.changePosition(offsetAmountNeg,offsetAmountPos);
+                   }          
               }
               
               if(limbtracker.limbFlailing(KinectPV2.JointType_HandLeft))
@@ -358,8 +414,6 @@ void setNonActive()
        {
          zoneSetter[j]=false;
        }       
-       for (int j=0; j<zoneSetter.length; j++)
-       {
          if (zoneSetter[2]==false)
          {     
           for (Triangle tri : triangleArr) 
@@ -383,8 +437,71 @@ void setNonActive()
            squar.setColor(128,128,128,150);
           }           
          }           
-       }
+          for (int i=0; i<zoneSetter.length; i++) 
+         {
+           if(zoneSetter[i]==true)
+           {
+             //col3=color(255,127,80,100);
+             //col1=color(sliderValue,251,157,100);
+             col3=color(col3R,col3G,col3B,50);
+             col1=color(col1R,col1G,col1B,50);
+             zoneCounter++;
+             //println( zoneCounter);
+             
+           }
+           else 
+           {
+             zoneCounter=0;
+             col1=color(255,251,157,3);
+             col3=color(255,127,80,3);
+             offsetShapes=false;
+           }
+         }
+         
+         if(zoneCounter>=2 && zoneCounter<3)
+         {
+           println("here");
+           col3=color(col3R,col3G,col3B,100);
+           col1=color(col1R,col1G,col1B,100);
+         }
+         
+         else if(zoneCounter>=3)
+         {
+           offsetShapes=true;
+           float x= getSinScale(160,40,600);
+           col3G=int(x);
+           float y= getSinScale(300,30,600);
+           col1R=int(y);
+           //println(col1R);
+           col3=color(col3R,col3G,col3B,125);
+           col1=color(col1R,col1G,col1B,125);
+           
+            //println("here");
+            for (Triangle2 tri : triangleArr2) 
+            {
+               tri.display();
+            }    
+            
+            for (Squigly2 squig : squiglyArr2) 
+            {
+               squig.display();
+            }    
+            
+            for (Square2 squar : squareArr2) 
+            {
+               squar.display();
+            }   
+         }
   
+}
+
+
+float getSinScale(float high, float low, float period)
+{
+     float amplitude=high-low;
+     float x = (amplitude-low)+(amplitude-high) * cos(TWO_PI * frameCount / period);
+     x=abs(x);
+     return x;
 }
 
 void drawSquiglyBoi(KJoint[] joints)

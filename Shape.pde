@@ -58,16 +58,16 @@ public class Shape
       shape.setStrokeWeight(random(3,7));   
      };
     
-     void changeScale(boolean flailing) 
+     void changeScale(boolean flailing, float maxOffset, float minOffset) 
      {
        if(flailing) 
        {
-         currentScale=lerp(currentScale,2,.08);
+         currentScale=lerp(currentScale,maxOffset,.08);
          
        }
        else 
        {
-         currentScale=lerp(currentScale,1,.03);
+         currentScale=lerp(currentScale,minOffset,.03);
        } 
        
      };
@@ -84,16 +84,18 @@ public class Shape
       shape.setFill(color(r,g,b,alpha));  
     };
     
-   void changePosition()
+   void changePosition(float offsetAmountNeg, float offsetAmountPos)
     {         
       if(random(0,1)>.5) 
-      {       
-        offset.set(random(-100,100),random(-100,100));
+      {   
+        //slider.sliderValue=offsetAmountNeg;
+        offset.set(random(offsetAmountNeg,offsetAmountPos),random(offsetAmountNeg,offsetAmountPos));
       }
       else 
       {
         offset.set(0,0);
-      }            
+      }     
+      println(offsetAmountNeg);
     };
     
      void setCenterPosition()

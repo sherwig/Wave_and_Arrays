@@ -2,6 +2,8 @@ import processing.sound.*;
 public class Jazz
 {
   SoundFile file1,file2,file3,P1,P2,P3,P4,P5,D1,D2,D3,D4,D5,B1,B2,B3,B4,B5;
+  float pamp,bamp,damp,scamp, p5Rate, ma6Rate,bampc;
+
   //int red, green, blue; 
   public Jazz()
   {
@@ -25,7 +27,37 @@ public class Jazz
     D4 = new SoundFile(CV_proto.this, "Drums tomH.wav");
     D5 = new SoundFile(CV_proto.this, "Drums tomM.wav");
     
+      pamp = 0.05;
+      bamp = 0.2;
+      damp = 0.2;
+      scamp = 0.08; // pseudo side chain compression ducking amplitude
+      bampc = 0.23; //bass amp pseudo compressed amplitude
+  
+      //initialize volume levels Piano
+      P1.amp(pamp);
+      P2.amp(pamp);
+      P3.amp(pamp);
+      P4.amp(pamp);
+      P5.amp(pamp);
+      //initialize volume levels drums
+      D1.amp(damp);
+      D2.amp(damp);
+      D3.amp(damp);
+      D4.amp(damp);
+      D5.amp(damp);
+      //setting rate playback settings to transpose base notes into cm pentatonic at higher register
+      p5Rate = 1.17; //perfect 5th 
+      ma6Rate = 1.5; //major 6th
+    
   };
+  
+  public void playLoops()
+  {
+    file1.loop();
+    file2.loop();
+    file3.loop(); 
+  };
+
   
   public void playLoops()
   {
