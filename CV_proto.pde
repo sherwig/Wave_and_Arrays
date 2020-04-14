@@ -113,7 +113,7 @@ void setup() {
     triangleArr.add(new Triangle(0,1300,900)); 
     triangleArr2.add(new Triangle2(10,1300,900));
     
-     backgroundArr.add(new Background_Lines(0,-15,100,300));
+    backgroundArr.add(new Background_Lines(0,-15,100,300));
     backgroundArr.add(new Background_Lines(0,-15,50,50));
     backgroundArr.add(new Background_Lines(0,-15,500,50));
     backgroundArr.add(new Background_Lines(0,-15,500,300));
