@@ -17,6 +17,7 @@ ArrayList <Squigly> squiglyArr;
 ArrayList <Squigly2> squiglyArr2;
 ArrayList <Triangle> triangleArr;
 ArrayList <Triangle2> triangleArr2;
+ArrayList <Background_Lines> backgroundArr;
 color col1=color(255,251,157,3);
 //color col2=color(221,160,221);
 color col2=color(0,0,255);
@@ -75,9 +76,11 @@ void setup() {
     triangleArr2=new ArrayList<Triangle2>();
     squiglyArr2=new ArrayList<Squigly2>();
     squareArr2=new ArrayList<Square2>();
+    backgroundArr=new ArrayList<Background_Lines>();
+
 
       
-squareArr.add(new Square(0,200,200));
+    squareArr.add(new Square(0,200,200));
     squareArr2.add(new Square2(20,200,200));
     squareArr.add(new Square(0,200,700));
     squareArr2.add(new Square2(20,200,700));
@@ -109,6 +112,46 @@ squareArr.add(new Square(0,200,200));
     triangleArr2.add(new Triangle2(10,1400,400));
     triangleArr.add(new Triangle(0,1300,900)); 
     triangleArr2.add(new Triangle2(10,1300,900));
+    
+     backgroundArr.add(new Background_Lines(0,-15,100,300));
+    backgroundArr.add(new Background_Lines(0,-15,50,50));
+    backgroundArr.add(new Background_Lines(0,-15,500,50));
+    backgroundArr.add(new Background_Lines(0,-15,500,300));
+    backgroundArr.add(new Background_Lines(0,-15,500,600));
+    backgroundArr.add(new Background_Lines(0,-15,150,500));
+    backgroundArr.add(new Background_Lines(0,-15,150,500));
+    backgroundArr.add(new Background_Lines(0,-15,450,800));
+    backgroundArr.add(new Background_Lines(0,-15,650,740));
+    backgroundArr.add(new Background_Lines(0,-15,850,800));
+    backgroundArr.add(new Background_Lines(0,-15,1000,850));
+    backgroundArr.add(new Background_Lines(0,-15,1200,1050));
+    backgroundArr.add(new Background_Lines(0,-15,150,1000));
+    backgroundArr.add(new Background_Lines(0,-15,450,1050));
+    backgroundArr.add(new Background_Lines(0,-15,650,920));
+    backgroundArr.add(new Background_Lines(0,-15,850,1050));
+    backgroundArr.add(new Background_Lines(0,-15,1300,1000));
+    backgroundArr.add(new Background_Lines(0,-15,1500,1070));
+    backgroundArr.add(new Background_Lines(0,-15,1700,930));
+    backgroundArr.add(new Background_Lines(0,-15,1900,1000));
+    backgroundArr.add(new Background_Lines(0,-15,1900,840));
+    backgroundArr.add(new Background_Lines(0,-15,1850,920));
+    backgroundArr.add(new Background_Lines(0,-15,1900,600));
+    backgroundArr.add(new Background_Lines(0,-15,1800,400));
+    backgroundArr.add(new Background_Lines(0,-15,1850,220));  
+    
+    backgroundArr.add(new Background_Lines(0,-15,1600,1030));
+    backgroundArr.add(new Background_Lines(0,-15,1600,800));
+    backgroundArr.add(new Background_Lines(0,-15,1650,970));
+    backgroundArr.add(new Background_Lines(0,-15,1600,570));
+    backgroundArr.add(new Background_Lines(0,-15,1500,430));
+    
+    backgroundArr.add(new Background_Lines(0,-15,1180,1030));
+    backgroundArr.add(new Background_Lines(0,-15,1280,800));
+    backgroundArr.add(new Background_Lines(0,-15,1250,970));
+    backgroundArr.add(new Background_Lines(0,-15,1210,570));
+    backgroundArr.add(new Background_Lines(0,-15,1200,430));
+    backgroundArr.add(new Background_Lines(0,-15,1290,240));
+    backgroundArr.add(new Background_Lines(0,-15,1290,40));
     
     
     
