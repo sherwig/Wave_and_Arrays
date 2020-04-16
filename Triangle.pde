@@ -8,6 +8,7 @@ public class Triangle extends Shape{
   public Triangle(float trianglePoint,float x, float y)
   {    
     super(0,255,255,100,x,y);
+    shapeMode(CORNER);
     shape=createShape();
     shape.beginShape(TRIANGLES);
     //triangle.noFill();

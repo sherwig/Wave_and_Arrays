@@ -212,6 +212,11 @@ void draw() {
      squig.display();
   } 
   
+ for (Background_Lines back : backgroundArr) 
+  {
+     back.display();
+  } 
+  
   jazz.file1.amp(0.1);
   jazz.file3.amp(0.1);
   jazz.file2.amp(0.2);
@@ -236,7 +241,8 @@ void SkullyBoi()
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
       float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
-       // println(xSetter);    
+      //  println(xSetter);    
+       
        col3=color(255,127,80,100);
        col1=color(255,251,157,100);
        //println(zoneSetter);       
@@ -339,11 +345,12 @@ void SkullyBoi()
        else if(xSetter<.24 && xSetter>-.52 && zoneSetter[1]==false)
         {          
              zoneSetter[1]=true;
+             println("HERE");
              for (Squigly squig : squiglyArr) 
              {
                squig.setColor(squig.r,squig.g,squig.b,squig.alpha); 
              }           
-         
+             
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
              //drawSquiglyBoi(joints);
@@ -365,9 +372,9 @@ void SkullyBoi()
                  } 
                  if(offsetShapes) 
                  {
-                   for (Squigly2 squig : squiglyArr2) 
+                   for (Squigly2 squig2 : squiglyArr2) 
                    {
-                     squig.changePosition(offsetAmountNeg,offsetAmountPos);
+                     squig2.changePosition(offsetAmountNeg,offsetAmountPos);
                    }          
                  }                          
               }
@@ -381,9 +388,9 @@ void SkullyBoi()
                } 
                  if(offsetShapes) 
                  {
-                   for (Squigly2 squig : squiglyArr2) 
+                   for (Squigly2 squig2 : squiglyArr2) 
                    {
-                     squig.changeScale(true,maxOffset,minOffset);
+                     squig2.changeScale(true,maxOffset,minOffset);
                    }          
                  }       
               } 
@@ -396,9 +403,9 @@ void SkullyBoi()
                } 
                  if(offsetShapes) 
                  {
-                   for (Squigly2 squig : squiglyArr2) 
+                   for (Squigly2 squig2 : squiglyArr2) 
                    {
-                     squig.changeScale(false,maxOffset,minOffset);
+                     squig2.changeScale(false,maxOffset,minOffset);
                    }          
                  }
                
@@ -462,7 +469,9 @@ void SkullyBoi()
                squar.setColor(squar.r,squar.g,squar.b,squar.alpha);
              }             
              //drawSquareBoi(joints);
-             limbtracker3.update2(joints);                    
+                          
+             limbtracker3.update2(joints);   
+             limbtracker2.fillFollowing(KinectPV2.JointType_Count);       
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
              limbtracker3.fillBuffer(comparison3);          
              
@@ -557,7 +566,9 @@ void setNonActive()
   for (int j=0; j<zoneSetter.length; j++)
        {
          zoneSetter[j]=false;
+         println(zoneSetter);
        }       
+         
          if (zoneSetter[2]==false)
          {     
           for (Triangle tri : triangleArr) 
@@ -580,62 +591,64 @@ void setNonActive()
           {
            squar.setColor(128,128,128,150);
           }           
-         }           
-          for (int i=0; i<zoneSetter.length; i++) 
-         {
-           if(zoneSetter[i]==true)
-           {
-             //col3=color(255,127,80,100);
-             //col1=color(sliderValue,251,157,100);
-             col3=color(col3R,col3G,col3B,50);
-             col1=color(col1R,col1G,col1B,50);
-             zoneCounter++;
-             //println( zoneCounter);
+         } 
+         
+         //for (int i=0; i<zoneSetter.length; i++) 
+         //{
+         //  if(zoneSetter[i]==true)
+         //  {
+         //    //col3=color(255,127,80,100);
+         //    //col1=color(sliderValue,251,157,100);
+         //    col3=color(col3R,col3G,col3B,50);
+         //    col1=color(col1R,col1G,col1B,50);
+         //    zoneCounter++;
+         //    println("1");
+         //    //println( zoneCounter);
              
-           }
-           else 
-           {
-             zoneCounter=0;
-             col1=color(255,251,157,3);
-             col3=color(255,127,80,3);
-             offsetShapes=false;
-           }
-         }
+         //  }
+         //  else 
+         //  {
+         //    zoneCounter=0;
+         //    col1=color(255,251,157,3);
+         //    col3=color(255,127,80,3);
+         //    offsetShapes=false;
+         //  }
+         //}
          
-         if(zoneCounter>=2 && zoneCounter<3)
-         {
-           println("here");
-           col3=color(col3R,col3G,col3B,100);
-           col1=color(col1R,col1G,col1B,100);
-         }
+         //if(zoneCounter>=2 && zoneCounter<3)
+         //{
+         //  println("here");
+         //  col3=color(col3R,col3G,col3B,100);
+         //  col1=color(col1R,col1G,col1B,100);
+         //}
          
-         else if(zoneCounter>=3)
-         {
-           offsetShapes=true;
-           float x= getSinScale(160,40,600);
-           col3G=int(x);
-           float y= getSinScale(300,30,600);
-           col1R=int(y);
-           //println(col1R);
-           col3=color(col3R,col3G,col3B,125);
-           col1=color(col1R,col1G,col1B,125);
+         //else if(zoneCounter>=3)
+         //{
+         //  offsetShapes=true;
+         //  float x= getSinScale(160,40,600);
+         //  col3G=int(x);
+         //  float y= getSinScale(300,30,600);
+         //  col1R=int(y);
+         //  //println(col1R);
+         //  col3=color(col3R,col3G,col3B,155);
+         //  col1=color(col1R,col1G,col1B,155);
            
-            //println("here");
-            for (Triangle2 tri : triangleArr2) 
-            {
-               tri.display();
-            }    
+         //   //println("here");
+         //   for (Triangle2 tri : triangleArr2) 
+         //   {
+         //      tri.display();
+         //   }    
             
-            for (Squigly2 squig : squiglyArr2) 
-            {
-               squig.display();
-            }    
+         //   for (Squigly2 squig : squiglyArr2) 
+         //   {
+         //      squig.display();
+         //   }    
             
-            for (Square2 squar : squareArr2) 
-            {
-               squar.display();
-            }   
-         }
+         //   for (Square2 squar : squareArr2) 
+         //   {
+         //      squar.display();
+         //   }   
+         //}
   
 }
 
