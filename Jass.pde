@@ -27,12 +27,13 @@ public class Jazz
     D4 = new SoundFile(CV_proto.this, "Drums tomH.wav");
     D5 = new SoundFile(CV_proto.this, "Drums tomM.wav");
     
+        //amp levels
       pamp = 0.05;
       bamp = 0.2;
       damp = 0.2;
       scamp = 0.08; // pseudo side chain compression ducking amplitude
       bampc = 0.23; //bass amp pseudo compressed amplitude
-  
+    
       //initialize volume levels Piano
       P1.amp(pamp);
       P2.amp(pamp);
@@ -47,7 +48,7 @@ public class Jazz
       D5.amp(damp);
       //setting rate playback settings to transpose base notes into cm pentatonic at higher register
       p5Rate = 1.17; //perfect 5th 
-      ma6Rate = 1.5; //major 6th
+      ma6Rate = 1.33; //minor 6th
     
   };
   
