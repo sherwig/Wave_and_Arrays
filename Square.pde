@@ -8,7 +8,7 @@ public class Square extends Shape{
   {    
     super(255,0,255,100,x,y);
     shapeMode(CORNER);
-    shape=createShape(RECT,squarePoint,squarePoint, squarePoint+150, squarePoint+150);      
+    shape=createShape(RECT,squarePoint,squarePoint, squarePoint+125, squarePoint+125);      
     shape.setStroke(color(r,g,b,alpha));
     shape.setStrokeWeight(2);  
     shape.setFill(color(r,g,b,alpha));

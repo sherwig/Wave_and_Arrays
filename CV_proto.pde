@@ -32,9 +32,9 @@ Gradients gradient;
 float quad1,quad2,quad3;
 int zoneCounter=0;
 boolean offsetShapes=false;
-float offsetAmountNeg=-100;
-float offsetAmountPos=100;
-float maxOffset=2;
+float offsetAmountNeg=-200;
+float offsetAmountPos=200;
+float maxOffset=3;
 float minOffset=1;
 
 void setup() {
@@ -65,9 +65,9 @@ void setup() {
  
     //Jazz loops
     jazz=new Jazz();
-    jazz.file1.loop();
-    jazz.file2.loop();
-    jazz.file3.loop();
+    //jazz.file1.loop();
+    //jazz.file2.loop();
+    //jazz.file3.loop();
   
     //Different way to fill and draw shapes from classes
     squareArr=new ArrayList<Square>();
@@ -81,37 +81,37 @@ void setup() {
 
       
     squareArr.add(new Square(0,200,200));
-    squareArr2.add(new Square2(20,200,200));
+    squareArr2.add(new Square2(0,180,180));
     squareArr.add(new Square(0,200,700));
-    squareArr2.add(new Square2(20,200,700));
+    squareArr2.add(new Square2(0,180,680));
     squareArr.add(new Square(0,1600,150));
-    squareArr2.add(new Square2(20,1600,150));
+    squareArr2.add(new Square2(0,1580,130));
     squareArr.add(new Square(0,1300,550));
-    squareArr2.add(new Square2(20,1300,550));
+    squareArr2.add(new Square2(0,1280,530));
 
     //squareArr.add(new Square(0,600,450));
     //squareArr.add(new Square(0,1000,750));
            
     squiglyArr.add(new Squigly(0,600,400));
-    squiglyArr2.add(new Squigly2(20,600,400));
+    squiglyArr2.add(new Squigly2(0,580,380));
     squiglyArr.add(new Squigly(0,600,1000));
-    squiglyArr2.add(new Squigly2(20,600,1000));
+    squiglyArr2.add(new Squigly2(0,580,980));
     squiglyArr.add(new Squigly(0,1000,400));    
-    squiglyArr2.add(new Squigly2(20,1000,400));
+    squiglyArr2.add(new Squigly2(0,980,380));
     squiglyArr.add(new Squigly(0,800,700));
-    squiglyArr2.add(new Squigly2(20,800,700));
+    squiglyArr2.add(new Squigly2(0,780,680));
 
     //squiglyArr.add(new Squigly(0,1500,800));
     //squiglyArr.add(new Squigly(0,300,700));
              
     triangleArr.add(new Triangle(0,900,300));
-    triangleArr2.add(new Triangle2(10,900,300));
+    triangleArr2.add(new Triangle2(0,890,290));
     triangleArr.add(new Triangle(0,900,800));
-    triangleArr2.add(new Triangle2(10,900,800));
+    triangleArr2.add(new Triangle2(0,890,790));
     triangleArr.add(new Triangle(0,1400,400));
-    triangleArr2.add(new Triangle2(10,1400,400));
+    triangleArr2.add(new Triangle2(0,1390,390));
     triangleArr.add(new Triangle(0,1300,900)); 
-    triangleArr2.add(new Triangle2(10,1300,900));
+    triangleArr2.add(new Triangle2(0,1290,890));
     
     backgroundArr.add(new Background_Lines(0,-15,100,300));
     backgroundArr.add(new Background_Lines(0,-15,50,50));
@@ -241,10 +241,10 @@ void SkullyBoi()
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
       float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
-      //  println(xSetter);    
+    //  println(xSetter);    
        
-       col3=color(255,127,80,100);
-       col1=color(255,251,157,100);
+       col3=color(255,127,80,50);
+       col1=color(255,251,157,50);
        //println(zoneSetter);       
                  
         //Checking what third the skeloten is in
@@ -261,7 +261,8 @@ void SkullyBoi()
              limbtracker.fillFollowing(KinectPV2.JointType_Count);       
              float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
              limbtracker.fillBuffer(comparison);
-             
+             //println("HERE");
+
               if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
                  jazz.P1.play();
@@ -277,7 +278,7 @@ void SkullyBoi()
                    }          
               }
               
-              if(limbtracker.limbFlailing(KinectPV2.JointType_HandLeft))
+              if(limbtracker.limbFlailing(KinectPV2.JointType_HandRight))
               {
                 for (Triangle tri : triangleArr) 
                 {
@@ -308,7 +309,7 @@ void SkullyBoi()
                 }
               }
                 
-              if (limbtracker.limbActivated(KinectPV2.JointType_HandRight)) 
+              if (limbtracker.limbActivated(KinectPV2.JointType_KneeRight)) 
               {            
                 jazz.P2.play();  
                 for (Triangle tri : triangleArr) 
@@ -325,8 +326,25 @@ void SkullyBoi()
                }
                               
               }
+             
+              if (limbtracker.limbActivated(KinectPV2.JointType_KneeLeft)) 
+              {            
+                jazz.P4.play();
+                 for (Triangle tri : triangleArr) 
+                {
+                  tri.changeRotation();
+                }
+               
+               if(offsetShapes) 
+               {
+                 for (Triangle2 tri : triangleArr2) 
+                 {
+                   tri.changeRotation();
+                 } 
+               }
+               }    
               
-              if (limbtracker.limbActivated(KinectPV2.JointType_KneeRight)) 
+              if (limbtracker.limbActivated(KinectPV2.JointType_SpineMid)) 
               {      
                 //for (Triangle tri : triangleArr) 
                 //{
@@ -336,16 +354,14 @@ void SkullyBoi()
              
               }
                     
-              if (limbtracker.limbActivated(KinectPV2.JointType_KneeLeft)) 
-              {            
-                jazz.P4.play();
-               }            
-         }
+                   
+           }       
+        }
        
-       else if(xSetter<.24 && xSetter>-.52 && zoneSetter[1]==false)
+       if(xSetter<.24 && xSetter>-.52 && zoneSetter[1]==false)
         {          
              zoneSetter[1]=true;
-             println("HERE");
+            // println("HERE");
              for (Squigly squig : squiglyArr) 
              {
                squig.setColor(squig.r,squig.g,squig.b,squig.alpha); 
@@ -379,7 +395,7 @@ void SkullyBoi()
                  }                          
               }
                            
-              if(limbtracker2.limbFlailing(KinectPV2.JointType_HandLeft))
+              if(limbtracker2.limbFlailing(KinectPV2.JointType_HandRight))
               {
                // squigly.RotateX(.01);
               for (Squigly squig : squiglyArr) 
@@ -441,7 +457,20 @@ void SkullyBoi()
                 jazz.B3.rate(jazz.p5Rate);//relating note by 5th
                 jazz.file1.amp(jazz.scamp);
                 jazz.file2.amp(jazz.scamp);
-                jazz.file3.amp(jazz.scamp);                 
+                jazz.file3.amp(jazz.scamp);       
+                
+                for (Squigly squig : squiglyArr) 
+                {
+                   squig.changeRotation(); 
+                }      
+                
+                if(offsetShapes) 
+                 {
+                   for (Squigly2 squig : squiglyArr2) 
+                   {
+                     squig.changeRotation();
+                   }          
+                 }
                 //for (Squigly squig : squiglyArr) 
                 //{
                 //   squig.changeOpacity(5); 
@@ -449,7 +478,7 @@ void SkullyBoi()
                 //squigly.RandomColor();               
               }
                     
-              if (limbtracker2.limbActivated(KinectPV2.JointType_FootLeft)) 
+              if (limbtracker2.limbActivated(KinectPV2.JointType_SpineMid)) 
               {            
                 jazz.B4.play();
                 jazz.B4.amp(jazz.bampc);
@@ -460,10 +489,11 @@ void SkullyBoi()
               }                                       
         }
         
-        else if(xSetter<-.52 && zoneSetter[0]==false)
+       if(xSetter<-.52 && zoneSetter[0]==false)
         {       
              //println(4);                  
              zoneSetter[0]=true;
+            // println("HERE2");
              for (Square squar : squareArr) 
              {
                squar.setColor(squar.r,squar.g,squar.b,squar.alpha);
@@ -491,7 +521,7 @@ void SkullyBoi()
                    }
               }
               
-              if(limbtracker3.limbFlailing(KinectPV2.JointType_HandLeft))
+              if(limbtracker3.limbFlailing(KinectPV2.JointType_HandRight))
               {
                   for (Square squar : squareArr) 
                    {
@@ -521,13 +551,20 @@ void SkullyBoi()
                      }
               }
                 
-              if (limbtracker3.limbActivated(KinectPV2.JointType_HandRight)) 
+              if (limbtracker3.limbActivated(KinectPV2.JointType_KneeLeft)) 
               {            
                 jazz.D2.play();
                 for (Square squar : squareArr) 
                  {
                    squar.changeRotation();
-                 }                
+                 } 
+                 if(offsetShapes) 
+                 {
+                     for (Square2 squar : squareArr2) 
+                     {
+                       squar.changeRotation();
+                     }       
+                 }            
               }
               
               if (limbtracker3.limbActivated(KinectPV2.JointType_KneeRight)) 
@@ -546,19 +583,19 @@ void SkullyBoi()
                    }
               }
                     
-              if (limbtracker3.limbActivated(KinectPV2.JointType_KneeLeft)) 
+              if (limbtracker3.limbActivated(KinectPV2.JointType_SpineMid)) 
               {            
                 jazz.D4.play();
                 //square.RandomStroke();
               }                                               
           }
-        }      
-       //drawBody(joints);  
+        }     
+      // drawBody(joints);  
        //text(skeletonArray.size(), 100,100);
        //text(spot,150,150);
     }       
   
-  }
+  
 }
 
 void setNonActive()
@@ -566,7 +603,7 @@ void setNonActive()
   for (int j=0; j<zoneSetter.length; j++)
        {
          zoneSetter[j]=false;
-         println(zoneSetter);
+        // println(zoneSetter);
        }       
          
          if (zoneSetter[2]==false)
@@ -593,62 +630,62 @@ void setNonActive()
           }           
          } 
          
-         //for (int i=0; i<zoneSetter.length; i++) 
-         //{
-         //  if(zoneSetter[i]==true)
-         //  {
-         //    //col3=color(255,127,80,100);
-         //    //col1=color(sliderValue,251,157,100);
-         //    col3=color(col3R,col3G,col3B,50);
-         //    col1=color(col1R,col1G,col1B,50);
-         //    zoneCounter++;
-         //    println("1");
-         //    //println( zoneCounter);
+         for (int i=0; i<zoneSetter.length; i++) 
+         {
+           if(zoneSetter[i]==true)
+           {
+             //col3=color(255,127,80,100);
+             //col1=color(sliderValue,251,157,100);
+             col3=color(col3R,col3G,col3B,50);
+             col1=color(col1R,col1G,col1B,50);
+             zoneCounter++;
+             println("1");
+             //println( zoneCounter);
              
-         //  }
-         //  else 
-         //  {
-         //    zoneCounter=0;
-         //    col1=color(255,251,157,3);
-         //    col3=color(255,127,80,3);
-         //    offsetShapes=false;
-         //  }
-         //}
+           }
+           else 
+           {
+             zoneCounter=0;
+             col1=color(255,251,157,3);
+             col3=color(255,127,80,3);
+             offsetShapes=false;
+           }
+         }
          
-         //if(zoneCounter>=2 && zoneCounter<3)
-         //{
-         //  println("here");
-         //  col3=color(col3R,col3G,col3B,100);
-         //  col1=color(col1R,col1G,col1B,100);
-         //}
+         if(zoneCounter>=2 && zoneCounter<3)
+         {
+           println("here");
+           col3=color(col3R,col3G,col3B,100);
+           col1=color(col1R,col1G,col1B,100);
+         }
          
-         //else if(zoneCounter>=3)
-         //{
-         //  offsetShapes=true;
-         //  float x= getSinScale(160,40,600);
-         //  col3G=int(x);
-         //  float y= getSinScale(300,30,600);
-         //  col1R=int(y);
-         //  //println(col1R);
-         //  col3=color(col3R,col3G,col3B,155);
-         //  col1=color(col1R,col1G,col1B,155);
+         else if(zoneCounter>=3)
+         {
+           offsetShapes=true;
+           float x= getSinScale(160,40,600);
+           col3G=int(x);
+           float y= getSinScale(300,30,600);
+           col1R=int(y);
+           //println(col1R);
+           col3=color(col3R,col3G,col3B,155);
+           col1=color(col1R,col1G,col1B,155);
            
-         //   //println("here");
-         //   for (Triangle2 tri : triangleArr2) 
-         //   {
-         //      tri.display();
-         //   }    
+            //println("here");
+            for (Triangle2 tri : triangleArr2) 
+            {
+               tri.display();
+            }    
             
-         //   for (Squigly2 squig : squiglyArr2) 
-         //   {
-         //      squig.display();
-         //   }    
+            for (Squigly2 squig : squiglyArr2) 
+            {
+               squig.display();
+            }    
             
-         //   for (Square2 squar : squareArr2) 
-         //   {
-         //      squar.display();
-         //   }   
-         //}
+            for (Square2 squar : squareArr2) 
+            {
+               squar.display();
+            }   
+         }
   
 }
 
