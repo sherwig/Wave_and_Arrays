@@ -7,8 +7,9 @@ public class Squigly extends Shape {
    
   public Squigly(float squiglyPoint,float x, float y)
   {
-    super(30,247,37,100,x,y);
+    super(30,247,37,255,x,y);
     shapeMode(CORNER);
+    strokeJoin(ROUND);
     shape = createShape();       
     shape.beginShape(LINES);         
 

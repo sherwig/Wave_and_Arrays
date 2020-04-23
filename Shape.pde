@@ -95,7 +95,7 @@ public class Shape
       {
         offset.set(0,0);
       }     
-      println(offsetAmountNeg);
+      //println(offsetAmountNeg);
     };
     
      void setCenterPosition()

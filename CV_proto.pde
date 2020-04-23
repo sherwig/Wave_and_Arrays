@@ -18,16 +18,23 @@ ArrayList <Squigly2> squiglyArr2;
 ArrayList <Triangle> triangleArr;
 ArrayList <Triangle2> triangleArr2;
 ArrayList <Background_Lines> backgroundArr;
-color col1=color(255,251,157,3);
-//color col2=color(221,160,221);
-color col2=color(0,0,255);
-color col3=color(255,127,80,3);
-int col3R=255;
-int col3B=251;
-int col3G=157;
-int col1R=213;
-int col1B=23;
+color col1=color(255,251,157,50);
+color col3=color(255,127,80,50);
+int col1R=255;
+int col1B=251;
 int col1G=157;
+int col3R=213;
+int col3B=23;
+int col3G=157;
+int col1R2=226;
+int col1B2=38;
+int col1G2=104;
+int col3R2=255;
+int col3B2=255;
+int col3G2=105;
+//int col3R=255;
+//int col3B=127;
+//int col3G=80;
 Gradients gradient;
 float quad1,quad2,quad3;
 int zoneCounter=0;
@@ -36,18 +43,149 @@ float offsetAmountNeg=-200;
 float offsetAmountPos=200;
 float maxOffset=3;
 float minOffset=1;
+PImage[] dancer = new PImage[60];
+int a = int(512*.5), b = int(683*.5);
+
 
 void setup() {
     size(1920, 1080, P3D);
     colorMode(RGB);
     kinect = new KinectPV2(this);
-  
+    frameRate(60);
     //kinect.enableSkeletonColorMap(true);
     //kinect.enableColorImg(true);
     kinect.enableSkeleton3DMap(true);
     kinect.enableDepthMaskImg(true);
     //kinect.enableSkeletonDepthMap(true);
   
+    //myMovie = new Movie(this, "Dance5.mp4");
+    //myMovie.loop();
+    //myMovie2 = new Movie(this, "Dance5.mp4");
+    //myMovie2.loop();
+    //myMovie3 = new Movie(this, "Dance5.mp4");
+    //myMovie3.loop();
+    smooth();
+    dancer[0] = loadImage( "dancer0.gif" );
+    dancer[0].resize(a,b);
+    dancer[1] = loadImage( "dancer0.gif" );
+    dancer[1].resize(a,b);
+    dancer[2] = loadImage( "dancer0.gif" );
+    dancer[2].resize(a,b);
+    dancer[3] = loadImage( "dancer1.gif" );
+    dancer[3].resize(a,b);
+    dancer[4] = loadImage( "dancer1.gif" );
+    dancer[4].resize(a,b);
+    dancer[5] = loadImage( "dancer1.gif" );
+    dancer[5].resize(a,b);
+    dancer[6] = loadImage( "dancer2.gif" );
+    dancer[6].resize(a,b);
+    dancer[7] = loadImage( "dancer2.gif" );
+    dancer[7].resize(a,b);
+    dancer[8] = loadImage( "dancer2.gif" );
+    dancer[8].resize(a,b);
+    dancer[9] = loadImage( "dancer3.gif" );
+    dancer[9].resize(a,b);
+    dancer[10] = loadImage( "dancer3.gif" );
+    dancer[10].resize(a,b);
+    dancer[11] = loadImage( "dancer3.gif" );
+    dancer[11].resize(a,b);
+    dancer[12] = loadImage( "dancer4.gif" );
+    dancer[12].resize(a,b);
+    dancer[13] = loadImage( "dancer4.gif" );
+    dancer[13].resize(a,b);
+    dancer[14] = loadImage( "dancer4.gif" );
+    dancer[14].resize(a,b);
+    dancer[15] = loadImage( "dancer5.gif" );
+    dancer[15].resize(a,b);
+    dancer[16] = loadImage( "dancer5.gif" );
+    dancer[16].resize(a,b);
+    dancer[17] = loadImage( "dancer5.gif" );
+    dancer[17].resize(a,b);
+    dancer[18] = loadImage( "dancer6.gif" );
+    dancer[18].resize(a,b);
+    dancer[19] = loadImage( "dancer6.gif" );
+    dancer[19].resize(a,b);
+    dancer[20] = loadImage( "dancer6.gif" );
+    dancer[20].resize(a,b);
+    dancer[21] = loadImage( "dancer7.gif" );
+    dancer[21].resize(a,b);
+    dancer[22] = loadImage( "dancer7.gif" );
+    dancer[22].resize(a,b);
+    dancer[23] = loadImage( "dancer7.gif" );
+    dancer[23].resize(a,b);
+    dancer[24] = loadImage( "dancer8.gif" );
+    dancer[24].resize(a,b);
+    dancer[25] = loadImage( "dancer8.gif" );
+    dancer[25].resize(a,b);
+    dancer[26] = loadImage( "dancer8.gif" );
+    dancer[26].resize(a,b);
+    dancer[27] = loadImage( "dancer9.gif" );
+    dancer[27].resize(a,b);
+    dancer[28] = loadImage( "dancer9.gif" );
+    dancer[28].resize(a,b);
+    dancer[29] = loadImage( "dancer9.gif" );
+    dancer[29].resize(a,b);
+    dancer[30] = loadImage( "dancer10.gif" );
+    dancer[30].resize(a,b);
+    dancer[31] = loadImage( "dancer10.gif" );
+    dancer[31].resize(a,b);
+    dancer[32] = loadImage( "dancer10.gif" );
+    dancer[32].resize(a,b);
+    dancer[33] = loadImage( "dancer11.gif" );
+    dancer[33].resize(a,b);
+    dancer[34] = loadImage( "dancer11.gif" );
+    dancer[34].resize(a,b);
+    dancer[35] = loadImage( "dancer11.gif" );
+    dancer[35].resize(a,b);
+    dancer[36] = loadImage( "dancer12.gif" );
+    dancer[36].resize(a,b);
+    dancer[37] = loadImage( "dancer12.gif" );
+    dancer[37].resize(a,b);
+    dancer[38] = loadImage( "dancer12.gif" );
+    dancer[38].resize(a,b);
+    dancer[39] = loadImage( "dancer13.gif" );
+    dancer[39].resize(a,b);
+    dancer[40] = loadImage( "dancer13.gif" );
+    dancer[40].resize(a,b);
+    dancer[41] = loadImage( "dancer13.gif" );
+    dancer[41].resize(a,b);
+    dancer[42] = loadImage( "dancer14.gif" );
+    dancer[42].resize(a,b);
+    dancer[43] = loadImage( "dancer14.gif" );
+    dancer[43].resize(a,b);
+    dancer[44] = loadImage( "dancer14.gif" );
+    dancer[44].resize(a,b);
+    dancer[45] = loadImage( "dancer15.gif" );
+    dancer[45].resize(a,b);
+    dancer[46] = loadImage( "dancer15.gif" );
+    dancer[46].resize(a,b);
+    dancer[47] = loadImage( "dancer15.gif" );
+    dancer[47].resize(a,b);
+    dancer[48] = loadImage( "dancer16.gif" );
+    dancer[48].resize(a,b);
+    dancer[49] = loadImage( "dancer16.gif" );
+    dancer[49].resize(a,b);
+    dancer[50] = loadImage( "dancer16.gif" );
+    dancer[50].resize(a,b);
+    dancer[51] = loadImage( "dancer17.gif" );
+    dancer[51].resize(a,b);
+    dancer[52] = loadImage( "dancer17.gif" );
+    dancer[52].resize(a,b);
+    dancer[53] = loadImage( "dancer17.gif" );
+    dancer[53].resize(a,b);
+    dancer[54] = loadImage( "dancer18.gif" );
+    dancer[54].resize(a,b);
+    dancer[55] = loadImage( "dancer18.gif" );
+    dancer[55].resize(a,b);
+    dancer[56] = loadImage( "dancer18.gif" );
+    dancer[56].resize(a,b);
+    dancer[57] = loadImage( "dancer19.gif" );
+    dancer[57].resize(a,b);
+    dancer[58] = loadImage( "dancer19.gif" );
+    dancer[58].resize(a,b);
+    dancer[59] = loadImage( "dancer19.gif" );
+    dancer[59].resize(a,b);
+    
     kinect.init();
       
     vert1=width/3; 
@@ -65,9 +203,9 @@ void setup() {
  
     //Jazz loops
     jazz=new Jazz();
-    //jazz.file1.loop();
-    //jazz.file2.loop();
-    //jazz.file3.loop();
+    jazz.file1.loop();
+    jazz.file2.loop();
+    jazz.file3.loop();
   
     //Different way to fill and draw shapes from classes
     squareArr=new ArrayList<Square>();
@@ -77,9 +215,7 @@ void setup() {
     squiglyArr2=new ArrayList<Squigly2>();
     squareArr2=new ArrayList<Square2>();
     backgroundArr=new ArrayList<Background_Lines>();
-
-
-      
+   
     squareArr.add(new Square(0,200,200));
     squareArr2.add(new Square2(0,180,180));
     squareArr.add(new Square(0,200,700));
@@ -152,19 +288,11 @@ void setup() {
     backgroundArr.add(new Background_Lines(0,-15,1200,430));
     backgroundArr.add(new Background_Lines(0,-15,1290,240));
     backgroundArr.add(new Background_Lines(0,-15,1290,40));
-    
-    
-    
+  
 }
 
 void draw() {
-  
-  //Image being grabbed from kinect
-  //image(kinect.getColorImage(), 0, 0, width, height);
-  //pushMatrix();
-  //scale(3.8);
-  //image(kinect.getDepthMaskImage(), 0, 0);
-  //popMatrix();
+
 
   //lines in thirds for debugging
   //line(vert1,height,vert1,0);
@@ -186,6 +314,7 @@ void draw() {
   
   //Radial gradient
   gradient.radial(width*3,height*3,col1,col3,100);
+
 
   pushMatrix();
   pushStyle();
@@ -216,7 +345,24 @@ void draw() {
   {
      back.display();
   } 
+
+    if( zoneSetter[0]==false)
+    {
+      image( dancer[frameCount%60], 300, height-300);
+    }
+    
+    if( zoneSetter[1]==false)
+    {
+     image( dancer[frameCount%60], 900,height-300 );
   
+    }
+    
+    if( zoneSetter[2]==false)
+    {
+      image( dancer[frameCount%60], 1500, height-300);
+  
+    }
+
   jazz.file1.amp(0.1);
   jazz.file3.amp(0.1);
   jazz.file2.amp(0.2);
@@ -226,31 +372,76 @@ void draw() {
   jazz.B3.amp(jazz.bamp);
   jazz.B4.amp(jazz.bamp);
   jazz.B5.amp(jazz.bamp);
-    //fill(0, 0, 0);
-    //text(frameRate, 50, 50);
+     
 }
 
 void SkullyBoi()
 {
-   setNonActive();  
+   setNonActive(); 
    ArrayList<KSkeleton> skeletonArray =  kinect.getSkeleton3d();   
    //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();  
   //individual JOINTS
+   if(skeletonArray.size()==0) 
+    {
+     col1=color(255,251,157,50);
+     col3=color(255,127,80,50);
+     offsetShapes=false;
+    }
   for (int i = 0; i < skeletonArray.size(); i++) {
-    KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
+    KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);   
     if (skeleton.isTracked()) {
       KJoint[] joints = skeleton.getJoints();
       float xSetter=getJointX(joints,KinectPV2.JointType_SpineMid);
     //  println(xSetter);    
-       
-       col3=color(255,127,80,50);
-       col1=color(255,251,157,50);
-       //println(zoneSetter);       
+
+       if(skeletonArray.size()==1) 
+           {
+             col1=color(col1R,col1G,col1B,50);
+             col3=color(col3R,col3G,col3B,50);
+             offsetShapes=false;
+           }
+    
+        else if(skeletonArray.size()==2)
+         {
+           //println("here");
+           col1=color(col1R2,col1G2,col1B2,75);
+           col3=color(col3R2,col3G2,col3B2,75);
+           offsetShapes=false;
+         }
+         
+         else if(skeletonArray.size()==3)
+         {
+           offsetShapes=true;
+           float x= getSinScale(160,40,600);
+           col3G=int(x);
+           float y= getSinScale(300,30,600);
+           col1R=int(y);
+           //println(col1R);
+           col3=color(col3R2,col3G2,col3B2,150); //<>//
+           col1=color(col1R2,col1G2,col1B2,150);
+           
+            println("here");
+            for (Triangle2 tri : triangleArr2) 
+            {
+               tri.display();
+            }    
+            
+            for (Squigly2 squig : squiglyArr2) 
+            {
+               squig.display();
+            }    
+            
+            for (Square2 squar : squareArr2) 
+            {
+               squar.display();
+            }   
+         }
+
                  
         //Checking what third the skeloten is in
         if(xSetter>.24 && zoneSetter[2]==false)
-        {                            
-             zoneSetter[2]=true;    
+        {             
+             zoneSetter[2]=true; 
              for (Triangle tri : triangleArr) 
              {
                 tri.setColor(tri.r,tri.g,tri.b,tri.alpha);
@@ -282,13 +473,14 @@ void SkullyBoi()
               {
                 for (Triangle tri : triangleArr) 
                 {
+                 println("TrueScale");
                  tri.changeScale(true,maxOffset,minOffset);
                 }   
                 if(offsetShapes) 
                 {
-                   for (Triangle2 tri : triangleArr2) 
+                   for (Triangle2 tri2 : triangleArr2) 
                    {
-                     tri.changeScale(true,maxOffset,minOffset);
+                     tri2.changeScale(true,maxOffset,minOffset);
                    }          
                 }
               } 
@@ -297,14 +489,16 @@ void SkullyBoi()
               {
                 for (Triangle tri : triangleArr) 
                 {
+                  println("FalseScale");
+
                   tri.changeScale(false,maxOffset,minOffset);
                 }
                 
                 if(offsetShapes) 
                 {
-                   for (Triangle2 tri : triangleArr2) 
+                   for (Triangle2 tri2 : triangleArr2) 
                    {
-                     tri.changeScale(false,maxOffset,minOffset);
+                     tri2.changeScale(false,maxOffset,minOffset);
                    }          
                 }
               }
@@ -342,26 +536,19 @@ void SkullyBoi()
                    tri.changeRotation();
                  } 
                }
-               }    
+              }    
               
               if (limbtracker.limbActivated(KinectPV2.JointType_SpineMid)) 
               {      
-                //for (Triangle tri : triangleArr) 
-                //{
-                //  tri.changeOpacity(5);
-                //}
-                  jazz.P3.play();
-             
+                  jazz.P3.play();           
               }
-                    
-                   
+                  
            }       
         }
        
        if(xSetter<.24 && xSetter>-.52 && zoneSetter[1]==false)
         {          
-             zoneSetter[1]=true;
-            // println("HERE");
+             zoneSetter[1]=true; 
              for (Squigly squig : squiglyArr) 
              {
                squig.setColor(squig.r,squig.g,squig.b,squig.alpha); 
@@ -470,12 +657,7 @@ void SkullyBoi()
                    {
                      squig.changeRotation();
                    }          
-                 }
-                //for (Squigly squig : squiglyArr) 
-                //{
-                //   squig.changeOpacity(5); 
-                //}   
-                //squigly.RandomColor();               
+                 }             
               }
                     
               if (limbtracker2.limbActivated(KinectPV2.JointType_SpineMid)) 
@@ -490,10 +672,9 @@ void SkullyBoi()
         }
         
        if(xSetter<-.52 && zoneSetter[0]==false)
-        {       
+        {     
              //println(4);                  
              zoneSetter[0]=true;
-            // println("HERE2");
              for (Square squar : squareArr) 
              {
                squar.setColor(squar.r,squar.g,squar.b,squar.alpha);
@@ -628,65 +809,7 @@ void setNonActive()
           {
            squar.setColor(128,128,128,150);
           }           
-         } 
-         
-         for (int i=0; i<zoneSetter.length; i++) 
-         {
-           if(zoneSetter[i]==true)
-           {
-             //col3=color(255,127,80,100);
-             //col1=color(sliderValue,251,157,100);
-             col3=color(col3R,col3G,col3B,50);
-             col1=color(col1R,col1G,col1B,50);
-             zoneCounter++;
-             println("1");
-             //println( zoneCounter);
-             
-           }
-           else 
-           {
-             zoneCounter=0;
-             col1=color(255,251,157,3);
-             col3=color(255,127,80,3);
-             offsetShapes=false;
-           }
-         }
-         
-         if(zoneCounter>=2 && zoneCounter<3)
-         {
-           println("here");
-           col3=color(col3R,col3G,col3B,100);
-           col1=color(col1R,col1G,col1B,100);
-         }
-         
-         else if(zoneCounter>=3)
-         {
-           offsetShapes=true;
-           float x= getSinScale(160,40,600);
-           col3G=int(x);
-           float y= getSinScale(300,30,600);
-           col1R=int(y);
-           //println(col1R);
-           col3=color(col3R,col3G,col3B,155);
-           col1=color(col1R,col1G,col1B,155);
-           
-            //println("here");
-            for (Triangle2 tri : triangleArr2) 
-            {
-               tri.display();
-            }    
-            
-            for (Squigly2 squig : squiglyArr2) 
-            {
-               squig.display();
-            }    
-            
-            for (Square2 squar : squareArr2) 
-            {
-               squar.display();
-            }   
-         }
-  
+         }       
 }
 
 
@@ -696,94 +819,6 @@ float getSinScale(float high, float low, float period)
      float x = (amplitude-low)+(amplitude-high) * cos(TWO_PI * frameCount / period);
      x=abs(x);
      return x;
-}
-
-void drawSquiglyBoi(KJoint[] joints)
-{  
-  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderLeft);
-  drawBone(joints,  KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_HipRight);
-  drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_KneeLeft);
-  drawBone(joints,KinectPV2.JointType_KneeLeft,KinectPV2.JointType_FootRight );
-  
-  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderRight);
-  drawBone(joints,  KinectPV2.JointType_ShoulderRight,KinectPV2.JointType_HipLeft);
-  drawBone(joints, KinectPV2.JointType_HipLeft,KinectPV2.JointType_KneeRight);
-  drawBone(joints,KinectPV2.JointType_KneeRight,KinectPV2.JointType_FootLeft);
-  
-  drawBone(joints, KinectPV2.JointType_ShoulderRight, KinectPV2.JointType_ElbowLeft); 
-  drawBone(joints, KinectPV2.JointType_ElbowLeft, KinectPV2.JointType_WristLeft);
-  drawBone(joints, KinectPV2.JointType_WristLeft, KinectPV2.JointType_HandLeft);
-  
-  drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ElbowRight); 
-  drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_WristRight);
-  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_HandRight);  
-}
-
-void drawTriangleBoi(KJoint[] joints)
-{
-  //drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootRight );
-  //drawBone(joints, KinectPV2.JointType_Head,KinectPV2.JointType_FootLeft );
-  
-  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderLeft);
-  drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_ShoulderRight);
-  drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ShoulderRight);
-  
-  drawBone(joints, KinectPV2.JointType_ShoulderRight, KinectPV2.JointType_ElbowRight);
-  drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_WristRight);
-  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_ShoulderRight);
-  
-  drawBone(joints, KinectPV2.JointType_WristRight, KinectPV2.JointType_HandRight);
-  drawBone(joints, KinectPV2.JointType_HandRight, KinectPV2.JointType_ThumbRight);
-  drawBone(joints, KinectPV2.JointType_ThumbRight, KinectPV2.JointType_HandTipRight);
-  
-  
-  drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ElbowLeft);
-  drawBone(joints, KinectPV2.JointType_ElbowLeft, KinectPV2.JointType_WristLeft);
-  drawBone(joints, KinectPV2.JointType_WristLeft, KinectPV2.JointType_ShoulderLeft);
-  
-  drawBone(joints, KinectPV2.JointType_WristLeft, KinectPV2.JointType_HandLeft);
-  drawBone(joints, KinectPV2.JointType_HandLeft, KinectPV2.JointType_ThumbLeft);
-  drawBone(joints, KinectPV2.JointType_ThumbLeft, KinectPV2.JointType_HandTipLeft);
-  
-  drawBone(joints, KinectPV2.JointType_Neck, KinectPV2.JointType_HipRight);
-  drawBone(joints, KinectPV2.JointType_Neck, KinectPV2.JointType_HipLeft);
-  drawBone(joints, KinectPV2.JointType_HipRight, KinectPV2.JointType_HipLeft);
-  
-  
-  drawBone(joints, KinectPV2.JointType_HipRight, KinectPV2.JointType_KneeRight);
-  drawBone(joints, KinectPV2.JointType_KneeRight, KinectPV2.JointType_AnkleRight);
-  drawBone(joints, KinectPV2.JointType_AnkleRight, KinectPV2.JointType_FootRight);
-  drawBone(joints, KinectPV2.JointType_FootRight, KinectPV2.JointType_KneeRight);
-
-  drawBone(joints, KinectPV2.JointType_HipLeft, KinectPV2.JointType_KneeLeft);
-  drawBone(joints, KinectPV2.JointType_KneeLeft, KinectPV2.JointType_AnkleLeft);
-  drawBone(joints, KinectPV2.JointType_AnkleLeft, KinectPV2.JointType_FootLeft);
-  drawBone(joints, KinectPV2.JointType_FootLeft, KinectPV2.JointType_KneeLeft);
-}
-
-void drawSquareBoi(KJoint[] joints)
-{
-  drawBone(joints, KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_ShoulderRight);
-  drawBone(joints, KinectPV2.JointType_ShoulderLeft,KinectPV2.JointType_HipLeft);
-  drawBone(joints, KinectPV2.JointType_ShoulderRight,KinectPV2.JointType_HipRight);
-  drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_HipLeft );
-  
-  drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_SpineMid);
-  drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_ElbowLeft);
-  drawBone(joints, KinectPV2.JointType_ElbowLeft, KinectPV2.JointType_HandLeft);
-  drawBone(joints, KinectPV2.JointType_HandLeft, KinectPV2.JointType_SpineMid);
-
-  drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_ElbowRight);
-  drawBone(joints, KinectPV2.JointType_ElbowRight, KinectPV2.JointType_HandRight);
-  drawBone(joints, KinectPV2.JointType_HandRight, KinectPV2.JointType_SpineMid);
-
-  drawBone(joints, KinectPV2.JointType_HipRight,KinectPV2.JointType_KneeRight);
-  drawBone(joints, KinectPV2.JointType_HipLeft,KinectPV2.JointType_KneeLeft);
-  drawBone(joints, KinectPV2.JointType_KneeRight,KinectPV2.JointType_KneeLeft);
-
-  drawBone(joints, KinectPV2.JointType_KneeRight,KinectPV2.JointType_AnkleRight);
-  drawBone(joints, KinectPV2.JointType_KneeLeft,KinectPV2.JointType_AnkleLeft);
-  drawBone(joints, KinectPV2.JointType_AnkleLeft,KinectPV2.JointType_AnkleRight);
 }
 
 //DRAW BODY
