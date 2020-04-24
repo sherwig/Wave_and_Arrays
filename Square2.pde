@@ -8,11 +8,11 @@ public class Square2 extends Shape{
   {              
     super(255,0,255,100,x,y);
     shapeMode(CORNER);
-    shape=createShape(RECT,squarePoint,squarePoint, squarePoint+150, squarePoint+150);    
+    shape=createShape(RECT,squarePoint,squarePoint, squarePoint+100, squarePoint+100);    
     shape.setFill(255);
     shape.setStroke(color(r,g,b,alpha));
     shape.setStrokeWeight(2);  
-    setCenterPosition();
+    //setCenterPosition();
   }
   
 }

@@ -13,13 +13,13 @@ public class Triangle2 extends Shape{
     shape.noFill();
   
     shape.vertex(trianglePoint, trianglePoint);
-    shape.vertex(trianglePoint-75, trianglePoint-75);
-    shape.vertex(trianglePoint, trianglePoint-150);
+    shape.vertex(trianglePoint-65, trianglePoint-65);
+    shape.vertex(trianglePoint, trianglePoint-130);
     shape.endShape(CLOSE); 
         
     shape.setStroke(color(r,g,b,alpha));
     shape.setStrokeWeight(2);
-    setCenterPosition();
+    //setCenterPosition();
     //shape.setFill(color(r,g,b,alpha));  
   }; 
 }

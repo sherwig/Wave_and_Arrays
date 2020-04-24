@@ -38,7 +38,7 @@ int col3G2=105;
 Gradients gradient;
 float quad1,quad2,quad3;
 int zoneCounter=0;
-boolean offsetShapes=false;
+boolean offsetShapes;
 float offsetAmountNeg=-200;
 float offsetAmountPos=200;
 float maxOffset=3;
@@ -339,7 +339,7 @@ void draw() {
   for (Squigly squig : squiglyArr) 
   {
      squig.display();
-  } 
+  }   
   
  for (Background_Lines back : backgroundArr) 
   {
@@ -387,6 +387,7 @@ void SkullyBoi()
      col3=color(255,127,80,50);
      offsetShapes=false;
     }
+
   for (int i = 0; i < skeletonArray.size(); i++) {
     KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);   
     if (skeleton.isTracked()) {
@@ -412,29 +413,15 @@ void SkullyBoi()
          else if(skeletonArray.size()==3)
          {
            offsetShapes=true;
-           float x= getSinScale(160,40,600);
+           float x= getSinScale(160,40,400);
            col3G=int(x);
-           float y= getSinScale(300,30,600);
+           float y= getSinScale(300,30,400);
            col1R=int(y);
-           //println(col1R);
+           println(col1R);
            col3=color(col3R2,col3G2,col3B2,150); //<>//
            col1=color(col1R2,col1G2,col1B2,150);
-           
-            println("here");
-            for (Triangle2 tri : triangleArr2) 
-            {
-               tri.display();
-            }    
-            
-            for (Squigly2 squig : squiglyArr2) 
-            {
-               squig.display();
-            }    
-            
-            for (Square2 squar : squareArr2) 
-            {
-               squar.display();
-            }   
+           println("yes");
+
          }
 
                  
@@ -445,14 +432,20 @@ void SkullyBoi()
              for (Triangle tri : triangleArr) 
              {
                 tri.setColor(tri.r,tri.g,tri.b,tri.alpha);
-             }                  
+             }     
+              if(skeletonArray.size()==3) 
+              {
+                 for (Triangle2 tri2 : triangleArr2) 
+                 {
+                    tri2.display();
+                 }    
+              }
              //drawTriangleBoi(joints);
              limbtracker.update2(joints);
              //filling second PVector with the first PVectors values
              limbtracker.fillFollowing(KinectPV2.JointType_Count);       
              float[] comparison=limbtracker.distance(KinectPV2.JointType_Count);
              limbtracker.fillBuffer(comparison);
-             //println("HERE");
 
               if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft)) 
               {              
@@ -461,22 +454,24 @@ void SkullyBoi()
                  {
                     tri.changePosition(offsetAmountNeg,offsetAmountPos);
                  } 
-                 if(offsetShapes) 
+               // println(offsetShapes);
+
+                 if(skeletonArray.size()==3) 
                  {
+                   println("Here1");
                    for (Triangle2 tri : triangleArr2) 
                    {
                      tri.changePosition(offsetAmountNeg,offsetAmountPos);
                    }          
-              }
-              
+                 }
+              }             
               if(limbtracker.limbFlailing(KinectPV2.JointType_HandRight))
               {
                 for (Triangle tri : triangleArr) 
                 {
-                 println("TrueScale");
                  tri.changeScale(true,maxOffset,minOffset);
                 }   
-                if(offsetShapes) 
+                if(skeletonArray.size()==3) 
                 {
                    for (Triangle2 tri2 : triangleArr2) 
                    {
@@ -489,12 +484,10 @@ void SkullyBoi()
               {
                 for (Triangle tri : triangleArr) 
                 {
-                  println("FalseScale");
-
                   tri.changeScale(false,maxOffset,minOffset);
                 }
                 
-                if(offsetShapes) 
+                if(skeletonArray.size()==3) 
                 {
                    for (Triangle2 tri2 : triangleArr2) 
                    {
@@ -511,14 +504,13 @@ void SkullyBoi()
                   tri.changeRotation();
                 }
                
-               if(offsetShapes) 
-               {
-                 for (Triangle2 tri : triangleArr2) 
-                 {
+                if(skeletonArray.size()==3) 
+                {
+                  for (Triangle2 tri : triangleArr2) 
+                  {
                    tri.changeRotation();
-                 } 
-               }
-                              
+                  } 
+                }                             
               }
              
               if (limbtracker.limbActivated(KinectPV2.JointType_KneeLeft)) 
@@ -529,7 +521,7 @@ void SkullyBoi()
                   tri.changeRotation();
                 }
                
-               if(offsetShapes) 
+               if(skeletonArray.size()==3) 
                {
                  for (Triangle2 tri : triangleArr2) 
                  {
@@ -543,7 +535,7 @@ void SkullyBoi()
                   jazz.P3.play();           
               }
                   
-           }       
+                  
         }
        
        if(xSetter<.24 && xSetter>-.52 && zoneSetter[1]==false)
@@ -552,7 +544,14 @@ void SkullyBoi()
              for (Squigly squig : squiglyArr) 
              {
                squig.setColor(squig.r,squig.g,squig.b,squig.alpha); 
-             }           
+             }  
+            if(skeletonArray.size()==3) 
+            {
+              for (Squigly2 squig2 : squiglyArr2) 
+              {
+                 squig2.display();
+              }    
+            }
              
              limbtracker2.update2(joints);
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);
@@ -573,8 +572,9 @@ void SkullyBoi()
                  {
                    squig.changePosition(offsetAmountNeg,offsetAmountPos);
                  } 
-                 if(offsetShapes) 
+                 if(skeletonArray.size()==3) 
                  {
+                   println("Here2");
                    for (Squigly2 squig2 : squiglyArr2) 
                    {
                      squig2.changePosition(offsetAmountNeg,offsetAmountPos);
@@ -589,7 +589,7 @@ void SkullyBoi()
                {
                  squig.changeScale(true,maxOffset,minOffset);
                } 
-                 if(offsetShapes) 
+                 if(skeletonArray.size()==3) 
                  {
                    for (Squigly2 squig2 : squiglyArr2) 
                    {
@@ -604,7 +604,7 @@ void SkullyBoi()
                {
                  squig.changeScale(false,maxOffset,minOffset);
                } 
-                 if(offsetShapes) 
+                 if(skeletonArray.size()==3) 
                  {
                    for (Squigly2 squig2 : squiglyArr2) 
                    {
@@ -628,7 +628,7 @@ void SkullyBoi()
                    squig.changeRotation(); 
                 }      
                 
-                if(offsetShapes) 
+                if(skeletonArray.size()==3) 
                  {
                    for (Squigly2 squig : squiglyArr2) 
                    {
@@ -651,7 +651,7 @@ void SkullyBoi()
                    squig.changeRotation(); 
                 }      
                 
-                if(offsetShapes) 
+                if(skeletonArray.size()==3) 
                  {
                    for (Squigly2 squig : squiglyArr2) 
                    {
@@ -678,9 +678,15 @@ void SkullyBoi()
              for (Square squar : squareArr) 
              {
                squar.setColor(squar.r,squar.g,squar.b,squar.alpha);
-             }             
-             //drawSquareBoi(joints);
-                          
+             }       
+             
+            if(skeletonArray.size()==3) 
+            {
+              for (Square2 squar2 : squareArr2) 
+              {
+                 squar2.display();
+              }     
+            }                          
              limbtracker3.update2(joints);   
              limbtracker2.fillFollowing(KinectPV2.JointType_Count);       
              float[] comparison3=limbtracker3.distance(KinectPV2.JointType_Count);
@@ -693,8 +699,9 @@ void SkullyBoi()
                  {
                    squar.changePosition(offsetAmountNeg,offsetAmountPos);
                  }  
-                  if(offsetShapes) 
+                  if(skeletonArray.size()==3) 
                    {
+                     println("Here3");
                      for (Square2 squar : squareArr2) 
                      {
                        squar.changePosition(offsetAmountNeg,offsetAmountPos);
@@ -708,7 +715,7 @@ void SkullyBoi()
                    {
                      squar.changeScale(true,maxOffset,minOffset);
                    } 
-                    if(offsetShapes) 
+                    if(skeletonArray.size()==3) 
                      {
                        for (Square2 squar : squareArr2) 
                        {
@@ -723,7 +730,7 @@ void SkullyBoi()
                    {
                      squar.changeScale(false,maxOffset,minOffset);
                    } 
-                    if(offsetShapes) 
+                    if(skeletonArray.size()==3) 
                      {
                        for (Square2 squar : squareArr2) 
                        {
@@ -739,7 +746,7 @@ void SkullyBoi()
                  {
                    squar.changeRotation();
                  } 
-                 if(offsetShapes) 
+                 if(skeletonArray.size()==3) 
                  {
                      for (Square2 squar : squareArr2) 
                      {
@@ -755,7 +762,7 @@ void SkullyBoi()
                  {
                    squar.changeRotation();
                  } 
-                   if(offsetShapes) 
+                   if(skeletonArray.size()==3) 
                    {
                      for (Square2 squar : squareArr2) 
                      {
@@ -792,6 +799,7 @@ void setNonActive()
           for (Triangle tri : triangleArr) 
           {
              tri.setColor(128,128,128,150);
+             tri.changeScale(false,maxOffset,minOffset);
           }            
          }         
         
@@ -799,7 +807,8 @@ void setNonActive()
          {           
           for (Squigly squig : squiglyArr) 
           {
-             squig.setColor(128,128,128,150); 
+             squig.setColor(128,128,128,150);
+             squig.changeScale(false,maxOffset,minOffset);
           }       
          }  
            
@@ -808,6 +817,8 @@ void setNonActive()
           for (Square squar : squareArr) 
           {
            squar.setColor(128,128,128,150);
+           squar.changeScale(false,maxOffset,minOffset);
+
           }           
          }       
 }

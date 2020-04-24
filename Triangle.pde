@@ -11,11 +11,10 @@ public class Triangle extends Shape{
     shapeMode(CORNER);
     shape=createShape();
     shape.beginShape(TRIANGLES);
-    //triangle.noFill();
-  
+    
     shape.vertex(trianglePoint, trianglePoint);
-    shape.vertex(trianglePoint-75, trianglePoint-75);
-    shape.vertex(trianglePoint, trianglePoint-150);
+    shape.vertex(trianglePoint-65, trianglePoint-65);
+    shape.vertex(trianglePoint, trianglePoint-130);
     shape.endShape(CLOSE); 
     
     shape.setStroke(color(r,g,b,alpha));

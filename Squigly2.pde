@@ -25,7 +25,7 @@ public class Squigly2 extends Shape {
     
     shape.setStroke(color(r,g,b,alpha));
     shape.setStrokeWeight(4);
-    setCenterPosition();
+    //setCenterPosition();
   
 
 };
