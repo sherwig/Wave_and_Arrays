@@ -316,24 +316,24 @@ void draw()
     pushStyle();
     stroke(0, 0, 255);
     translate(width / 2, height / 2, 0);
-    scale(zVal);
-    rotateX(rotX);
+    //scale(zVal);
+    //rotateX(rotX);
     SkullyBoi();
     popStyle();
     popMatrix();
-    for (Square2 squar2: squareArr2)
-    {
-        squar2.display();
-    }
+    //for (Square2 squar2: squareArr2)
+    //{
+    //    squar2.display();
+    //}
 
-    for (Triangle2 tri2: triangleArr2)
-    {
-        tri2.display();
-    }
-    for (Squigly2 squig2: squiglyArr2)
-    {
-        squig2.display();
-    }
+    //for (Triangle2 tri2: triangleArr2)
+    //{
+    //    tri2.display();
+    //}
+    //for (Squigly2 squig2: squiglyArr2)
+    //{
+    //    squig2.display();
+    //}
 
     for (Square squar: squareArr)
     {
@@ -445,7 +445,7 @@ void SkullyBoi()
                 if (skeletonArray.size() == 3)
                 {
                     for (Triangle2 tri2: triangleArr2)
-                    {
+                    {                     
                         tri2.display();
                         tri2.setBackgroundColor(tri2.r, tri2.g, tri2.b, tri2.alpha);
                     }
