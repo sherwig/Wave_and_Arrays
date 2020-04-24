@@ -6,6 +6,7 @@ Limbtracker limbtracker;
 Limbtracker limbtracker2;
 Limbtracker limbtracker3;
 Boolean[] zoneSetter = new Boolean[3];
+KSkeleton[] zoneSkully = new KSkeleton[3];
 KinectPV2 kinect;
 Jazz jazz;
 float threshold = .5;
@@ -45,7 +46,7 @@ float maxOffset = 3;
 float minOffset = 1;
 PImage[] dancer = new PImage[60];
 int a = int(512 * .5), b = int(683 * .5);
-
+int numSkully=0;
 
 void setup()
 {
@@ -312,15 +313,16 @@ void draw()
     gradient.radial(width * 3, height * 3, col1, col3, 100);
 
 
-    pushMatrix();
-    pushStyle();
-    stroke(0, 0, 255);
-    translate(width / 2, height / 2, 0);
+    //pushMatrix();
+    //pushStyle();
+    //stroke(0, 0, 255);
+    //translate(width / 2, height / 2, 0);
     //scale(zVal);
     //rotateX(rotX);
     SkullyBoi();
-    popStyle();
-    popMatrix();
+    //popStyle();
+    //popMatrix();
+    
     //for (Square2 squar2: squareArr2)
     //{
     //    squar2.display();
@@ -388,39 +390,42 @@ void draw()
 void SkullyBoi()
 {
     setNonActive();
-    ArrayList < KSkeleton > skeletonArray = kinect.getSkeleton3d();
+    findZoneSkullies();
+    //ArrayList < KSkeleton > skeletonArray = kinect.getSkeleton3d();
     //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();  
     //individual JOINTS
-    if (skeletonArray.size() == 0)
+    if (numSkully == 0)
     {
         col1 = color(255, 251, 157, 50);
         col3 = color(255, 127, 80, 50);
         offsetShapes = false;
     }
 
-    for (int i = 0; i < skeletonArray.size(); i++)
+    for (int i = 0; i < zoneSkully.length; i++)
     {
-        KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
-        if (skeleton.isTracked())
+    //{
+    //    KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
+    
+        if (zoneSkully[i]!=null)
         {
-            KJoint[] joints = skeleton.getJoints();
-            float xSetter = getJointX(joints, KinectPV2.JointType_SpineMid);
+            KJoint[] joints = zoneSkully[i].getJoints();
+    //        float xSetter = getJointX(joints, KinectPV2.JointType_SpineMid);
             //  println(xSetter);    
 
-            if (skeletonArray.size() == 1)
+            if (numSkully == 1)
             {
                 col1 = color(col1R, col1G, col1B, 50);
                 col3 = color(col3R, col3G, col3B, 50);
                 offsetShapes = false;
             }
-            else if (skeletonArray.size() == 2)
+            else if (numSkully == 2)
             {
                 //println("here");
                 col1 = color(col1R2, col1G2, col1B2, 75);
                 col3 = color(col3R2, col3G2, col3B2, 75);
                 offsetShapes = false;
             }
-            else if (skeletonArray.size() == 3)
+            else if (numSkully == 3)
             {
                 offsetShapes = true;
                 float x = getSinScale(160, 40, 400);
@@ -434,15 +439,14 @@ void SkullyBoi()
             }
             
             //Checking what third the skeloten is in
-            if (xSetter > .24 && zoneSetter[2] == false)
+            if (zoneSetter[2]==true)
             {
-                zoneSetter[2] = true;
                 for (Triangle tri: triangleArr)
                 {
                     tri.setColor(tri.r, tri.g, tri.b, tri.alpha);
                 }
-                println("Size in Triangles", skeletonArray.size());
-                if (skeletonArray.size() == 3)
+               // println("Size in Triangles", skeletonArray.size());
+                if (numSkully == 3)
                 {
                     for (Triangle2 tri2: triangleArr2)
                     {                     
@@ -464,7 +468,7 @@ void SkullyBoi()
                     {
                         tri.changePosition(offsetAmountNeg, offsetAmountPos);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         println("Here1");
                         for (Triangle2 tri: triangleArr2)
@@ -479,7 +483,7 @@ void SkullyBoi()
                     {
                         tri.changeScale(true, maxOffset, minOffset);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Triangle2 tri2: triangleArr2)
                         {
@@ -494,7 +498,7 @@ void SkullyBoi()
                         tri.changeScale(false, maxOffset, minOffset);
                     }
 
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Triangle2 tri2: triangleArr2)
                         {
@@ -511,7 +515,7 @@ void SkullyBoi()
                         tri.changeRotation();
                     }
 
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Triangle2 tri: triangleArr2)
                         {
@@ -528,7 +532,7 @@ void SkullyBoi()
                         tri.changeRotation();
                     }
 
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Triangle2 tri: triangleArr2)
                         {
@@ -545,15 +549,14 @@ void SkullyBoi()
 
             }
 
-            if (xSetter < .24 && xSetter > -.52 && zoneSetter[1] == false)
+            if (zoneSetter[1]==true)
             {
-                zoneSetter[1] = true;
                 for (Squigly squig: squiglyArr)
                 {
                     squig.setColor(squig.r, squig.g, squig.b, squig.alpha);
                 }
-                println("Size in Squiglys ", skeletonArray.size());
-                if (skeletonArray.size() == 3)
+                println("Size in Squiglys ", numSkully);
+                if (numSkully == 3)
                 {
                     for (Squigly2 squig2: squiglyArr2)
                     {
@@ -581,7 +584,7 @@ void SkullyBoi()
                     {
                         squig.changePosition(offsetAmountNeg, offsetAmountPos);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         println("Here2");
                         for (Squigly2 squig2: squiglyArr2)
@@ -598,7 +601,7 @@ void SkullyBoi()
                     {
                         squig.changeScale(true, maxOffset, minOffset);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Squigly2 squig2: squiglyArr2)
                         {
@@ -612,7 +615,7 @@ void SkullyBoi()
                     {
                         squig.changeScale(false, maxOffset, minOffset);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Squigly2 squig2: squiglyArr2)
                         {
@@ -636,7 +639,7 @@ void SkullyBoi()
                         squig.changeRotation();
                     }
 
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Squigly2 squig: squiglyArr2)
                         {
@@ -659,7 +662,7 @@ void SkullyBoi()
                         squig.changeRotation();
                     }
 
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Squigly2 squig: squiglyArr2)
                         {
@@ -679,17 +682,16 @@ void SkullyBoi()
                 }
             }
 
-            if (xSetter < -.52 && zoneSetter[0] == false)
+            if (zoneSetter[0]==true)
             {
                 //println(4);                  
-                zoneSetter[0] = true;
                 for (Square squar: squareArr)
                 {
                     squar.setColor(squar.r, squar.g, squar.b, squar.alpha);
                 }
-                println("Size in Squares ", skeletonArray.size());
+                println("Size in Squares ", numSkully);
 
-                if (skeletonArray.size() == 3)
+                if (numSkully == 3)
                 {
                     for (Square2 squar2: squareArr2)
                     {
@@ -709,7 +711,7 @@ void SkullyBoi()
                     {
                         squar.changePosition(offsetAmountNeg, offsetAmountPos);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         println("Here3");
                         for (Square2 squar: squareArr2)
@@ -725,7 +727,7 @@ void SkullyBoi()
                     {
                         squar.changeScale(true, maxOffset, minOffset);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Square2 squar: squareArr2)
                         {
@@ -739,7 +741,7 @@ void SkullyBoi()
                     {
                         squar.changeScale(false, maxOffset, minOffset);
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Square2 squar: squareArr2)
                         {
@@ -755,7 +757,7 @@ void SkullyBoi()
                     {
                         squar.changeRotation();
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Square2 squar: squareArr2)
                         {
@@ -771,7 +773,7 @@ void SkullyBoi()
                     {
                         squar.changeRotation();
                     }
-                    if (skeletonArray.size() == 3)
+                    if (numSkully == 3)
                     {
                         for (Square2 squar: squareArr2)
                         {
@@ -786,13 +788,54 @@ void SkullyBoi()
                     //square.RandomStroke();
                 }
             }
-        }
+       // }
         // drawBody(joints);  
         //text(skeletonArray.size(), 100,100);
         //text(spot,150,150);
+        }
+
     }
+}
 
 
+void findZoneSkullies() 
+{
+    ArrayList < KSkeleton > skeletonArray = kinect.getSkeleton3d();
+    for (int i = 0; i < skeletonArray.size(); i++)
+    {
+        KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
+        if (skeleton.isTracked())
+        {
+            KJoint[] joints = skeleton.getJoints();
+            float xSetter = getJointX(joints, KinectPV2.JointType_SpineMid);
+            if (xSetter > .24 && zoneSetter[2] == false)
+            {
+                zoneSetter[2] = true;
+                zoneSkully[2]=skeleton;
+            }
+            if (xSetter < .24 && xSetter > -.52 && zoneSetter[1] == false)
+            {
+                zoneSetter[1] = true;
+                zoneSkully[1]=skeleton;
+            }
+            if (xSetter < -.52 && zoneSetter[0] == false)
+            {
+                zoneSetter[0] = true;
+                zoneSkully[0]=skeleton;
+            }
+        }
+        
+    }
+    
+    //numSkully=0;    
+    //for (int i=0; i<zoneSetter.length; i++)
+    //{
+    //  if(zoneSetter[i]==true)
+    //  {
+    //     numSkully++;
+    //  }
+    //}
+  
 }
 
 void setNonActive()
@@ -800,9 +843,10 @@ void setNonActive()
     for (int j = 0; j < zoneSetter.length; j++)
     {
         zoneSetter[j] = false;
+        zoneSkully[j]=null;
         // println(zoneSetter);
     }
-
+    
     if (zoneSetter[2] == false)
     {
         for (Triangle tri: triangleArr)
@@ -830,6 +874,23 @@ void setNonActive()
 
         }
     }
+}
+
+void keyPressed() 
+{
+  if(key=='1')
+  {
+    numSkully=1;
+  }
+  if(key=='2')
+  {
+    numSkully=2;
+  }
+  if(key=='3')
+  {
+    numSkully=3;
+  }
+   
 }
 
 
