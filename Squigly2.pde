@@ -3,7 +3,7 @@ public class Squigly2 extends Shape {
   int r=0; 
   int g=0; 
   int b=0;
-  int alpha=255;
+  int alpha=150;
    
   public Squigly2(float squiglyPoint,float x, float y)
   {

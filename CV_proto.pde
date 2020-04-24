@@ -325,6 +325,19 @@ void draw() {
   SkullyBoi();
   popStyle();
   popMatrix();
+     for (Square2 squar2 : squareArr2) 
+     {
+       squar2.display();
+     }  
+              
+    for (Triangle2 tri2 : triangleArr2) 
+    {
+      tri2.display();
+     }   
+    for (Squigly2 squig2 : squiglyArr2) 
+    {
+      squig2.display();
+    } 
 
   for (Square squar : squareArr) 
   {
@@ -340,6 +353,7 @@ void draw() {
   {
      squig.display();
   }   
+       
   
  for (Background_Lines back : backgroundArr) 
   {
@@ -417,10 +431,10 @@ void SkullyBoi()
            col3G=int(x);
            float y= getSinScale(300,30,400);
            col1R=int(y);
-           println(col1R);
+          // println(col1R);
            col3=color(col3R2,col3G2,col3B2,150); //<>//
            col1=color(col1R2,col1G2,col1B2,150);
-           println("yes");
+          // println("yes");
 
          }
 
@@ -433,11 +447,13 @@ void SkullyBoi()
              {
                 tri.setColor(tri.r,tri.g,tri.b,tri.alpha);
              }     
+              println("Size in Triangles",skeletonArray.size());
               if(skeletonArray.size()==3) 
               {
                  for (Triangle2 tri2 : triangleArr2) 
                  {
                     tri2.display();
+                    tri2.setColor(tri2.r,tri2.g,tri2.b,tri2.alpha);
                  }    
               }
              //drawTriangleBoi(joints);
@@ -454,8 +470,6 @@ void SkullyBoi()
                  {
                     tri.changePosition(offsetAmountNeg,offsetAmountPos);
                  } 
-               // println(offsetShapes);
-
                  if(skeletonArray.size()==3) 
                  {
                    println("Here1");
@@ -545,11 +559,13 @@ void SkullyBoi()
              {
                squig.setColor(squig.r,squig.g,squig.b,squig.alpha); 
              }  
+            println("Size in Squiglys ",skeletonArray.size());
             if(skeletonArray.size()==3) 
             {
               for (Squigly2 squig2 : squiglyArr2) 
               {
                  squig2.display();
+                 squig2.setColor(squig2.r,squig2.g,squig2.b,squig2.alpha);
               }    
             }
              
@@ -678,13 +694,15 @@ void SkullyBoi()
              for (Square squar : squareArr) 
              {
                squar.setColor(squar.r,squar.g,squar.b,squar.alpha);
-             }       
+             }    
+             println("Size in Squares ",skeletonArray.size());
              
             if(skeletonArray.size()==3) 
             {
               for (Square2 squar2 : squareArr2) 
               {
                  squar2.display();
+                 squar2.setColor(squar2.r,squar2.g,squar2.b,squar2.alpha);
               }     
             }                          
              limbtracker3.update2(joints);   

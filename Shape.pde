@@ -98,7 +98,7 @@ public class Shape
       //println(offsetAmountNeg);
     };
     
-     void setCenterPosition()
+  void setCenterPosition()
   {
     float sumX=0; 
     float sumY=0;
