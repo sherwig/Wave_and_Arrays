@@ -53,6 +53,11 @@ public class Shape
        shape.setFill(color(r,g,b,alpha));
     };
     
+    void setBackgroundColor(int r, int g, int b,int alpha)
+    {      
+       shape.setFill(color(r,g,b,alpha));
+    };
+    
      void RandomStroke() 
      {
       shape.setStrokeWeight(random(3,7));   

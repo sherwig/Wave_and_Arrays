@@ -325,19 +325,19 @@ void draw() {
   SkullyBoi();
   popStyle();
   popMatrix();
-    // for (Square2 squar2 : squareArr2) 
-    // {
-    //   squar2.display();
-    // }  
+     for (Square2 squar2 : squareArr2) 
+     {
+       squar2.display();
+     }  
               
-    //for (Triangle2 tri2 : triangleArr2) 
-    //{
-    //  tri2.display();
-    // }   
-    //for (Squigly2 squig2 : squiglyArr2) 
-    //{
-    //  squig2.display();
-    //} 
+    for (Triangle2 tri2 : triangleArr2) 
+    {
+      tri2.display();
+     }   
+    for (Squigly2 squig2 : squiglyArr2) 
+    {
+      squig2.display();
+    } 
 
   for (Square squar : squareArr) 
   {
@@ -453,7 +453,7 @@ void SkullyBoi()
                  for (Triangle2 tri2 : triangleArr2) 
                  {
                     tri2.display();
-                    tri2.setColor(tri2.r,tri2.g,tri2.b,tri2.alpha);
+                    tri2.setBackgroundColor(tri2.r,tri2.g,tri2.b,tri2.alpha);
                  }    
               }
              //drawTriangleBoi(joints);
@@ -565,7 +565,7 @@ void SkullyBoi()
               for (Squigly2 squig2 : squiglyArr2) 
               {
                  squig2.display();
-                 squig2.setColor(squig2.r,squig2.g,squig2.b,squig2.alpha);
+                 squig2.setBackgroundColor(squig2.r,squig2.g,squig2.b,squig2.alpha);
               }    
             }
              
@@ -702,7 +702,7 @@ void SkullyBoi()
               for (Square2 squar2 : squareArr2) 
               {
                  squar2.display();
-                 squar2.setColor(squar2.r,squar2.g,squar2.b,squar2.alpha);
+                 squar2.setBackgroundColor(squar2.r,squar2.g,squar2.b,squar2.alpha);
               }     
             }                          
              limbtracker3.update2(joints);   
