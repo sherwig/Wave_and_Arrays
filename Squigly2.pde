@@ -9,6 +9,8 @@ public class Squigly2 extends Shape {
   {
     super(30,247,37,100,x,y);
     shapeMode(CORNER);
+    strokeJoin(ROUND);
+
     shape = createShape();       
     shape.beginShape(LINES);         
 

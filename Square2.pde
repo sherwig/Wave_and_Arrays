@@ -6,14 +6,26 @@ public class Square2 extends Shape{
     
   public Square2(float squarePoint, float x, float y )
   {              
-    super(255,0,255,100,x,y);
+    super(255,0,255,255,x,y);
     shapeMode(CORNER);
-    shape=createShape(RECT,squarePoint,squarePoint, squarePoint+100, squarePoint+100); 
-    shape.noFill();
-    shape.setFill(255);
-    shape.setStroke(color(r,g,b,alpha));
-    shape.setStrokeWeight(2);  
-    //setCenterPosition();
+    strokeJoin(ROUND);
+    shape = createShape();       
+    shape.beginShape(LINES);  
+    shape.vertex(squarePoint, squarePoint);
+    shape.vertex(squarePoint+100, squarePoint);
+    
+    shape.vertex(squarePoint+100, squarePoint);
+    shape.vertex(squarePoint+100, squarePoint+100);
+
+    shape.vertex(squarePoint, squarePoint+100);
+    shape.vertex(squarePoint+100, squarePoint+100);
+    
+    shape.vertex(squarePoint, squarePoint+100);
+    shape.vertex(squarePoint, squarePoint);
+
+   // shape.vertex(squarePoint+100, squarePoint+100);
+
+    shape.endShape(CLOSE);
   }
   
 }

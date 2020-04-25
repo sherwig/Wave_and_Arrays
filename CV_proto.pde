@@ -1,4 +1,4 @@
-import KinectPV2.KJoint; //<>//
+import KinectPV2.KJoint; //<>// //<>//
 import KinectPV2.*;
 import java.util.ArrayList;
 int vert1, vert2;
@@ -33,9 +33,6 @@ int col1G2 = 104;
 int col3R2 = 255;
 int col3B2 = 255;
 int col3G2 = 105;
-//int col3R=255;
-//int col3B=127;
-//int col3G=80;
 Gradients gradient;
 float quad1, quad2, quad3;
 int zoneCounter = 0;
@@ -46,7 +43,7 @@ float maxOffset = 3;
 float minOffset = 1;
 PImage[] dancer = new PImage[60];
 int a = int(512 * .5), b = int(683 * .5);
-int numSkully=0;
+int numSkully = 0;
 
 void setup()
 {
@@ -290,11 +287,6 @@ void setup()
 void draw()
 {
 
-
-    //lines in thirds for debugging
-    //line(vert1,height,vert1,0);
-    //line(vert2,height,vert2,0);
-
     //Thirds
     //gradient.linear(0,vert1,height*2, col1, col3); 
     //gradient.linear(vert1,vert2,height*2, col3, col1); 
@@ -322,20 +314,6 @@ void draw()
     SkullyBoi();
     //popStyle();
     //popMatrix();
-    
-    //for (Square2 squar2: squareArr2)
-    //{
-    //    squar2.display();
-    //}
-
-    //for (Triangle2 tri2: triangleArr2)
-    //{
-    //    tri2.display();
-    //}
-    //for (Squigly2 squig2: squiglyArr2)
-    //{
-    //    squig2.display();
-    //}
 
     for (Square squar: squareArr)
     {
@@ -391,9 +369,6 @@ void SkullyBoi()
 {
     setNonActive();
     findZoneSkullies();
-    //ArrayList < KSkeleton > skeletonArray = kinect.getSkeleton3d();
-    //ArrayList<KSkeleton> skeletonArray =  kinect.getSkeletonDepthMap();  
-    //individual JOINTS
     if (numSkully == 0)
     {
         col1 = color(255, 251, 157, 50);
@@ -401,402 +376,37 @@ void SkullyBoi()
         offsetShapes = false;
     }
 
-    for (int i = 0; i < zoneSkully.length; i++)
-    {  
-        if (zoneSkully[i]!=null)
-        {
-            KJoint[] joints = zoneSkully[i].getJoints();
-           
-            if (numSkully == 1)
-            {
-                col1 = color(col1R, col1G, col1B, 50);
-                col3 = color(col3R, col3G, col3B, 50);
-                offsetShapes = false;
-            }
-            else if (numSkully == 2)
-            {
-                //println("here");
-                col1 = color(col1R2, col1G2, col1B2, 75);
-                col3 = color(col3R2, col3G2, col3B2, 75);
-                offsetShapes = false;
-            }
-            else if (numSkully == 3)
-            {
-                offsetShapes = true;
-                float x = getSinScale(160, 40, 400);
-                col3G = int(x);
-                float y = getSinScale(300, 30, 400);
-                col1R = int(y);
-                // println(col1R);
-                col3 = color(col3R2, col3G2, col3B2, 150);
-                col1 = color(col1R2, col1G2, col1B2, 150);
-                // println("yes");
-            }
-             //<>//
-            //Checking what third the skeloten is in
-            if (zoneSetter[2]==true)
-            {
-               println("ZoneSkully: ", zoneSkully[i]);
-                for (Triangle tri: triangleArr)
-                {
-                    tri.setColor(tri.r, tri.g, tri.b, tri.alpha);
-                }
-               // println("Size in Triangles", skeletonArray.size());
-                if (numSkully == 3)
-                {
-                    for (Triangle2 tri2: triangleArr2)
-                    {                     
-                        tri2.display();
-                        tri2.setBackgroundColor(tri2.r, tri2.g, tri2.b, tri2.alpha);
-                    }
-                }
-                
-                limbtracker.update2(joints);
-                //filling second PVector with the first PVectors values
-                limbtracker.fillFollowing(KinectPV2.JointType_Count);
-                float[] comparison = limbtracker.distance(KinectPV2.JointType_Count);
-                limbtracker.fillBuffer(comparison);
+    if (zoneSkully[2] != null) runTriangleUser();
+    if (zoneSkully[1] != null) runSquiglyUser();
+    if (zoneSkully[0] != null) runSquareUser();
 
-                if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft))
-                {
-                    jazz.P1.play();
-                    for (Triangle tri: triangleArr)
-                    {
-                        tri.changePosition(offsetAmountNeg, offsetAmountPos);
-                    }
-                    if (numSkully == 3)
-                    {
-                        println("Here1");
-                        for (Triangle2 tri: triangleArr2)
-                        {
-                            tri.changePosition(offsetAmountNeg, offsetAmountPos);
-                        }
-                    }
-                }
-                if (limbtracker.limbFlailing(KinectPV2.JointType_HandRight))
-                {
-                    for (Triangle tri: triangleArr)
-                    {
-                        tri.changeScale(true, maxOffset, minOffset);
-                    }
-                    if (numSkully == 3)
-                    {
-                        for (Triangle2 tri2: triangleArr2)
-                        {
-                            tri2.changeScale(true, maxOffset, minOffset);
-                        }
-                    }
-                }
-                else
-                {
-                    for (Triangle tri: triangleArr)
-                    {
-                        tri.changeScale(false, maxOffset, minOffset);
-                    }
-
-                    if (numSkully == 3)
-                    {
-                        for (Triangle2 tri2: triangleArr2)
-                        {
-                            tri2.changeScale(false, maxOffset, minOffset);
-                        }
-                    }
-                }
-
-                if (limbtracker.limbActivated(KinectPV2.JointType_KneeRight))
-                {
-                    jazz.P2.play();
-                    for (Triangle tri: triangleArr)
-                    {
-                        tri.changeRotation();
-                    }
-
-                    if (numSkully == 3)
-                    {
-                        for (Triangle2 tri: triangleArr2)
-                        {
-                            tri.changeRotation();
-                        }
-                    }
-                }
-
-                if (limbtracker.limbActivated(KinectPV2.JointType_KneeLeft))
-                {
-                    jazz.P4.play();
-                    for (Triangle tri: triangleArr)
-                    {
-                        tri.changeRotation();
-                    }
-
-                    if (numSkully == 3)
-                    {
-                        for (Triangle2 tri: triangleArr2)
-                        {
-                            tri.changeRotation();
-                        }
-                    }
-                }
-
-                if (limbtracker.limbActivated(KinectPV2.JointType_SpineMid))
-                {
-                    jazz.P3.play();
-                }
-
-
-            }
-
-            if (zoneSetter[1]==true)
-            {
-                println("ZoneSkully2: ", zoneSkully[i]);
-
-                for (Squigly squig: squiglyArr)
-                {
-                    squig.setColor(squig.r, squig.g, squig.b, squig.alpha);
-                }
-                println("Size in Squiglys ", numSkully);
-                if (numSkully == 3)
-                {
-                    for (Squigly2 squig2: squiglyArr2)
-                    {
-                        squig2.display();
-                        squig2.setBackgroundColor(squig2.r, squig2.g, squig2.b, squig2.alpha);
-                    }
-                }
-
-                limbtracker2.update2(joints);
-                limbtracker2.fillFollowing(KinectPV2.JointType_Count);
-                //drawSquiglyBoi(joints);
-                float[] comparison2 = limbtracker2.distance(KinectPV2.JointType_Count);
-                limbtracker2.fillBuffer(comparison2);
-
-                if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft))
-                {
-                    jazz.B1.play();
-                    jazz.B1.amp(jazz.bampc);
-                    jazz.B1.rate(jazz.p5Rate); //relating note by 5th
-                    jazz.file1.amp(jazz.scamp);
-                    jazz.file2.amp(jazz.scamp);
-                    jazz.file3.amp(jazz.scamp);
-                    //squigly.changeSizePositive(2);
-                    for (Squigly squig: squiglyArr)
-                    {
-                        squig.changePosition(offsetAmountNeg, offsetAmountPos);
-                    }
-                    if (numSkully == 3)
-                    {
-                        println("Here2");
-                        for (Squigly2 squig2: squiglyArr2)
-                        {
-                            squig2.changePosition(offsetAmountNeg, offsetAmountPos);
-                        }
-                    }
-                }
-
-                if (limbtracker2.limbFlailing(KinectPV2.JointType_HandRight))
-                {
-                    // squigly.RotateX(.01);
-                    for (Squigly squig: squiglyArr)
-                    {
-                        squig.changeScale(true, maxOffset, minOffset);
-                    }
-                    if (numSkully == 3)
-                    {
-                        for (Squigly2 squig2: squiglyArr2)
-                        {
-                            squig2.changeScale(true, maxOffset, minOffset);
-                        }
-                    }
-                }
-                else
-                {
-                    for (Squigly squig: squiglyArr)
-                    {
-                        squig.changeScale(false, maxOffset, minOffset);
-                    }
-                    if (numSkully == 3)
-                    {
-                        for (Squigly2 squig2: squiglyArr2)
-                        {
-                            squig2.changeScale(false, maxOffset, minOffset);
-                        }
-                    }
-
-                }
-
-                if (limbtracker2.limbActivated(KinectPV2.JointType_KneeRight))
-                {
-                    jazz.B2.play();
-                    jazz.B2.amp(jazz.bampc);
-                    jazz.B2.rate(jazz.p5Rate); //relating note by 5th
-                    jazz.file1.amp(jazz.scamp);
-                    jazz.file2.amp(jazz.scamp);
-                    jazz.file3.amp(jazz.scamp);
-
-                    for (Squigly squig: squiglyArr)
-                    {
-                        squig.changeRotation();
-                    }
-
-                    if (numSkully == 3)
-                    {
-                        for (Squigly2 squig: squiglyArr2)
-                        {
-                            squig.changeRotation();
-                        }
-                    }
-                }
-
-                if (limbtracker2.limbActivated(KinectPV2.JointType_KneeLeft))
-                {
-                    jazz.B3.play();
-                    jazz.B3.amp(jazz.bampc);
-                    jazz.B3.rate(jazz.p5Rate); //relating note by 5th
-                    jazz.file1.amp(jazz.scamp);
-                    jazz.file2.amp(jazz.scamp);
-                    jazz.file3.amp(jazz.scamp);
-
-                    for (Squigly squig: squiglyArr)
-                    {
-                        squig.changeRotation();
-                    }
-
-                    if (numSkully == 3)
-                    {
-                        for (Squigly2 squig: squiglyArr2)
-                        {
-                            squig.changeRotation();
-                        }
-                    }
-                }
-
-                if (limbtracker2.limbActivated(KinectPV2.JointType_SpineMid))
-                {
-                    jazz.B4.play();
-                    jazz.B4.amp(jazz.bampc);
-                    jazz.B4.rate(jazz.p5Rate); //relating note by 5th
-                    jazz.file1.amp(jazz.scamp);
-                    jazz.file2.amp(jazz.scamp);
-                    jazz.file3.amp(jazz.scamp);
-                }
-            }
-
-            if (zoneSetter[0]==true)
-            {
-                //println(4);                  
-                for (Square squar: squareArr)
-                {
-                    squar.setColor(squar.r, squar.g, squar.b, squar.alpha);
-                }
-                println("Size in Squares ", numSkully);
-
-                if (numSkully == 3)
-                {
-                    for (Square2 squar2: squareArr2)
-                    {
-                        squar2.display();
-                        squar2.setBackgroundColor(squar2.r, squar2.g, squar2.b, squar2.alpha);
-                    }
-                }
-                limbtracker3.update2(joints);
-                limbtracker2.fillFollowing(KinectPV2.JointType_Count);
-                float[] comparison3 = limbtracker3.distance(KinectPV2.JointType_Count);
-                limbtracker3.fillBuffer(comparison3);
-
-                if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft))
-                {
-                    jazz.D1.play();
-                    for (Square squar: squareArr)
-                    {
-                        squar.changePosition(offsetAmountNeg, offsetAmountPos);
-                    }
-                    if (numSkully == 3)
-                    {
-                        println("Here3");
-                        for (Square2 squar: squareArr2)
-                        {
-                            squar.changePosition(offsetAmountNeg, offsetAmountPos);
-                        }
-                    }
-                }
-
-                if (limbtracker3.limbFlailing(KinectPV2.JointType_HandRight))
-                {
-                    for (Square squar: squareArr)
-                    {
-                        squar.changeScale(true, maxOffset, minOffset);
-                    }
-                    if (numSkully == 3)
-                    {
-                        for (Square2 squar: squareArr2)
-                        {
-                            squar.changeScale(true, maxOffset, minOffset);
-                        }
-                    }
-                }
-                else
-                {
-                    for (Square squar: squareArr)
-                    {
-                        squar.changeScale(false, maxOffset, minOffset);
-                    }
-                    if (numSkully == 3)
-                    {
-                        for (Square2 squar: squareArr2)
-                        {
-                            squar.changeScale(false, maxOffset, minOffset);
-                        }
-                    }
-                }
-
-                if (limbtracker3.limbActivated(KinectPV2.JointType_KneeLeft))
-                {
-                    jazz.D2.play();
-                    for (Square squar: squareArr)
-                    {
-                        squar.changeRotation();
-                    }
-                    if (numSkully == 3)
-                    {
-                        for (Square2 squar: squareArr2)
-                        {
-                            squar.changeRotation();
-                        }
-                    }
-                }
-
-                if (limbtracker3.limbActivated(KinectPV2.JointType_KneeRight))
-                {
-                    jazz.D3.play();
-                    for (Square squar: squareArr)
-                    {
-                        squar.changeRotation();
-                    }
-                    if (numSkully == 3)
-                    {
-                        for (Square2 squar: squareArr2)
-                        {
-                            squar.changeRotation();
-                        }
-                    }
-                }
-
-                if (limbtracker3.limbActivated(KinectPV2.JointType_SpineMid))
-                {
-                    jazz.D4.play();
-                    //square.RandomStroke();
-                }
-            }
-       // }
-        // drawBody(joints);  
-        //text(skeletonArray.size(), 100,100);
-        //text(spot,150,150);
-        }
-
+    if (numSkully == 1)
+    {
+        col1 = color(col1R, col1G, col1B, 50);
+        col3 = color(col3R, col3G, col3B, 50);
+        offsetShapes = false;
+    }
+    else if (numSkully == 2)
+    {
+        //println("here");
+        col1 = color(col1R2, col1G2, col1B2, 75);
+        col3 = color(col3R2, col3G2, col3B2, 75);
+        offsetShapes = false;
+    }
+    else if (numSkully == 3)
+    {
+        offsetShapes = true;
+        float x = getSinScale(160, 40, 400);
+        col3G = int(x);
+        float y = getSinScale(300, 30, 400);
+        col1R = int(y);
+        col3 = color(col3R2, col3G2, col3B2, 150);
+        col1 = color(col1R2, col1G2, col1B2, 150);
     }
 }
 
 
-void findZoneSkullies() 
+void findZoneSkullies()
 {
     ArrayList < KSkeleton > skeletonArray = kinect.getSkeleton3d();
     for (int i = 0; i < skeletonArray.size(); i++)
@@ -807,35 +417,33 @@ void findZoneSkullies()
         {
             KJoint[] joints = skeleton.getJoints();
             float xSetter = getJointX(joints, KinectPV2.JointType_SpineMid);
-            if (xSetter > .24 && zoneSetter[2] == false)
+            if (xSetter > .24 && zoneSetter[2] == false && zoneSkully[2] == null)
             {
                 zoneSetter[2] = true;
-                zoneSkully[2]=skeleton;
+                zoneSkully[2] = skeleton;
             }
-            if (xSetter < .24 && xSetter > -.52 && zoneSetter[1] == false)
+            if (xSetter < .24 && xSetter > -.52 && zoneSetter[1] == false && zoneSkully[1] == null)
             {
                 zoneSetter[1] = true;
-                zoneSkully[1]=skeleton;
+                zoneSkully[1] = skeleton;
             }
-            if (xSetter < -.52 && zoneSetter[0] == false)
+            if (xSetter < -.52 && zoneSetter[0] == false && zoneSkully[0] == null)
             {
                 zoneSetter[0] = true;
-                zoneSkully[0]=skeleton;
+                zoneSkully[0] = skeleton;
             }
         }
-        println(zoneSkully);
-        
     }
-    
-    numSkully=0;    
-    for (int i=0; i<zoneSetter.length; i++)
+
+    numSkully = 0;
+    for (int i = 0; i < zoneSetter.length; i++)
     {
-      if(zoneSetter[i]==true)
-      {
-         numSkully++;
-      }
+        if (zoneSetter[i] == true)
+        {
+            numSkully++;
+        }
     }
-  
+
 }
 
 void setNonActive()
@@ -843,16 +451,23 @@ void setNonActive()
     for (int j = 0; j < zoneSetter.length; j++)
     {
         zoneSetter[j] = false;
-        zoneSkully[j]=null;
-        // println(zoneSetter);
     }
-    
+
+    for (int j = 0; j < zoneSkully.length; j++)
+    {
+        zoneSkully[j] = null;
+    }
+
     if (zoneSetter[2] == false)
     {
         for (Triangle tri: triangleArr)
         {
             tri.setColor(128, 128, 128, 150);
             tri.changeScale(false, maxOffset, minOffset);
+        }        
+        for (Triangle2 tri2: triangleArr2)
+        {
+            tri2.changeScale(false, maxOffset, minOffset);
         }
     }
 
@@ -863,6 +478,10 @@ void setNonActive()
             squig.setColor(128, 128, 128, 150);
             squig.changeScale(false, maxOffset, minOffset);
         }
+        for (Squigly2 squig2: squiglyArr2)
+        {
+            squig2.changeScale(false, maxOffset, minOffset);
+        }
     }
 
     if (zoneSetter[0] == false)
@@ -871,9 +490,360 @@ void setNonActive()
         {
             squar.setColor(128, 128, 128, 150);
             squar.changeScale(false, maxOffset, minOffset);
-
+        }
+        for (Square2 squar2: squareArr2)
+        {
+            squar2.changeScale(false, maxOffset, minOffset);
         }
     }
+}
+
+void runTriangleUser()
+{
+    println("ZoneSkully: ", zoneSkully[2]);
+    KJoint[] joints = zoneSkully[2].getJoints();
+
+    for (Triangle tri: triangleArr)
+    {
+        tri.setColor(tri.r, tri.g, tri.b, tri.alpha);
+    }
+    if (numSkully == 3)
+    {
+        for (Triangle2 tri2: triangleArr2)
+        {
+            tri2.display();
+            tri2.setBackgroundColor(tri2.r, tri2.g, tri2.b, tri2.alpha);
+        }
+    }
+
+    limbtracker.update2(joints);
+    limbtracker.fillFollowing(KinectPV2.JointType_Count);
+    float[] comparison = limbtracker.distance(KinectPV2.JointType_Count);
+    limbtracker.fillBuffer(comparison);
+
+    if (limbtracker.limbActivated(KinectPV2.JointType_HandLeft))
+    {
+        jazz.P1.play();
+        for (Triangle tri: triangleArr)
+        {
+            tri.changePosition(offsetAmountNeg, offsetAmountPos);
+        }
+        if (numSkully == 3)
+        {
+            println("Here1");
+            for (Triangle2 tri: triangleArr2)
+            {
+                tri.changePosition(offsetAmountNeg, offsetAmountPos);
+            }
+        }
+    }
+    if (limbtracker.limbFlailing(KinectPV2.JointType_HandRight))
+    {
+        for (Triangle tri: triangleArr)
+        {
+            tri.changeScale(true, maxOffset, minOffset);
+        }
+        if (numSkully == 3)
+        {
+            for (Triangle2 tri2: triangleArr2)
+            {
+                tri2.changeScale(true, maxOffset, minOffset);
+            }
+        }
+    }
+    else
+    {
+        for (Triangle tri: triangleArr)
+        {
+            tri.changeScale(false, maxOffset, minOffset);
+        }
+
+        if (numSkully == 3)
+        {
+            for (Triangle2 tri2: triangleArr2)
+            {
+                tri2.changeScale(false, maxOffset, minOffset);
+            }
+        }
+    }
+
+    if (limbtracker.limbActivated(KinectPV2.JointType_KneeRight))
+    {
+        jazz.P2.play();
+        for (Triangle tri: triangleArr)
+        {
+            tri.changeRotation();
+        }
+
+        if (numSkully == 3)
+        {
+            for (Triangle2 tri: triangleArr2)
+            {
+                tri.changeRotation();
+            }
+        }
+    }
+
+    if (limbtracker.limbActivated(KinectPV2.JointType_KneeLeft))
+    {
+        jazz.P4.play();
+        for (Triangle tri: triangleArr)
+        {
+            tri.changeRotation();
+        }
+
+        if (numSkully == 3)
+        {
+            for (Triangle2 tri: triangleArr2)
+            {
+                tri.changeRotation();
+            }
+        }
+    }
+
+    if (limbtracker.limbActivated(KinectPV2.JointType_SpineMid))
+    {
+        jazz.P3.play();
+    }
+}
+
+void runSquiglyUser()
+{
+    KJoint[] joints = zoneSkully[1].getJoints();
+
+    for (Squigly squig: squiglyArr)
+    {
+        squig.setColor(squig.r, squig.g, squig.b, squig.alpha);
+    }
+    if (numSkully == 3)
+    {
+        for (Squigly2 squig2: squiglyArr2)
+        {
+            squig2.display();
+            squig2.setBackgroundColor(squig2.r, squig2.g, squig2.b, squig2.alpha);
+        }
+    }
+
+    limbtracker2.update2(joints);
+    limbtracker2.fillFollowing(KinectPV2.JointType_Count);
+    float[] comparison2 = limbtracker2.distance(KinectPV2.JointType_Count);
+    limbtracker2.fillBuffer(comparison2);
+
+    if (limbtracker2.limbActivated(KinectPV2.JointType_HandLeft))
+    {
+        jazz.B1.play();
+        jazz.B1.amp(jazz.bampc);
+        jazz.B1.rate(jazz.p5Rate); //relating note by 5th
+        jazz.file1.amp(jazz.scamp);
+        jazz.file2.amp(jazz.scamp);
+        jazz.file3.amp(jazz.scamp);
+        for (Squigly squig: squiglyArr)
+        {
+            squig.changePosition(offsetAmountNeg, offsetAmountPos);
+        }
+        if (numSkully == 3)
+        {
+            println("Here2");
+            for (Squigly2 squig2: squiglyArr2)
+            {
+                squig2.changePosition(offsetAmountNeg, offsetAmountPos);
+            }
+        }
+    }
+
+    if (limbtracker2.limbFlailing(KinectPV2.JointType_HandRight))
+    {
+        for (Squigly squig: squiglyArr)
+        {
+            squig.changeScale(true, maxOffset, minOffset);
+        }
+        if (numSkully == 3)
+        {
+            for (Squigly2 squig2: squiglyArr2)
+            {
+                squig2.changeScale(true, maxOffset, minOffset);
+            }
+        }
+    }
+    else
+    {
+        for (Squigly squig: squiglyArr)
+        {
+            squig.changeScale(false, maxOffset, minOffset);
+        }
+        if (numSkully == 3)
+        {
+            for (Squigly2 squig2: squiglyArr2)
+            {
+                squig2.changeScale(false, maxOffset, minOffset);
+            }
+        }
+
+    }
+
+    if (limbtracker2.limbActivated(KinectPV2.JointType_KneeRight))
+    {
+        jazz.B2.play();
+        jazz.B2.amp(jazz.bampc);
+        jazz.B2.rate(jazz.p5Rate); //relating note by 5th
+        jazz.file1.amp(jazz.scamp);
+        jazz.file2.amp(jazz.scamp);
+        jazz.file3.amp(jazz.scamp);
+
+        for (Squigly squig: squiglyArr)
+        {
+            squig.changeRotation();
+        }
+
+        if (numSkully == 3)
+        {
+            for (Squigly2 squig: squiglyArr2)
+            {
+                squig.changeRotation();
+            }
+        }
+    }
+
+    if (limbtracker2.limbActivated(KinectPV2.JointType_KneeLeft))
+    {
+        jazz.B3.play();
+        jazz.B3.amp(jazz.bampc);
+        jazz.B3.rate(jazz.p5Rate); //relating note by 5th
+        jazz.file1.amp(jazz.scamp);
+        jazz.file2.amp(jazz.scamp);
+        jazz.file3.amp(jazz.scamp);
+
+        for (Squigly squig: squiglyArr)
+        {
+            squig.changeRotation();
+        }
+
+        if (numSkully == 3)
+        {
+            for (Squigly2 squig: squiglyArr2)
+            {
+                squig.changeRotation();
+            }
+        }
+    }
+
+    if (limbtracker2.limbActivated(KinectPV2.JointType_SpineMid))
+    {
+        jazz.B4.play();
+        jazz.B4.amp(jazz.bampc);
+        jazz.B4.rate(jazz.p5Rate); //relating note by 5th
+        jazz.file1.amp(jazz.scamp);
+        jazz.file2.amp(jazz.scamp);
+        jazz.file3.amp(jazz.scamp);
+    }
+
+}
+
+void runSquareUser()
+{
+    KJoint[] joints = zoneSkully[0].getJoints();
+    for (Square squar: squareArr)
+    {
+        squar.setColor(squar.r, squar.g, squar.b, squar.alpha);
+    }
+    println("Size in Squares ", numSkully);
+
+    if (numSkully == 3)
+    {
+        for (Square2 squar2: squareArr2)
+        {
+            squar2.display();
+            squar2.setBackgroundColor(squar2.r, squar2.g, squar2.b, squar2.alpha);
+        }
+    }
+    limbtracker3.update2(joints);
+    limbtracker2.fillFollowing(KinectPV2.JointType_Count);
+    float[] comparison3 = limbtracker3.distance(KinectPV2.JointType_Count);
+    limbtracker3.fillBuffer(comparison3);
+
+    if (limbtracker3.limbActivated(KinectPV2.JointType_HandLeft))
+    {
+        jazz.D1.play();
+        for (Square squar: squareArr)
+        {
+            squar.changePosition(offsetAmountNeg, offsetAmountPos);
+        }
+        if (numSkully == 3)
+        {
+            println("Here3");
+            for (Square2 squar: squareArr2)
+            {
+                squar.changePosition(offsetAmountNeg, offsetAmountPos);
+            }
+        }
+    }
+
+    if (limbtracker3.limbFlailing(KinectPV2.JointType_HandRight))
+    {
+        for (Square squar: squareArr)
+        {
+            squar.changeScale(true, maxOffset, minOffset);
+        }
+        if (numSkully == 3)
+        {
+            for (Square2 squar: squareArr2)
+            {
+                squar.changeScale(true, maxOffset, minOffset);
+            }
+        }
+    }
+    else
+    {
+        for (Square squar: squareArr)
+        {
+            squar.changeScale(false, maxOffset, minOffset);
+        }
+        if (numSkully == 3)
+        {
+            for (Square2 squar: squareArr2)
+            {
+                squar.changeScale(false, maxOffset, minOffset);
+            }
+        }
+    }
+
+    if (limbtracker3.limbActivated(KinectPV2.JointType_KneeLeft))
+    {
+        jazz.D2.play();
+        for (Square squar: squareArr)
+        {
+            squar.changeRotation();
+        }
+        if (numSkully == 3)
+        {
+            for (Square2 squar: squareArr2)
+            {
+                squar.changeRotation();
+            }
+        }
+    }
+
+    if (limbtracker3.limbActivated(KinectPV2.JointType_KneeRight))
+    {
+        jazz.D3.play();
+        for (Square squar: squareArr)
+        {
+            squar.changeRotation();
+        }
+        if (numSkully == 3)
+        {
+            for (Square2 squar: squareArr2)
+            {
+                squar.changeRotation();
+            }
+        }
+    }
+
+    if (limbtracker3.limbActivated(KinectPV2.JointType_SpineMid))
+    {
+        jazz.D4.play();
+    }
+
 }
 
 float getSinScale(float high, float low, float period)
@@ -931,50 +901,21 @@ void drawBody(KJoint[] joints)
     drawJoint(joints, KinectPV2.JointType_Head);
 }
 
-//draw joint
-//void drawJoint(KJoint[] joints, int jointType) {
-//  pushMatrix();
-//  translate(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
-//  ellipse(0, 0, 25, 25);
-//  popMatrix();
-//}
-
-////draw bone
-//void drawBone(KJoint[] joints, int jointType1, int jointType2) {
-//  pushMatrix();
-//  translate(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ());
-//  ellipse(0, 0, 25, 25);
-//  popMatrix();
-//  line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(), joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
-//}
-
 
 void drawJoint(KJoint[] joints, int jointType)
 {
-    //strokeWeight(2.0f + joints[jointType].getZ()*8);
     pushStyle();
     strokeWeight(.05);
     popStyle();
-    //float xMapped = map(joints[jointType].getX(), -1.28, 1, 0, width);
-    //float yMapped = map(joints[jointType].getY(), -0.3, 0.07, 0, height);
-    //float zMapped = map(joints[jointType].getZ(), 1, 8, 0, height*2);
-    //point(xMapped, yMapped, zMapped);
-    //println(xMapped);
     point(joints[jointType].getX(), joints[jointType].getY(), joints[jointType].getZ());
 }
 
 void drawBone(KJoint[] joints, int jointType1, int jointType2)
 {
-    //strokeWeight(2.0f + joints[jointType1].getZ()*8);
-
-    //float xMapped = map(joints[jointType1].getX(), -1.28, 1, 0, width);
-    //float yMapped = map(joints[jointType1].getY(), -0.3, 0.07, 0, height);
-    //float zMapped = map(joints[jointType1].getZ(), 1, 8, 0, height*2);
     pushStyle();
     strokeWeight(.01);
     popStyle();
     line(joints[jointType1].getX(), joints[jointType1].getY(), joints[jointType1].getZ(), joints[jointType2].getX(), joints[jointType2].getY(), joints[jointType2].getZ());
-
 }
 
 //Gets an X value of a joint.

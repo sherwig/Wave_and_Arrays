@@ -40,7 +40,7 @@ void setup() {
 
 void draw() {
   background(0);
-
+  
   // Draw the color Image
  // image(kinect.getColorImage(), 0, 0);
 
@@ -69,17 +69,17 @@ void draw() {
         float y3 = HDfaceData.getY(i+2);
         
         xoff = xoff + .005;
-        x2 = (noise(xoff) * HDfaceData.getX(i));
-      //  y = noise(xoff)*HDfaceData.getY(i);
+        //x2 = (noise(xoff) * HDfaceData.getX(i));
+       // y = noise(xoff)*HDfaceData.getY(i);
 
         //y2 = noise(xoff)*HDfaceData.getY(i);
         
         vertex(x, y);
         vertex(x2, y2);
-        vertex(x3, y3);
-        vertex(x, y2);
-        vertex(x2, y);
-        vertex(x2, y3);
+        //vertex(x3, y3);
+        //vertex(x, y2);
+        //vertex(x2, y);
+        //vertex(x2, y3);
        
       }
       endShape();
