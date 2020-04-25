@@ -51,11 +51,8 @@ void setup()
     colorMode(RGB);
     kinect = new KinectPV2(this);
     frameRate(60);
-    //kinect.enableSkeletonColorMap(true);
-    //kinect.enableColorImg(true);
     kinect.enableSkeleton3DMap(true);
-    kinect.enableDepthMaskImg(true);
-    //kinect.enableSkeletonDepthMap(true);
+//    kinect.enableDepthMaskImg(true);
 
     smooth();
     dancer[0] = loadImage("dancer0.gif");
@@ -330,7 +327,6 @@ void draw()
         squig.display();
     }
 
-
     for (Background_Lines back: backgroundArr)
     {
         back.display();
@@ -388,7 +384,6 @@ void SkullyBoi()
     }
     else if (numSkully == 2)
     {
-        //println("here");
         col1 = color(col1R2, col1G2, col1B2, 75);
         col3 = color(col3R2, col3G2, col3B2, 75);
         offsetShapes = false;
@@ -411,7 +406,6 @@ void findZoneSkullies()
     ArrayList < KSkeleton > skeletonArray = kinect.getSkeleton3d();
     for (int i = 0; i < skeletonArray.size(); i++)
     {
-        println("Array Size: ", skeletonArray.size());
         KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
         if (skeleton.isTracked())
         {
@@ -500,7 +494,6 @@ void setNonActive()
 
 void runTriangleUser()
 {
-    println("ZoneSkully: ", zoneSkully[2]);
     KJoint[] joints = zoneSkully[2].getJoints();
 
     for (Triangle tri: triangleArr)
@@ -530,7 +523,6 @@ void runTriangleUser()
         }
         if (numSkully == 3)
         {
-            println("Here1");
             for (Triangle2 tri: triangleArr2)
             {
                 tri.changePosition(offsetAmountNeg, offsetAmountPos);
@@ -746,8 +738,6 @@ void runSquareUser()
     {
         squar.setColor(squar.r, squar.g, squar.b, squar.alpha);
     }
-    println("Size in Squares ", numSkully);
-
     if (numSkully == 3)
     {
         for (Square2 squar2: squareArr2)
