@@ -402,16 +402,11 @@ void SkullyBoi()
     }
 
     for (int i = 0; i < zoneSkully.length; i++)
-    {
-    //{
-    //    KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
-    
+    {  
         if (zoneSkully[i]!=null)
         {
             KJoint[] joints = zoneSkully[i].getJoints();
-    //        float xSetter = getJointX(joints, KinectPV2.JointType_SpineMid);
-            //  println(xSetter);    
-
+           
             if (numSkully == 1)
             {
                 col1 = color(col1R, col1G, col1B, 50);
@@ -437,10 +432,11 @@ void SkullyBoi()
                 col1 = color(col1R2, col1G2, col1B2, 150);
                 // println("yes");
             }
-            
+             //<>//
             //Checking what third the skeloten is in
             if (zoneSetter[2]==true)
             {
+               println("ZoneSkully: ", zoneSkully[i]);
                 for (Triangle tri: triangleArr)
                 {
                     tri.setColor(tri.r, tri.g, tri.b, tri.alpha);
@@ -454,7 +450,7 @@ void SkullyBoi()
                         tri2.setBackgroundColor(tri2.r, tri2.g, tri2.b, tri2.alpha);
                     }
                 }
-                //drawTriangleBoi(joints);
+                
                 limbtracker.update2(joints);
                 //filling second PVector with the first PVectors values
                 limbtracker.fillFollowing(KinectPV2.JointType_Count);
@@ -551,6 +547,8 @@ void SkullyBoi()
 
             if (zoneSetter[1]==true)
             {
+                println("ZoneSkully2: ", zoneSkully[i]);
+
                 for (Squigly squig: squiglyArr)
                 {
                     squig.setColor(squig.r, squig.g, squig.b, squig.alpha);
@@ -803,6 +801,7 @@ void findZoneSkullies()
     ArrayList < KSkeleton > skeletonArray = kinect.getSkeleton3d();
     for (int i = 0; i < skeletonArray.size(); i++)
     {
+        println("Array Size: ", skeletonArray.size());
         KSkeleton skeleton = (KSkeleton) skeletonArray.get(i);
         if (skeleton.isTracked())
         {
@@ -824,17 +823,18 @@ void findZoneSkullies()
                 zoneSkully[0]=skeleton;
             }
         }
+        println(zoneSkully);
         
     }
     
-    //numSkully=0;    
-    //for (int i=0; i<zoneSetter.length; i++)
-    //{
-    //  if(zoneSetter[i]==true)
-    //  {
-    //     numSkully++;
-    //  }
-    //}
+    numSkully=0;    
+    for (int i=0; i<zoneSetter.length; i++)
+    {
+      if(zoneSetter[i]==true)
+      {
+         numSkully++;
+      }
+    }
   
 }
 
@@ -875,24 +875,6 @@ void setNonActive()
         }
     }
 }
-
-void keyPressed() 
-{
-  if(key=='1')
-  {
-    numSkully=1;
-  }
-  if(key=='2')
-  {
-    numSkully=2;
-  }
-  if(key=='3')
-  {
-    numSkully=3;
-  }
-   
-}
-
 
 float getSinScale(float high, float low, float period)
 {

@@ -84,6 +84,7 @@ public class Limbtracker {
          variance[i]=buffer[i].variance(); 
          boolean wasActive=flag[i];        
          flag[i]=(variance[i]>threshold);
+        // println(variance[i]);
          activated[i]=(wasActive==false && flag[i]==true);      
        }       
      //return variance;
